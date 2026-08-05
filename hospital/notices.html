@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>通知公告 - 临江市第二医院</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
+    <style>
+        :root { --hospital-green: #0d7a5f; --hospital-green-light: #0f9b7a; --hospital-red: #d1423a; }
+        body { font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f5f6f8; color: #333; }
+        .top-toolbar { background: #f0f2f5; border-bottom: 1px solid #e0e3e8; font-size: 0.8rem; color: #666; }
+        .main-header { background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06); position: sticky; top:0; z-index:100; }
+        .header-logo-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--hospital-green) 0%, var(--hospital-green-light) 100%); border-radius: 14px; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 12px rgba(13,122,95,0.3); }
+        .header-logo-icon svg { width: 32px; height: 32px; fill: #fff; }
+        .nav-bar { background: var(--hospital-green); }
+        .nav-link { color: rgba(255,255,255,0.9); text-decoration: none; padding: 14px 18px; display: inline-block; font-size: 0.9rem; font-weight: 500; letter-spacing: 0.5px; transition: all 0.25s; }
+        .nav-link:hover, .nav-link.active { color: #fff; background: rgba(255,255,255,0.15); }
+        .nav-link.active { font-weight: 600; border-bottom: 3px solid #ffd54f; }
+        .section-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); border:1px solid #eef0f3; }
+        .section-card-header { padding: 16px 20px; border-bottom: 1px solid #f0f2f5; display: flex; align-items: center; }
+        .section-card-header h2 { font-size: 1.2rem; font-weight: 700; color: #1a1a1a; margin:0; display: flex; align-items: center; gap: 8px; }
+        .section-card-header h2::before { content: ''; width: 4px; height: 22px; background: var(--hospital-green); border-radius: 2px; }
+        .section-card-body { padding: 24px; }
+        .notice-item { border-bottom: 1px solid #eef0f3; padding-bottom: 24px; margin-bottom: 24px; }
+        .notice-item:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+        .notice-item h3 { font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin-bottom: 6px; }
+        .notice-meta { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; font-size: 0.8rem; color: #888; }
+        .notice-tag { display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 500; }
+        .notice-tag.notice { background: #fff3e0; color: #e65100; }
+        .notice-tag.announcement { background: #e3f2fd; color: #1565c0; }
+        .notice-body { line-height: 1.8; color: #444; font-size: 0.9rem; }
+        .site-footer { background: #1a1f2b; color: #b0b8c1; padding: 40px 0 20px; margin-top: 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; margin-bottom: 30px; }
+        .footer-bottom { border-top: 1px solid #2a303c; padding-top: 16px; text-align: center; font-size: 0.72rem; color: #6b7583; }
+    </style>
+</head>
+<body>
+    <div class="top-toolbar">
+        <div class="max-w-7xl mx-auto px-4 py-1.5 flex items-center justify-between">
+            <span>📍 临江市健康路128号 | 🕐 门诊时间：周一至周日 8:00-17:30</span>
+            <span><a href="#" class="text-gray-600 hover:text-green-700">手机版</a> | <a href="#" class="text-gray-600 hover:text-green-700">English</a></span>
+        </div>
+    </div>
+    <header class="main-header">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="header-logo-icon">
+                    <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="20" rx="1.5" fill="white"/><rect x="2" y="9" width="20" height="6" rx="1.5" fill="white"/></svg>
+                </div>
+                <div>
+                    <h1 class="text-xl font-bold">临江市第二医院</h1>
+                    <p class="text-xs text-gray-500">LINJIANG SECOND HOSPITAL</p>
+                </div>
+            </div>
+            <a href="../law/dashboard.html" class="text-sm text-gray-500 hover:text-green-700">← 返回律所OA系统</a>
+        </div>
+    </header>
+    <nav class="nav-bar">
+        <div class="max-w-7xl mx-auto px-4 flex flex-wrap">
+            <a href="hospital.html" class="nav-link">首页</a>
+            <a href="about.html" class="nav-link">医院概况</a>
+            <a href="news.html" class="nav-link">新闻动态</a>
+            <a href="departments.html" class="nav-link">科室导航</a>
+            <a href="experts.html" class="nav-link">专家团队</a>
+            <a href="maintenance.html" class="nav-link">就医指南</a>
+            <a href="maintenance.html" class="nav-link">健康科普</a>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="section-card">
+            <div class="section-card-header">
+                <h2>📢 通知公告</h2>
+                <a href="index.html" class="text-sm text-green-700 hover:underline">返回首页</a>
+            </div>
+            <div class="section-card-body">
+                <!-- 公告1 -->
+                <div class="notice-item">
+                    <h3>关于急诊科升级改造期间就诊安排的通知</h3>
+                    <div class="notice-meta">
+                        <span>📅 2026-07-15</span>
+                        <span class="notice-tag notice">公告</span>
+                    </div>
+                    <div class="notice-body">
+                        <p>广大市民朋友：</p>
+                        <p>为进一步提升急诊救治能力，优化就诊环境，我院急诊科自<strong>2026年7月20日起进行为期约60天的内部升级改造</strong>。改造期间，急诊科将临时搬迁至门诊楼一层东侧（原健康体检中心区域），保留全部急诊功能，120急救通道照常运行，急救电话<strong>120</strong>不变。</p>
+                        <p>改造期间可能对就诊造成一定不便，敬请谅解。请急诊患者及家属按照院内指引标识前往临时急诊区就诊。如有疑问可拨打咨询电话：0512-8555-1200（工作时间）。</p>
+                        <p>预计改造完成后，急诊将拥有更完善的抢救单元和留观病房，感谢您的理解与支持。</p>
+                        <p class="text-right text-gray-500 mt-2">临江市第二医院医务科<br>2026年7月15日</p>
+                    </div>
+                </div>
+                <!-- 公告2 -->
+                <div class="notice-item">
+                    <h3>2026年第三季度医保报销政策调整说明</h3>
+                    <div class="notice-meta">
+                        <span>📅 2026-07-08</span>
+                        <span class="notice-tag announcement">通知</span>
+                    </div>
+                    <div class="notice-body">
+                        <p>根据临江市医疗保障局最新文件精神，自<strong>2026年7月1日起</strong>，我院将执行第三季度医保报销政策调整，主要涉及以下内容：</p>
+                        <ul class="list-disc list-inside mt-2 space-y-1">
+                            <li>普通门诊统筹报销比例在原有基础上提升2个百分点；</li>
+                            <li>部分慢性病药品纳入门诊特殊病种报销范围，具体目录可至医保办查询；</li>
+                            <li>住院起付线标准维持不变，二次住院患者起付线减半政策延续执行。</li>
+                        </ul>
+                        <p>请参保患者就诊时携带医保卡/医保电子凭证，如有政策疑问可至我院医保办公室（门诊二楼）或拨打医保咨询专线：0512-8555-1201。</p>
+                        <p class="text-right text-gray-500 mt-2">临江市第二医院医保办公室<br>2026年7月8日</p>
+                    </div>
+                </div>
+                <!-- 公告3 -->
+                <div class="notice-item">
+                    <h3>我院骨科成功开展首例微创脊柱内镜手术</h3>
+                    <div class="notice-meta">
+                        <span>📅 2026-06-22</span>
+                        <span class="notice-tag notice">公告</span>
+                    </div>
+                    <div class="notice-body">
+                        <p>2026年6月15日，我院骨科赵峰副主任医师团队成功为一名腰椎间盘突出患者实施了<strong>经皮椎间孔镜下髓核摘除术</strong>，填补了我院在该技术领域的空白。</p>
+                        <p>该手术切口仅约7毫米，术中出血少、恢复快，患者术后次日即可下地活动，目前恢复良好。该技术的开展标志着我院脊柱微创治疗水平迈上新台阶，将为此类疾病患者提供更优质的治疗选择。</p>
+                        <p>骨科咨询电话：0512-8555-1202（工作时间）</p>
+                        <p class="text-right text-gray-500 mt-2">临江市第二医院骨科<br>2026年6月22日</p>
+                    </div>
+                </div>
+                <!-- 公告4 -->
+                <div class="notice-item">
+                    <h3>端午节期间门诊安排及值班科室一览</h3>
+                    <div class="notice-meta">
+                        <span>📅 2026-06-10</span>
+                        <span class="notice-tag announcement">通知</span>
+                    </div>
+                    <div class="notice-body">
+                        <p>尊敬的市民：</p>
+                        <p>根据国家法定节假日安排，结合我院实际情况，<strong>2026年端午节假期（6月19日-6月21日）</strong>门诊工作安排如下：</p>
+                        <table class="w-full mt-3 text-sm border-collapse">
+                            <thead><tr class="bg-gray-50"><th class="border p-2 text-left">日期</th><th class="border p-2 text-left">门诊安排</th><th class="border p-2 text-left">值班科室</th></tr></thead>
+                            <tbody>
+                                <tr><td class="border p-2">6月19日（周五）</td><td class="border p-2">上午半天门诊</td><td class="border p-2">内科、外科、妇产科、儿科</td></tr>
+                                <tr><td class="border p-2">6月20日（周六）</td><td class="border p-2">全天门诊</td><td class="border p-2">全部临床科室</td></tr>
+                                <tr><td class="border p-2">6月21日（周日）</td><td class="border p-2">上午半天门诊</td><td class="border p-2">内科、外科、骨科</td></tr>
+                            </tbody>
+                        </table>
+                        <p class="mt-3">急诊科24小时接诊，急救电话120。请合理安排就诊时间。</p>
+                        <p class="text-right text-gray-500 mt-2">临江市第二医院门诊部<br>2026年6月10日</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="footer-grid">
+                <div><h4 class="text-white mb-3">就医服务</h4><ul class="text-sm space-y-1"><li><a href="#" class="text-gray-400 hover:text-white">预约挂号</a></li><li><a href="#" class="text-gray-400 hover:text-white">住院指南</a></li></ul></div>
+                <div><h4 class="text-white mb-3">医院信息</h4><ul class="text-sm space-y-1"><li><a href="about.html" class="text-gray-400 hover:text-white">医院简介</a></li><li><a href="departments.html" class="text-gray-400 hover:text-white">科室介绍</a></li></ul></div>
+                <div><h4 class="text-white mb-3">联系方式</h4><ul class="text-sm space-y-1"><li class="text-gray-400">📍 临江市健康路128号</li><li class="text-gray-400">📞 0512-8555-1200</li></ul></div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 临江市第二医院 版权所有 | 苏ICP备2026XXXXXX号</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

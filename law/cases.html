@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>案件管理 - 明诚律师事务所 OA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
+
+<!-- 1. 登录校验 (放在 head 中，尽早拦截未登录访问) -->
+<script>
+(function checkAuth() {
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    const username = sessionStorage.getItem('username');
+    if (!isLoggedIn || isLoggedIn !== 'true') {
+        window.location.href = 'lawfirm.html';
+        return false;
+    }
+    window.currentUser = username;
+    return true;
+})();
+</script>
+
+<style>
+body { font-family: 'Noto Sans SC', sans-serif; }
+.sidebar { background: linear-gradient(180deg, #1e1b4b 0%, #0f172a 100%); }
+.menu-item { transition: all 0.3s ease; position: relative; overflow: hidden; }
+.menu-item::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0; background: linear-gradient(90deg, rgba(167, 139, 250, 0.3), transparent); transition: width 0.3s ease; }
+.menu-item:hover::before { width: 100%; }
+.menu-item.active { background: linear-gradient(90deg, rgba(124, 58, 237, 0.4), transparent); border-right: 3px solid #a78bfa; }
+@keyframes pulse-dot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.8; } }
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in-up { animation: fadeInUp 0.5s ease forwards; }
+.case-row { transition: all 0.2s ease; }
+.case-row:hover { background-color: #f9fafb; transform: translateX(4px); }
+.modal-overlay { position: fixed; inset: 0; background: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: none; align-items: center; justify-content: center; z-index: 100; }
+.modal-overlay.active { display: flex; }
+.modal-content { background: white; border-radius: 12px; max-width: 700px; width: 90%; max-height: 85vh; overflow-y: auto; animation: modalIn 0.3s ease; }
+@keyframes modalIn { from { opacity: 0; transform: scale(0.95) translateY(20px); } to { opacity: 1; transform: scale(1) translateY(0); } }
+.tag { transition: all 0.2s ease; }
+.tag:hover { transform: scale(1.05); }
+.search-box:focus { box-shadow: 0 0 0 3px rgba(167, 139, 250, 0.2); border-color: #a78bfa; }
+</style>
+</head>
+<body class="bg-gray-100">
+
+<header class="bg-white shadow-sm border-b border-gray-200 h-16 flex items-center px-6 justify-between sticky top-0 z-40">
+    <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-indigo-700 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">MC</div>
+        <div><h1 class="text-lg font-bold text-gray-900">明诚律师事务所</h1><p class="text-xs text-gray-500">内部案件管理系统 (OA) v4.2</p></div>
+    </div>
+    <div class="flex items-center space-x-6 text-sm">
+        <span class="text-gray-500" id="currentTime"></span>
+        <div class="flex items-center space-x-2 border-l pl-4">
+            <!-- 动态头像和用户名 -->
+            <div id="userAvatar" class="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">助</div>
+            <span id="userDisplayName" class="font-semibold text-gray-700">加载中...</span>
+            <button onclick="logout()" class="ml-2 text-gray-400 hover:text-red-500 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="flex h-[calc(100vh-4rem)]">
+    <aside class="sidebar w-64 text-gray-300 flex-shrink-0 hidden md:block">
+        <nav class="mt-6 space-y-1">
+            <a href="dashboard.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">📊</span> 工作台</a>
+            <a href="cases.html" class="menu-item active flex items-center px-6 py-3 text-white"><span class="mr-3 text-lg">📁</span> 案件管理<span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full pulse-dot">12</span></a>
+            <a href="schedule.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">📅</span> 日程安排<span class="ml-auto bg-yellow-500 text-white text-xs px-2 py-0.5 rounded-full">2</span></a>
+            <a href="external.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">🔗</span> 外部协查通道</a>
+            <a href="settings.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">⚙️</span> 系统设置</a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto p-6">
+        <div class="flex items-center justify-between mb-6 fade-in-up">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">案件管理</h2>
+                <p class="text-sm text-gray-500 mt-1">共 12 个案件 · 3 个处理中 · 9 个已结案</p>
+            </div>
+            <div class="flex space-x-3">
+                <div class="relative">
+                    <input type="text" id="searchInput" placeholder="搜索案号、当事人、关键词..." class="search-box bg-white border border-gray-300 rounded-lg px-4 py-2 pl-10 text-sm w-64 focus:outline-none transition">
+                    <svg class="w-4 h-4 text-gray-400 absolute left-3 top-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                </div>
+                <select class="bg-white border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-purple-500">
+                    <option>全部状态</option><option>处理中</option><option>已结案</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden fade-in-up">
+            <table class="w-full">
+                <thead class="bg-gray-50 border-b border-gray-200">
+                    <tr>
+                        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-600 uppercase">案号</th>
+                        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-600 uppercase">案由</th>
+                        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-600 uppercase">当事人</th>
+                        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-600 uppercase">承办律师</th>
+                        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-600 uppercase">状态</th>
+                        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-600 uppercase">最后更新</th>
+                        <th class="text-left px-6 py-3 text-xs font-semibold text-gray-600 uppercase">操作</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-gray-100" id="caseTable">
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2026-0040')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2026-0040</td><td class="px-6 py-4 text-sm text-gray-800">赡养纠纷</td><td class="px-6 py-4 text-sm text-gray-700">李秀英</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-semibold">处理中</span></td><td class="px-6 py-4 text-sm text-gray-500">2026-02-12</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2026-0039')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2026-0039</td><td class="px-6 py-4 text-sm text-gray-800">医疗损害责任纠纷</td><td class="px-6 py-4 text-sm text-gray-700">赵国强</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-semibold">处理中</span></td><td class="px-6 py-4 text-sm text-gray-500">2026-02-14</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2026-0038')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2026-0038</td><td class="px-6 py-4 text-sm text-gray-800">交通事故人身损害赔偿</td><td class="px-6 py-4 text-sm text-gray-700">张德明</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">已结案</span></td><td class="px-6 py-4 text-sm text-gray-500">2026-02-18</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2026-0037')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2026-0037</td><td class="px-6 py-4 text-sm text-gray-800">财产损害赔偿纠纷</td><td class="px-6 py-4 text-sm text-gray-700">刘梅</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-orange-100 text-orange-700 px-2 py-1 rounded text-xs font-semibold">处理中</span></td><td class="px-6 py-4 text-sm text-gray-500">2026-02-11</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2026-0035')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2026-0035</td><td class="px-6 py-4 text-sm text-gray-800">房屋买卖合同纠纷</td><td class="px-6 py-4 text-sm text-gray-700">王德福</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">已结案</span></td><td class="px-6 py-4 text-sm text-gray-500">2026-02-10</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer bg-amber-50/60" onclick="openCase('MC-2026-0042')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2026-0042<br><span class="text-[10px] text-amber-700">优先交接</span></td><td class="px-6 py-4 text-sm text-gray-800">遗嘱公证及遗产继承</td><td class="px-6 py-4 text-sm text-gray-700">周素兰（已故）</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-semibold">待复核</span></td><td class="px-6 py-4 text-sm text-gray-500">2026-02-18 17:42</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">接管 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2026-0033')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2026-0033</td><td class="px-6 py-4 text-sm text-gray-800">劳动争议（工伤认定）</td><td class="px-6 py-4 text-sm text-gray-700">孙建平</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">已结案</span></td><td class="px-6 py-4 text-sm text-gray-500">2026-02-08</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2026-0030')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2026-0030</td><td class="px-6 py-4 text-sm text-gray-800">物业服务合同纠纷</td><td class="px-6 py-4 text-sm text-gray-700">工人新村业委会</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">已结案</span></td><td class="px-6 py-4 text-sm text-gray-500">2026-01-25</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2025-0160')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2025-0160</td><td class="px-6 py-4 text-sm text-gray-800">离婚纠纷</td><td class="px-6 py-4 text-sm text-gray-700">林浩 vs 周婷</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">已结案</span></td><td class="px-6 py-4 text-sm text-gray-500">2025-12-28</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2025-0156')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2025-0156</td><td class="px-6 py-4 text-sm text-gray-800">劳动合同纠纷</td><td class="px-6 py-4 text-sm text-gray-700">临江机械制造有限公司</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">已结案</span></td><td class="px-6 py-4 text-sm text-gray-500">2025-12-20</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2025-0150')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2025-0150</td><td class="px-6 py-4 text-sm text-gray-800">法定继承纠纷</td><td class="px-6 py-4 text-sm text-gray-700">陈建国等五兄妹</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">已结案</span></td><td class="px-6 py-4 text-sm text-gray-500">2025-11-30</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                    <tr class="case-row cursor-pointer" onclick="openCase('MC-2025-0142')"><td class="px-6 py-4 font-mono text-sm text-purple-700 font-semibold">MC-2025-0142</td><td class="px-6 py-4 text-sm text-gray-800">运输合同纠纷</td><td class="px-6 py-4 text-sm text-gray-700">周卫国</td><td class="px-6 py-4 text-sm text-gray-700">沈致远</td><td class="px-6 py-4"><span class="tag bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">已结案</span></td><td class="px-6 py-4 text-sm text-gray-500">2025-11-15</td><td class="px-6 py-4"><button class="text-purple-600 hover:text-purple-800 text-sm font-semibold">查看 →</button></td></tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="mt-4 text-center text-xs text-gray-400 fade-in-up"><p>显示 1-12 条，共 12 条记录</p></div>
+    </main>
+</div>
+
+<div id="caseModal" class="modal-overlay" onclick="if(event.target===this)closeCase()">
+    <div class="modal-content">
+        <div class="px-6 py-4 border-b border-gray-200 flex items-center justify-between sticky top-0 bg-white rounded-t-xl z-10">
+            <h3 class="text-lg font-bold text-gray-800" id="modalTitle">案件详情</h3>
+            <button onclick="closeCase()" class="text-gray-400 hover:text-gray-700"><svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg></button>
+        </div>
+        <div class="p-6" id="modalBody"></div>
+    </div>
+</div>
+
+<script>
+function updateTime() { const now = new Date(); document.getElementById('currentTime').textContent = '当前时间：' + now.toLocaleString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}); }
+updateTime(); setInterval(updateTime, 1000);
+function logout() { if (confirm('确定要退出登录吗？')) window.location.href = 'lawfirm.html'; }
+
+const casesData = {
+    'MC-2026-0040': { title: 'MC-2026-0040 李秀英赡养纠纷案', content: `<div class="space-y-4">
+        <div class="grid grid-cols-2 gap-4 text-sm">
+            <div><span class="text-gray-500">案由：</span><span class="text-gray-800">赡养纠纷</span>
+                </div>
+                <div>
+                    <span class="text-gray-500">承办律师：</span>
+                    <span class="text-gray-800">沈致远</span>
+                    </div><div>
+                        <span class="text-gray-500">当事人：</span>
+                        <span class="text-gray-800">李秀英（女，76岁，工人新村8栋301室）</span>
+                        </div><div>
+                            <span class="text-gray-500">立案日期：</span>
+                            <span class="text-gray-800">2026-02-05
+                                </span>
+                            </div>
+                            </div>
+                            <div class="bg-blue-50 border-l-4 border-blue-400 p-3 rounded text-sm text-blue-800">
+                                <strong>案件备注：
+                                    </strong>
+                                    当事人系工人新村退休职工，与三名子女因赡养费问题产生纠纷。子女认为老人有退休金无需额外赡养，老人主张医疗费用应由子女分担。目前调解中，预计下周进行第二次调解。
+                                    </div>
+                                <div><h4 class="font-semibold text-gray-700 mb-2">案件材料</h4>
+                                    <div class="space-y-2">
+                                        <a href="../assets/docs/李秀英_起诉状.jpg" target="_blank" class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 transition group"><span class="text-sm text-gray-800">📄 起诉状.pdf</span><span class="text-xs text-blue-600 font-semibold group-hover:underline">查看原件 →</span></a>
+                                            <a href="../assets/docs/李秀英_调解协议书草案.jpg" target="_blank" class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 transition group"><span class="text-sm text-gray-800">📋 调解协议书（草案）.docx
+                                                </span>
+                                                <span class="text-xs text-blue-600 font-semibold group-hover:underline">查看原件 →</span>
+                                                </a>
+                                                <a href="../assets/docs/李秀英_社区居委会证明.jpg" target="_blank" class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 transition group"><span class="text-sm text-gray-800">🏠 社区居委会证明.pdf</span><span class="text-xs text-blue-600 font-semibold group-hover:underline">查看原件 →</span></a></div></div></div>` },
+
+
+    'MC-2026-0039': { title: 'MC-2026-0039 赵国强医疗损害责任纠纷', content: `<div class="space-y-4"><div class="grid grid-cols-2 gap-4 text-sm"><div><span class="text-gray-500">案由：</span><span class="text-gray-800">医疗损害责任纠纷</span></div><div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div><div><span class="text-gray-500">当事人：</span><span class="text-gray-800">赵国强（男，75岁，工人新村居民）</span></div><div><span class="text-gray-500">涉案医院：</span><span class="text-gray-800">临江市第二医院</span></div></div><div class="bg-blue-50 border-l-4 border-blue-400 p-3 rounded text-sm text-blue-800"><strong>案件备注：</strong>当事人在二院内科就诊时，因注射某种药物发生严重过敏反应，导致休克。家属认为医院未做皮试存在过错。目前等待市医学会进行医疗损害鉴定。<br><span class="text-xs text-blue-600 mt-1 block">（注：过敏原为头孢类药物，与周素兰案无关。）</span></div><div><h4 class="font-semibold text-gray-700 mb-2">案件材料</h4><div class="space-y-2"><a href="../assets/docs/赵国强_二院门诊病历及过敏原检测报告.jpg" target="_blank" class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 transition group"><span class="text-sm text-gray-800">🏥 二院门诊病历及过敏原检测报告.pdf</span><span class="text-xs text-blue-600 font-semibold group-hover:underline">查看原件 →</span></a><a href="../assets/docs/赵国强_医疗事故鉴定申请书.jpg" target="_blank" class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 transition group"><span class="text-sm text-gray-800">📋 医疗事故鉴定申请书.docx</span><span class="text-xs text-blue-600 font-semibold group-hover:underline">查看原件 →</span></a></div></div></div>` },
+    'MC-2026-0038': { title: 'MC-2026-0038 张德明交通事故理赔案', content: `
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div><span class="text-gray-500">案由：</span><span class="text-gray-800">交通事故人身损害赔偿</span></div>
+                <div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div>
+                <div><span class="text-gray-500">当事人：</span><span class="text-gray-800">张德明（男，65岁）</span></div>
+                <div><span class="text-gray-500">结案日期：</span><span class="text-gray-800">2026-02-18</span></div>
+            </div>
+            <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded text-sm text-green-800">
+                <strong>结案说明：</strong>与保险公司达成和解协议，赔偿金额 12.8 万元。案卷已归档。当事人对结果满意。
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">案件材料</h4>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-gray-100 rounded border border-gray-200 cursor-not-allowed opacity-60" onclick="alert('⚠️ 访问被拒绝\\n\\n该案件已结案，相关卷宗及附件已被归档加密。\\n如需调阅，请向律所档案室申请 L3 级及以上权限。')">
+                        <div class="flex items-center space-x-2"><span class="text-gray-500">🔒</span><span class="text-sm text-gray-600">交通事故认定书.pdf</span></div>
+                        <span class="text-xs text-gray-500">已归档加密</span>
+                    </div>
+                    <div class="flex items-center justify-between p-2 bg-gray-100 rounded border border-gray-200 cursor-not-allowed opacity-60" onclick="alert('⚠️ 访问被拒绝\\n\\n该案件已结案，相关卷宗及附件已被归档加密。\\n如需调阅，请向律所档案室申请 L3 级及以上权限。')">
+                        <div class="flex items-center space-x-2"><span class="text-gray-500">🔒</span><span class="text-sm text-gray-600">和解协议书.pdf</span></div>
+                        <span class="text-xs text-gray-500">已归档加密</span>
+                    </div>
+                </div>
+            </div>
+        </div>` },
+    'MC-2026-0037': { title: 'MC-2026-0037 刘梅财产损害赔偿纠纷（漏水）', content: `<div class="space-y-4"><div class="grid grid-cols-2 gap-4 text-sm"><div><span class="text-gray-500">案由：</span><span class="text-gray-800">财产损害赔偿纠纷</span></div><div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div><div><span class="text-gray-500">原告：</span><span class="text-gray-800">刘梅（女，68岁，工人新村7栋302室）</span></div><div><span class="text-gray-500">被告：</span><span class="text-gray-800">周素兰（工人新村7栋402室，已故）</span></div></div><div class="bg-blue-50 border-l-4 border-blue-400 p-3 rounded text-sm text-blue-800"><strong>案件备注：</strong>原告楼下（302室）卫生间天花板因楼上（402室）水管老化严重漏水受损。原告要求赔偿修复费用 5000 元。因被告周素兰于2月18日离世，本案需等待继承人明确后恢复审理。<br><span class="text-xs text-blue-600 mt-1 block">（注：现场勘查照片仅包含302室天花板水渍，未进入402室内部。）</span></div><div><h4 class="font-semibold text-gray-700 mb-2">案件材料</h4><div class="space-y-2"><a href="../assets/images/刘梅_302室漏水现场照片集.jpg" target="_blank" class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 transition group"><span class="text-sm text-gray-800">📸 302室漏水现场照片集.jpg</span><span class="text-xs text-blue-600 font-semibold group-hover:underline">放大查看 →</span></a><a href="../assets/docs/刘梅_物业维修记录单.pdf" target="_blank" class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 transition group"><span class="text-sm text-gray-800">📋 物业维修记录单.pdf</span><span class="text-xs text-blue-600 font-semibold group-hover:underline">查看原件 →</span></a></div></div></div>` },
+     'MC-2026-0035': { title: 'MC-2026-0035 王德福房屋买卖合同纠纷', content: `
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div><span class="text-gray-500">案由：</span><span class="text-gray-800">房屋买卖合同纠纷</span></div>
+                <div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div>
+                <div><span class="text-gray-500">当事人：</span><span class="text-gray-800">王德福（男，72岁，工人新村5栋201室）</span></div>
+                <div><span class="text-gray-500">结案日期：</span><span class="text-gray-800">2026-02-10</span></div>
+            </div>
+            <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded text-sm text-green-800">
+                <strong>结案说明：</strong>二手房交易中卖方违约，拒绝办理过户手续。经法院调解，双方达成和解，案卷已归档。
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">案件材料</h4>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-gray-100 rounded border border-gray-200 cursor-not-allowed opacity-60" onclick="alert('⚠️ 访问被拒绝\\n\\n该案件已结案，相关卷宗及附件已被归档加密。\\n如需调阅，请向律所档案室申请 L3 级及以上权限。')">
+                        <div class="flex items-center space-x-2"><span class="text-gray-500">🔒</span><span class="text-sm text-gray-600">房屋买卖合同.pdf</span></div>
+                        <span class="text-xs text-gray-500">已归档加密</span>
+                    </div>
+                </div>
+            </div>
+        </div>` },
+    'MC-2026-0042': { title: 'MC-2026-0042 周素兰遗产继承案', content: `<div class="space-y-4"><div class="grid grid-cols-2 gap-4 text-sm"><div><span class="text-gray-500">案由：</span><span class="text-gray-800">遗嘱公证及遗产继承</span></div><div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div><div><span class="text-gray-500">立遗嘱人：</span><span class="text-gray-800">周素兰（女，78岁，已于 2 月 18 日离世）</span></div><div><span class="text-gray-500">立案日期：</span><span class="text-gray-800">2026-01-28</span></div></div><div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded text-sm text-yellow-800"><strong>交接备注：</strong>2 月 15 日完成遗嘱签署，原定 2 月 19 日最终核对。沈致远律师于 2 月 18 日 17:42 最后编辑本案后失联。请先完成附件核对，暂勿联络家属讨论附加条款。</div><div><h4 class="font-semibold text-gray-700 mb-2">案件材料</h4><div class="space-y-2"><a href="../assets/docs/遗嘱公证书_20260215.jpg" target="_blank" class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 transition group"><span class="text-sm text-gray-800">遗嘱公证书（2026-02-15版）.jpg</span><span class="text-xs text-blue-600 font-semibold group-hover:underline">查看原件 →</span></a><div class="p-2 bg-gray-50 rounded border border-gray-200"><div class="flex items-center justify-between mb-2"><span class="text-sm text-gray-800">遗嘱会面录音.wav</span><a href="../assets/audio/遗嘱会面录音.wav" download class="text-xs text-blue-600 hover:underline">下载原文件</a></div><audio controls class="w-full h-8"><source src="../assets/audio/遗嘱会面录音.wav" type="audio/wav">您的浏览器不支持音频播放。</audio></div><a href="../assets/images/现场照片_402室门口.jpg" target="_blank" class="flex items-center justify-between p-2 bg-gray-50 rounded hover:bg-gray-100 transition group"><span class="text-sm text-gray-800">现场照片：402室门口.jpg</span><span class="text-xs text-blue-600 font-semibold group-hover:underline">查看原件 →</span></a><div class="p-3 bg-yellow-50 rounded border border-yellow-300"><p class="text-sm text-gray-800">🔒 沈律师私人笔记（加密）.docx</p><p class="text-xs text-yellow-800 mt-1">提示：最后约定的复核地点，请按“楼栋+房号”连续输入。</p><div class="mt-2 flex gap-2"><input id="notePassword" class="border border-yellow-300 rounded px-2 py-1 text-sm w-36" placeholder="例如 70402"><button onclick="unlockPrivateNote()" class="bg-yellow-700 text-white text-xs px-3 py-1 rounded">解密</button></div><p id="noteResult" class="text-xs mt-2"></p></div></div></div><div><h4 class="font-semibold text-gray-700 mb-2">案件时间线</h4><div class="space-y-2 text-sm"><div class="flex items-start space-x-3"><span class="text-gray-400 text-xs w-20 flex-shrink-0">2026-01-28</span><span class="text-gray-700">案件立案，周素兰委托沈致远律师办理遗嘱公证</span></div><div class="flex items-start space-x-3"><span class="text-gray-400 text-xs w-20 flex-shrink-0">2026-02-15</span><span class="text-gray-700">完成遗嘱签署，四名子女到场见证</span></div><div class="flex items-start space-x-3"><span class="text-gray-400 text-xs w-20 flex-shrink-0">2026-02-18</span><span class="text-red-600 font-semibold">立遗嘱人周素兰离世，沈致远律师失联</span></div></div></div></div>` },
+    'MC-2026-0033': { title: 'MC-2026-0033 孙建平劳动争议（工伤认定）', content: `
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div><span class="text-gray-500">案由：</span><span class="text-gray-800">劳动争议（工伤认定）</span></div>
+                <div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div>
+                <div><span class="text-gray-500">当事人：</span><span class="text-gray-800">孙建平（男，58岁，前机械厂职工）</span></div>
+                <div><span class="text-gray-500">结案日期：</span><span class="text-gray-800">2026-02-08</span></div>
+            </div>
+            <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded text-sm text-green-800">
+                <strong>结案说明：</strong>当事人在机械厂旧址协助清理废旧设备时受伤。经劳动仲裁，认定不属于工伤，但公司出于人道主义补偿 2 万元。案卷已归档。
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">案件材料</h4>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-gray-100 rounded border border-gray-200 cursor-not-allowed opacity-60" onclick="alert('⚠️ 访问被拒绝\\n\\n该案件已结案，相关卷宗及附件已被归档加密。\\n如需调阅，请向律所档案室申请 L3 级及以上权限。')">
+                        <div class="flex items-center space-x-2"><span class="text-gray-500">🔒</span><span class="text-sm text-gray-600">劳动仲裁裁决书.pdf</span></div>
+                        <span class="text-xs text-gray-500">已归档加密</span>
+                    </div>
+                </div>
+            </div>
+        </div>` },
+
+  'MC-2026-0030': { title: 'MC-2026-0030 工人新村业委会物业服务合同纠纷', content: `
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div><span class="text-gray-500">案由：</span><span class="text-gray-800">物业服务合同纠纷</span></div>
+                <div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div>
+                <div><span class="text-gray-500">原告：</span><span class="text-gray-800">工人新村业主委员会</span></div>
+                <div><span class="text-gray-500">结案日期：</span><span class="text-gray-800">2026-01-25</span></div>
+            </div>
+            <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded text-sm text-green-800">
+                <strong>结案说明：</strong>物业公司长期未清理小区垃圾站。经法院调解，物业公司退还 10% 物业费，并承诺整改。案卷已归档。
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">案件材料</h4>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-gray-100 rounded border border-gray-200 cursor-not-allowed opacity-60" onclick="alert('⚠️ 访问被拒绝\\n\\n该案件已结案，相关卷宗及附件已被归档加密。\\n如需调阅，请向律所档案室申请 L3 级及以上权限。')">
+                        <div class="flex items-center space-x-2"><span class="text-gray-500">🔒</span><span class="text-sm text-gray-600">物业服务合同.pdf</span></div>
+                        <span class="text-xs text-gray-500">已归档加密</span>
+                    </div>
+                </div>
+            </div>
+        </div>` },
+
+ 'MC-2025-0160': { title: 'MC-2025-0160 林浩 vs 周婷 离婚纠纷', content: `
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div><span class="text-gray-500">案由：</span><span class="text-gray-800">离婚纠纷</span></div>
+                <div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div>
+                <div><span class="text-gray-500">结案日期：</span><span class="text-gray-800">2025-12-28</span></div>
+            </div>
+            <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded text-sm text-green-800">
+                <strong>结案说明：</strong>双方因性格不合协议离婚。无子女，财产已分割完毕。案卷已归档。
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">案件材料</h4>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-gray-100 rounded border border-gray-200 cursor-not-allowed opacity-60" onclick="alert('⚠️ 访问被拒绝\\n\\n该案件已结案，相关卷宗及附件已被归档加密。\\n如需调阅，请向律所档案室申请 L3 级及以上权限。')">
+                        <div class="flex items-center space-x-2"><span class="text-gray-500">🔒</span><span class="text-sm text-gray-600">财产分割协议.pdf</span></div>
+                        <span class="text-xs text-gray-500">已归档加密</span>
+                    </div>
+                </div>
+            </div>
+        </div>` },
+
+  'MC-2025-0156': { title: 'MC-2025-0156 临江机械制造有限公司劳动合同案', content: `
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div><span class="text-gray-500">案由：</span><span class="text-gray-800">劳动合同纠纷</span></div>
+                <div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div>
+                <div><span class="text-gray-500">结案日期：</span><span class="text-gray-800">2025-12-20</span></div>
+            </div>
+            <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded text-sm text-green-800">
+                <strong>结案说明：</strong>退休员工工伤认定纠纷，经劳动仲裁后和解。案卷已归档。
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">案件材料</h4>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-gray-100 rounded border border-gray-200 cursor-not-allowed opacity-60" onclick="alert('⚠️ 访问被拒绝\\n\\n该案件已结案，相关卷宗及附件已被归档加密。\\n如需调阅，请向律所档案室申请 L3 级及以上权限。')">
+                        <div class="flex items-center space-x-2"><span class="text-gray-500">🔒</span><span class="text-sm text-gray-600">仲裁裁决书.pdf</span></div>
+                        <span class="text-xs text-gray-500">已归档加密</span>
+                    </div>
+                </div>
+            </div>
+        </div>` },
+
+   'MC-2025-0150': { title: 'MC-2025-0150 陈建国等五兄妹法定继承纠纷', content: `
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div><span class="text-gray-500">案由：</span><span class="text-gray-800">法定继承纠纷</span></div>
+                <div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div>
+                <div><span class="text-gray-500">结案日期：</span><span class="text-gray-800">2025-11-30</span></div>
+            </div>
+            <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded text-sm text-green-800">
+                <strong>结案说明：</strong>五兄妹对老厂房宿舍继承份额产生分歧。经法院调解，房屋归长子所有，由其补偿其他四人。案卷已归档。
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">案件材料</h4>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-gray-100 rounded border border-gray-200 cursor-not-allowed opacity-60" onclick="alert('⚠️ 访问被拒绝\\n\\n该案件已结案，相关卷宗及附件已被归档加密。\\n如需调阅，请向律所档案室申请 L3 级及以上权限。')">
+                        <div class="flex items-center space-x-2"><span class="text-gray-500">🔒</span><span class="text-sm text-gray-600">法院调解书.pdf</span></div>
+                        <span class="text-xs text-gray-500">已归档加密</span>
+                    </div>
+                </div>
+            </div>
+        </div>` },
+
+    'MC-2025-0142': { title: 'MC-2025-0142 周卫国运输合同纠纷', content: `
+        <div class="space-y-4">
+            <div class="grid grid-cols-2 gap-4 text-sm">
+                <div><span class="text-gray-500">案由：</span><span class="text-gray-800">运输合同纠纷</span></div>
+                <div><span class="text-gray-500">承办律师：</span><span class="text-gray-800">沈致远</span></div>
+                <div><span class="text-gray-500">结案日期：</span><span class="text-gray-800">2025-11-15</span></div>
+            </div>
+            <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded text-sm text-green-800">
+                <strong>结案说明：</strong>货运合同违约纠纷，经调解后对方支付违约金 3.2 万元。案卷已归档。
+            </div>
+            <div>
+                <h4 class="font-semibold text-gray-700 mb-2">案件材料</h4>
+                <div class="space-y-2">
+                    <div class="flex items-center justify-between p-2 bg-gray-100 rounded border border-gray-200 cursor-not-allowed opacity-60" onclick="alert('⚠️ 访问被拒绝\\n\\n该案件已结案，相关卷宗及附件已被归档加密。\\n如需调阅，请向律所档案室申请 L3 级及以上权限。')">
+                        <div class="flex items-center space-x-2"><span class="text-gray-500">🔒</span><span class="text-sm text-gray-600">调解协议书.pdf</span></div>
+                        <span class="text-xs text-gray-500">已归档加密</span>
+                    </div>
+                </div>
+            </div>
+        </div>` }
+};
+
+function openCase(caseId) { const data = casesData[caseId]; if (!data) return; document.getElementById('modalTitle').textContent = data.title; document.getElementById('modalBody').innerHTML = data.content; document.getElementById('caseModal').classList.add('active'); }
+function closeCase() { document.getElementById('caseModal').classList.remove('active'); }
+function unlockPrivateNote() {
+    const input = document.getElementById('notePassword');
+    const result = document.getElementById('noteResult');
+    if (!input || !result) return;
+    if (input.value.trim() === '70402') {
+        sessionStorage.setItem('caseStage', 'noteUnlocked');
+        result.className = 'text-xs mt-2 text-green-700';
+        result.innerHTML = '<strong>解密完成：</strong>“先别把录音交给家属。周素兰反复提到药盒；医院记录和她在厂里的旧笔记本也许能解释原因。以 MC-2026-0042 申请外部协查。”<br><a href="external.html" class="underline font-semibold">前往外部协查通道 →</a>';
+    } else {
+        result.className = 'text-xs mt-2 text-red-700';
+        result.textContent = '密码不正确。请核对案件材料中的复核地点。';
+    }
+}
+window.addEventListener('load', function() { const caseId = sessionStorage.getItem('openCaseId'); if (caseId && casesData[caseId]) { openCase(caseId); sessionStorage.removeItem('openCaseId'); } });
+document.getElementById('searchInput').addEventListener('input', function(e) { const keyword = e.target.value.toLowerCase(); const rows = document.querySelectorAll('#caseTable tr'); rows.forEach(row => { const text = row.textContent.toLowerCase(); row.style.display = text.includes(keyword) ? '' : 'none'; }); });
+
+// === 核心修复：放在这里确保 DOM 已加载完毕 ===
+(function initUserView() {
+    const username = window.currentUser || sessionStorage.getItem('username');
+    const userAvatar = document.getElementById('userAvatar');
+    const userDisplay = document.getElementById('userDisplayName');
+    
+    if (username === 'admin') {
+        if (userAvatar) userAvatar.textContent = '律';
+        if (userDisplay) userDisplay.textContent = '沈致远 律师';
+    } else {
+        if (userAvatar) userAvatar.textContent = '助';
+        if (userDisplay) userDisplay.textContent = '春梅 (你)';
+    }
+})();
+</script>
+</body>
+</html>

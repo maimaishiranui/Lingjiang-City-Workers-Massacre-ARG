@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新闻动态 - 临江市第二医院</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
+    <style>
+        :root { --hospital-green: #0d7a5f; --hospital-green-light: #0f9b7a; }
+        body { font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif; background: #f5f6f8; }
+        .top-toolbar { background: #f0f2f5; border-bottom: 1px solid #e0e3e8; font-size: 0.8rem; }
+        .main-header { background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06); position: sticky; top:0; z-index:100; }
+        .header-logo-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--hospital-green), var(--hospital-green-light)); border-radius: 14px; display: flex; align-items: center; justify-content: center; }
+        .header-logo-icon svg { width: 32px; height: 32px; fill: #fff; }
+        .nav-bar { background: var(--hospital-green); }
+        .nav-link { color: rgba(255,255,255,0.9); padding: 14px 18px; display: inline-block; font-size: 0.9rem; text-decoration: none; }
+        .nav-link:hover, .nav-link.active { background: rgba(255,255,255,0.15); color: #fff; }
+        .nav-link.active { font-weight: 600; border-bottom: 3px solid #ffd54f; }
+        .news-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); padding: 20px; margin-bottom: 20px; border:1px solid #eef0f3; }
+        .news-card h3 { font-size: 1.1rem; font-weight: 700; color: #1a1a1a; margin-bottom: 8px; }
+        .news-date { font-size: 0.8rem; color: #888; margin-bottom: 10px; display: block; }
+        .site-footer { background: #1a1f2b; color: #b0b8c1; padding: 40px 0 20px; margin-top: 40px; }
+        .footer-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 30px; }
+        .footer-bottom { border-top: 1px solid #2a303c; padding-top: 16px; text-align: center; font-size: 0.72rem; color: #6b7583; }
+    </style>
+</head>
+<body>
+    <div class="top-toolbar"><div class="max-w-7xl mx-auto px-4 py-1.5 flex justify-between"><span>📍 临江市健康路128号 | 🕐 8:00-17:30</span><span><a href="#" class="text-gray-600">手机版</a> | <a href="#" class="text-gray-600">English</a></span></div></div>
+    <header class="main-header">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="header-logo-icon"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="20" rx="1.5" fill="white"/><rect x="2" y="9" width="20" height="6" rx="1.5" fill="white"/></svg></div>
+                <div><h1 class="text-xl font-bold">临江市第二医院</h1><p class="text-xs text-gray-500">LINJIANG SECOND HOSPITAL</p></div>
+            </div>
+            <a href="../law/dashboard.html" class="text-sm text-gray-500">← 返回律所OA</a>
+        </div>
+    </header>
+    <nav class="nav-bar">
+        <div class="max-w-7xl mx-auto px-4 flex flex-wrap">
+            <a href="index.html" class="nav-link">首页</a>
+            <a href="about.html" class="nav-link">医院概况</a>
+            <a href="news.html" class="nav-link active">新闻动态</a>
+            <a href="departments.html" class="nav-link">科室导航</a>
+            <a href="experts.html" class="nav-link">专家团队</a>
+            <a href="maintenance.html" class="nav-link">就医指南</a>
+            <a href="maintenance.html" class="nav-link">健康科普</a>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">📰 新闻动态</h2>
+        <div class="news-card"><span class="news-date">2026-07-18</span><h3>临江市第二医院开展2026年度临床诊疗规范专项培训</h3><p class="text-gray-700">为持续提升全院医务人员诊疗水平，规范临床操作流程，近日我院组织开展临床诊疗规范专项培训。各临床科室医师、护理骨干参加学习。培训围绕急症处置、病历书写、医患沟通、院内感染防控等内容开展授课与案例研讨。会议强调，全体医护人员需严守医疗准则，细化诊疗流程，切实保障医疗安全，持续提升医疗服务质量。</p></div>
+        <div class="news-card"><span class="news-date">2026-07-12</span><h3>健康下乡｜我院医疗队赴临江郊区开展免费义诊活动</h3><p class="text-gray-700">本月中旬，临江市第二医院组织神经内科、心血管内科、骨科医护专家团队前往临江城郊社区开展公益义诊。现场为居民提供血压血糖测量、慢性病咨询、用药指导、康复宣教等服务，发放健康科普手册两百余份。后续医院将持续推进常态化基层义诊，把医疗服务延伸至群众家门口。</p></div>
+        <div class="news-card"><span class="news-date">2026-07-05</span><h3>新设备投入使用！我院新增高清内镜系统，助力微创诊疗</h3><p class="text-gray-700">近日，我院消化中心全新高清电子内镜系统正式投入临床使用。该设备成像清晰度更高，可更早发现消化道微小病变，适用于胃肠疾病筛查、内镜下微创手术。设备启用后，将进一步提升消化道疾病早筛与微创治疗能力。</p></div>
+        <div class="news-card"><span class="news-date">2026-06-28</span><h3>我院组织急诊危重患者抢救应急演练</h3><p class="text-gray-700">为夯实急诊急救能力，完善多学科联合救治机制，医务科联合急诊科、重症医学科、手术室开展急危重症抢救模拟演练。演练模拟多发伤急救、绿色通道转运、多科室协同处置等场景，检验团队快速响应能力，进一步理顺120急救入院救治流程。</p></div>
+        <div class="news-card"><span class="news-date">2026-06-15</span><h3>世界老年健康宣传周｜我院开展老年慢病健康科普讲座</h3><p class="text-gray-700">在老年健康宣传周期间，我院老年病科举办健康科普讲座，向中老年群众普及高血压、骨质疏松、睡眠障碍等常见慢病管理知识，科普合理用药、日常康复、定期体检的重要性，引导老年人建立科学健康生活方式。</p></div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="footer-grid">
+                <div><h4 class="text-white mb-3">就医服务</h4><ul class="text-sm space-y-1"><li><a href="#" class="text-gray-400">预约挂号</a></li></ul></div>
+                <div><h4 class="text-white mb-3">医院信息</h4><ul class="text-sm space-y-1"><li><a href="about.html" class="text-gray-400">医院简介</a></li></ul></div>
+                <div><h4 class="text-white mb-3">联系方式</h4><p class="text-sm text-gray-400">📍 临江市健康路128号</p></div>
+            </div>
+            <div class="footer-bottom"><p>© 2026 临江市第二医院 版权所有</p></div>
+        </div>
+    </footer>
+</body>
+</html>
