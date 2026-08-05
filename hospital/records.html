@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>临江市第二医院｜协查记录摘录</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>body{font-family:"Microsoft YaHei",Arial,sans-serif;background:#f1f5f3}.record{cursor:pointer}.record.selected{border-color:#334155;background:#f8fafc}.record::before{content:attr(data-order);display:inline-flex;width:1.4rem;height:1.4rem;align-items:center;justify-content:center;border-radius:999px;background:#e5e7eb;color:#6b7280;font-size:.75rem;margin-right:.5rem}.record.selected::before{background:#334155;color:#fff}</style>
+</head>
+<body class="min-h-screen text-slate-800">
+  <header class="bg-white border-b border-slate-200"><div class="max-w-4xl mx-auto px-5 py-4 flex justify-between items-center"><div><h1 class="font-semibold text-green-800">临江市第二医院</h1><p class="text-xs text-slate-500">院内协查记录摘录 · 仅供案件 MC-2026-0042 使用</p></div><a href="../law/external.html" class="text-sm text-green-700 hover:underline">返回协查通道</a></div></header>
+  <main class="max-w-4xl mx-auto p-5 md:p-8">
+    <div class="bg-amber-50 border-l-4 border-amber-500 p-4 text-sm leading-6"><strong>调阅说明：</strong>依据沈致远律师发起的协查申请，系统仅返回 2026 年 2 月 16 日下午与周启明相关的最小必要记录。请核对记录的发生顺序。</div>
+    <section class="mt-6 bg-white border border-slate-200 shadow-sm p-5 md:p-7">
+      <p class="text-xs tracking-wider text-slate-500">时间线复核</p>
+      <h2 class="mt-1 text-xl font-semibold">将附件按发生顺序写入复核意见</h2>
+      <p class="mt-2 text-sm text-slate-600">这不是为了证明“所有资料都在”，而是为了确认其中哪一段空白无法由周启明的说法解释。</p>
+      <div id="records" class="mt-6 grid gap-3">
+        <button class="record border border-slate-300 p-4 text-left text-sm" data-time="3">停车缴费记录：16:18，工人新村北门临时停车区。</button>
+        <button class="record border border-slate-300 p-4 text-left text-sm" data-time="1">急诊门禁：15:31，周启明刷卡离开急诊西门。</button>
+        <button class="record border border-slate-300 p-4 text-left text-sm" data-time="4">急诊门禁：16:18，周启明刷卡返回急诊西门。</button>
+        <button class="record border border-slate-300 p-4 text-left text-sm" data-time="2">社区公共影像：15:49，一名与周启明体貌相符者进入工人新村 7 栋。</button>
+      </div>
+      <div class="mt-5 flex items-center gap-3"><button id="check" class="bg-green-700 hover:bg-green-800 text-white px-4 py-2 text-sm">提交复核</button><button id="clear" class="text-sm text-slate-600 hover:underline">清空选择</button></div>
+      <p id="result" class="mt-4 text-sm leading-6"></p>
+    </section>
+    <p class="mt-5 text-xs text-slate-500">注：本页仅呈现叙事所需的访问、门禁与停车记录；不包含诊疗操作、药物或个人病历细节。</p>
+  </main>
+  <script>
+    const selected=[];document.querySelectorAll('.record').forEach((button)=>button.addEventListener('click',()=>{if(button.classList.contains('selected'))return;button.classList.add('selected');button.dataset.order=selected.length+1;selected.push(button.dataset.time)}));
+    document.getElementById('clear').addEventListener('click',()=>{selected.length=0;document.querySelectorAll('.record').forEach((button)=>{button.classList.remove('selected');button.removeAttribute('data-order')});document.getElementById('result').textContent=''});
+    document.getElementById('check').addEventListener('click',()=>{const result=document.getElementById('result');if(selected.join(',')==='1,2,3,4'){sessionStorage.setItem('hospitalReviewed','true');sessionStorage.setItem('caseStage','timelineUnlocked');result.className='mt-4 text-sm leading-6 text-green-700';result.innerHTML='<strong>复核成立。</strong> 周启明在 15:31 至 16:18 之间存在无法由院内工作解释的离岗窗口。现在还需要确认周素兰留下的日记到底在警告谁。<br><a class="underline font-semibold" href="../law/external.html">返回协查通道 →</a>'}else{result.className='mt-4 text-sm leading-6 text-red-700';result.textContent='顺序不成立。请从离开医院开始，依次核对进入社区、停车和返回医院的记录。'}});
+  </script>
+</body>
+</html>

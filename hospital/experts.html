@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>专家团队 - 临江市第二医院</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
+    <style>
+        :root { --hospital-green: #0d7a5f; --hospital-green-light: #0f9b7a; }
+        body { font-family: 'Noto Sans SC', sans-serif; background: #f5f6f8; }
+        .top-toolbar { background: #f0f2f5; border-bottom:1px solid #e0e3e8; font-size:0.8rem; }
+        .main-header { background:#fff; box-shadow:0 1px 4px rgba(0,0,0,0.06); }
+        .header-logo-icon { width:56px; height:56px; background:linear-gradient(135deg,var(--hospital-green),var(--hospital-green-light)); border-radius:14px; display:flex; align-items:center; justify-content:center; }
+        .header-logo-icon svg { width:32px; height:32px; fill:#fff; }
+        .nav-bar { background:var(--hospital-green); }
+        .nav-link { color:rgba(255,255,255,0.9); padding:14px 18px; display:inline-block; font-size:0.9rem; text-decoration:none; }
+        .nav-link:hover,.nav-link.active { background:rgba(255,255,255,0.15); color:#fff; }
+        .nav-link.active { font-weight:600; border-bottom:3px solid #ffd54f; }
+        .expert-card { background:#fff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.05); padding:24px; display:flex; gap:18px; align-items:flex-start; border:1px solid #eef0f3; }
+        .expert-avatar { width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,#0d7a5f,#0f9b7a); display:flex; align-items:center; justify-content:center; color:#fff; font-size:2rem; font-weight:700; flex-shrink:0; }
+        .site-footer { background:#1a1f2b; color:#b0b8c1; padding:40px 0 20px; margin-top:40px; }
+        .footer-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+        .footer-bottom { border-top:1px solid #2a303c; padding-top:16px; text-align:center; font-size:0.72rem; color:#6b7583; }
+        .arg-clue { background: #fff3e0; border-left: 4px solid #f57c00; padding: 8px 12px; margin-top: 8px; font-size:0.8rem; }
+    </style>
+</head>
+<body>
+    <div class="top-toolbar"><div class="max-w-7xl mx-auto px-4 py-1.5 flex justify-between"><span>📍 临江市健康路128号 | 🕐 8:00-17:30</span><span><a href="#" class="text-gray-600">手机版</a> | <a href="#" class="text-gray-600">English</a></span></div></div>
+    <header class="main-header">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="header-logo-icon"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="20" rx="1.5" fill="white"/><rect x="2" y="9" width="20" height="6" rx="1.5" fill="white"/></svg></div>
+                <div><h1 class="text-xl font-bold">临江市第二医院</h1><p class="text-xs text-gray-500">LINJIANG SECOND HOSPITAL</p></div>
+            </div>
+            <a href="../law/dashboard.html" class="text-sm text-gray-500">← 返回律所OA</a>
+        </div>
+    </header>
+    <nav class="nav-bar">
+        <div class="max-w-7xl mx-auto px-4 flex flex-wrap">
+            <a href="hospital.html" class="nav-link">首页</a>
+            <a href="about.html" class="nav-link">医院概况</a>
+            <a href="news.html" class="nav-link">新闻动态</a>
+            <a href="departments.html" class="nav-link">科室导航</a>
+            <a href="experts.html" class="nav-link active">专家团队</a>
+            <a href="maintenance.html" class="nav-link">就医指南</a>
+            <a href="maintenance.html" class="nav-link">健康科普</a>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-2">👨‍⚕️ 专家团队</h2>
+        <p class="text-gray-500 mb-8">临江市第二医院专家团队由一批深耕临床数十年的资深医师、中青年学科骨干组成。</p>
+        <div class="space-y-5">
+            <div class="expert-card">
+                <div class="expert-avatar">周</div>
+                <div>
+                    <h3 class="text-lg font-bold">周明远</h3>
+                    <p class="text-sm text-gray-500">心血管内科 主任医师 学科带头人</p>
+                    <p class="text-sm mt-2">从事心血管临床工作32年，擅长冠心病、顽固性高血压、心律失常介入诊疗。现任内科学术组组长，主持多项区域临床课题。</p>
+                    <p class="text-xs text-gray-400 mt-2">门诊时间：周一、周三上午</p>
+                </div>
+            </div>
+            <div class="expert-card">
+                <div class="expert-avatar">陈</div>
+                <div>
+                    <h3 class="text-lg font-bold">陈景生</h3>
+                    <p class="text-sm text-gray-500">神经内科 副主任医师</p>
+                    <p class="text-sm mt-2">长期专注脑血管疾病、认知功能异常、慢性眩晕诊疗，擅长脑卒中急性期救治与后期康复方案制定。</p><p class="text-xs text-gray-400 mt-2">门诊时间：周二、周四全天</p>
+                </div>
+            </div>
+            <div class="expert-card">
+                <div class="expert-avatar">林</div>
+                <div>
+                    <h3 class="text-lg font-bold">林晓雯</h3>
+                    <p class="text-sm text-gray-500">妇产科 主任医师</p>
+                    <p class="text-sm mt-2">妇产科临床工作26年，擅长高危妊娠管理、妇科微创手术、宫颈病变筛查，负责院内孕产妇危重病例会诊。</p>
+                    <p class="text-xs text-gray-400 mt-2">门诊时间：周一、周五全天</p>
+                </div>
+            </div>
+
+<div class="expert-card">
+    <div class="expert-avatar" style="background:linear-gradient(135deg,#0d7a5f,#0f9b7a);">周</div>
+    <div>
+        <h3 class="text-lg font-bold">周启明</h3>
+        <p class="text-sm text-gray-500">内科 住院医师</p>
+        <p class="text-sm mt-2">擅长：老年病、慢性病管理、高血压糖尿病管理</p>
+        <p class="text-xs text-gray-400 mt-2">入职时间：2021年</p>
+    </div>
+</div>
+<div class="expert-card">
+    <div class="expert-avatar" style="background:linear-gradient(135deg,#0d7a5f,#0f9b7a);">李</div>
+    <div>
+        <h3 class="text-lg font-bold">李建国</h3>
+        <p class="text-sm text-gray-500">急诊科 主任医师 · 教授</p>
+        <p class="text-sm mt-2">擅长：急诊抢救、过敏反应处理、急性中毒救治</p>
+        <p class="text-xs text-gray-400 mt-2">从业32年 · 博士生导师</p>
+    </div>
+</div>
+            
+            <div class="expert-card">
+                <div class="expert-avatar">赵</div>
+                <div>
+                    <h3 class="text-lg font-bold">赵峰</h3>
+                    <p class="text-sm text-gray-500">骨科 副主任医师</p>
+                    <p class="text-sm mt-2">主攻脊柱疾病、关节创伤、运动损伤，熟练开展脊柱微创、人工关节置换手术。</p>
+                <p class="text-xs text-gray-400 mt-2">门诊时间：周三、周六上午</p></div>
+                
+            </div>
+            <div class="expert-card" style="background: #fff8f0;">
+                <div class="expert-avatar" style="background:linear-gradient(135deg,#b45309,#d97706);">吴</div>
+                <div>
+                    <h3 class="text-lg font-bold">吴嘉和</h3>
+                    <p class="text-sm text-gray-500">精神心理科 主治医师</p>
+                    <p class="text-sm mt-2">擅长睡眠障碍、情绪障碍、慢性心理应激相关问题干预，长期开展住院患者心理评估工作。</p>
+                    <p class="text-xs text-gray-400 mt-2">门诊时间：周二、周四下午</p>
+                    <div class="arg-clue">📋 近期研究方向：长期留观人员心理状态追踪（课题编号：LJ2H-PSY-2026-04）</div>
+                </div>
+            </div>
+            <div class="expert-card"><div class="expert-avatar">陶
+
+            </div>
+            <div>
+                <h3 class="text-lg font-bold">陶善文</h3>
+                <p class="text-sm text-gray-500">急诊科 主任医师，急救中心负责人</p>
+                <p class="text-sm mt-2">从事急诊急救工作28年，擅长多发创伤、急危重症多学科联合抢救，统筹120院前急救体系运作。</p>
+                <p class="text-xs text-gray-400 mt-2">出诊：急诊24小时轮值</p>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="footer-grid">
+                <div><h4 class="text-white mb-3">就医服务</h4><ul class="text-sm"><li><a href="#" class="text-gray-400">预约挂号</a></li></ul></div>
+                <div><h4 class="text-white mb-3">医院信息</h4><ul class="text-sm"><li><a href="about.html" class="text-gray-400">医院简介</a></li></ul></div>
+                <div><h4 class="text-white mb-3">联系方式</h4><p class="text-sm text-gray-400">📍 临江市健康路128号</p></div>
+            </div>
+            <div class="footer-bottom"><p>© 2026 临江市第二医院 版权所有</p></div>
+        </div>
+    </footer>
+</body>
+</html>

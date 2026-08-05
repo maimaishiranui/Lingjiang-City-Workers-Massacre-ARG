@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>科室导航 - 临江市第二医院</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
+    <style>
+        :root { --hospital-green: #0d7a5f; --hospital-green-light: #0f9b7a; }
+        body { font-family: 'Noto Sans SC', sans-serif; background: #f5f6f8; }
+        .top-toolbar { background: #f0f2f5; border-bottom: 1px solid #e0e3e8; font-size:0.8rem; }
+        .main-header { background:#fff; box-shadow:0 1px 4px rgba(0,0,0,0.06); position:sticky; top:0; z-index:100; }
+        .header-logo-icon { width:56px; height:56px; background:linear-gradient(135deg,var(--hospital-green),var(--hospital-green-light)); border-radius:14px; display:flex; align-items:center; justify-content:center; }
+        .header-logo-icon svg { width:32px; height:32px; fill:#fff; }
+        .nav-bar { background:var(--hospital-green); }
+        .nav-link { color:rgba(255,255,255,0.9); padding:14px 18px; display:inline-block; font-size:0.9rem; text-decoration:none; }
+        .nav-link:hover,.nav-link.active { background:rgba(255,255,255,0.15); color:#fff; }
+        .nav-link.active { font-weight:600; border-bottom:3px solid #ffd54f; }
+        .dept-card { background:#fff; border-radius:12px; box-shadow:0 2px 12px rgba(0,0,0,0.05); padding:20px; border:1px solid #eef0f3; }
+        .dept-card h3 { font-size:1.1rem; font-weight:700; color:#1a1a1a; }
+        .site-footer { background:#1a1f2b; color:#b0b8c1; padding:40px 0 20px; margin-top:40px; }
+        .footer-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:30px; }
+        .footer-bottom { border-top:1px solid #2a303c; padding-top:16px; text-align:center; font-size:0.72rem; color:#6b7583; }
+        .arg-mark { color: #d1423a; font-weight: 600; }
+    </style>
+</head>
+<body>
+    <div class="top-toolbar"><div class="max-w-7xl mx-auto px-4 py-1.5 flex justify-between"><span>📍 临江市健康路128号 | 🕐 8:00-17:30</span><span><a href="#" class="text-gray-600">手机版</a> | <a href="#" class="text-gray-600">English</a></span></div></div>
+    <header class="main-header">
+        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="header-logo-icon"><svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="20" rx="1.5" fill="white"/><rect x="2" y="9" width="20" height="6" rx="1.5" fill="white"/></svg></div>
+                <div><h1 class="text-xl font-bold">临江市第二医院</h1><p class="text-xs text-gray-500">LINJIANG SECOND HOSPITAL</p></div>
+            </div>
+            <a href="../law/dashboard.html" class="text-sm text-gray-500">← 返回律所OA</a>
+        </div>
+    </header>
+    <nav class="nav-bar">
+        <div class="max-w-7xl mx-auto px-4 flex flex-wrap">
+            <a href="hospital.html" class="nav-link">首页</a>
+            <a href="about.html" class="nav-link">医院概况</a>
+            <a href="news.html" class="nav-link">新闻动态</a>
+            <a href="departments.html" class="nav-link active">科室导航</a>
+            <a href="experts.html" class="nav-link">专家团队</a>
+            <a href="maintenance.html" class="nav-link">就医指南</a>
+            <a href="maintenance.html" class="nav-link">健康科普</a>
+        </div>
+    </nav>
+
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <h2 class="text-2xl font-bold text-gray-800 mb-6">🏥 科室导航</h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="dept-card"><h3>🫀 心血管内科</h3><p class="text-sm text-gray-600 mt-2">冠心病、心力衰竭、心律失常、高血压、心肌病等心血管疾病诊疗，开展冠脉介入、心电监护与长期慢病管理。</p></div>
+            <div class="dept-card"><h3>🧠 神经内科</h3><p class="text-sm text-gray-600 mt-2">脑梗死、脑出血、癫痫、帕金森病、头痛眩晕、周围神经病变、认知功能障碍筛查与康复干预。</p></div>
+            <div class="dept-card"><h3>🍽️ 消化内科</h3><p class="text-sm text-gray-600 mt-2">胃炎、消化性溃疡、肝硬化、胰腺炎、炎症性肠病，开展胃肠镜筛查与内镜下微创治疗。</p></div>
+            <div class="dept-card"><h3>🫁 呼吸与危重症医学科</h3><p class="text-sm text-gray-600 mt-2">肺炎、哮喘、慢阻肺、肺部结节、呼吸衰竭等呼吸系统疾病，具备重症呼吸支持救治能力。</p></div>
+            <div class="dept-card"><h3>💉 内分泌/肾病内科</h3><p class="text-sm text-gray-600 mt-2">糖尿病、甲状腺疾病、痛风、慢性肾炎、肾功能损伤等代谢与肾脏疾病规范化治疗。</p></div>
+            <div class="dept-card"><h3>👴 老年病科</h3><p class="text-sm text-gray-600 mt-2">针对高龄多病共存老年患者，提供综合评估、慢病联合管理、营养支持、长期照护指导。</p></div>
+            <div class="dept-card"><h3>🔪 普外科</h3><p class="text-sm text-gray-600 mt-2">肝胆、胃肠、甲状腺、乳腺、腹壁疝、体表肿物手术，常规开展腹腔镜微创手术。</p></div>
+            <div class="dept-card"><h3>🦴 骨科</h3><p class="text-sm text-gray-600 mt-2">骨折创伤、颈腰椎疾病、关节退变、运动损伤，开展关节置换、脊柱微创、创伤修复手术。</p></div>
+            <div class="dept-card"><h3>🧠 神经外科</h3><p class="text-sm text-gray-600 mt-2">开展颅脑外伤、脑出血、颅内占位性病变外科救治，规范处理各类神经系统急症。</p></div>
+            <div class="dept-card"><h3>🚽 泌尿外科</h3><p class="text-sm text-gray-600 mt-2">泌尿系结石、前列腺疾病、泌尿系肿瘤，微创腔镜手术为特色。</p></div>
+            <div class="dept-card"><h3>🤰 妇产科</h3><p class="text-sm text-gray-600 mt-2">妇科炎症、子宫肌瘤、卵巢疾病、宫颈疾病筛查；产科：孕前指导、正常分娩、高危妊娠监护、产后康复。</p></div>
+            <div class="dept-card"><h3>👶 儿科</h3><p class="text-sm text-gray-600 mt-2">承担0–18岁儿童常见病、呼吸道感染、消化道疾病诊疗，儿童生长发育评估。</p></div>
+            <div class="dept-card"><h3>🚑 急诊科（120急救中心）</h3><p class="text-sm text-gray-600 mt-2">全年24小时接诊各类急危重症，开通创伤、心脑血管急症绿色通道，承担院前急救转运工作。</p></div>
+            <div class="dept-card"><h3>🛌 重症医学科（ICU）</h3><p class="text-sm text-gray-600 mt-2">针对各类危重患者实施生命支持、多器官功能保护，多学科联合救治危重症病患。</p></div>
+            <div class="dept-card"><h3>♿ 康复医学科</h3><p class="text-sm text-gray-600 mt-2">脑卒中康复、骨科术后康复、疼痛康复、物理治疗、言语与吞咽功能训练。</p></div>
+            <div class="dept-card border-red-300 bg-red-50"><h3 class="arg-mark">🧘 精神心理科</h3><p class="text-sm text-gray-700 mt-2">开展焦虑、抑郁、睡眠障碍、情绪障碍评估与干预，提供心理咨询与药物治疗。<span class="arg-mark text-xs">（科室档案编号：PSY-2025-07）</span></p></div>
+        </div>
+        <div class="dept-card mt-6"><h3 class="text-gray-500">🔬 医技辅助科室</h3><p class="text-sm text-gray-500">医学影像科、检验科、超声科、药剂科、病理科、消毒供应中心、健康体检中心</p></div>
+    </div>
+
+    <footer class="site-footer">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="footer-grid">
+                <div><h4 class="text-white mb-3">就医服务</h4><ul class="text-sm space-y-1"><li><a href="#" class="text-gray-400">预约挂号</a></li></ul></div>
+                <div><h4 class="text-white mb-3">医院信息</h4><ul class="text-sm space-y-1"><li><a href="about.html" class="text-gray-400">医院简介</a></li></ul></div>
+                <div><h4 class="text-white mb-3">联系方式</h4><p class="text-sm text-gray-400">📍 临江市健康路128号</p></div>
+            </div>
+            <div class="footer-bottom"><p>© 2026 临江市第二医院 版权所有</p></div>
+        </div>
+    </footer>
+</body>
+</html>

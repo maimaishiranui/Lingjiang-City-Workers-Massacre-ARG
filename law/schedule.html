@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<script>
+// 检查登录状态
+(function checkAuth() {
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    const username = sessionStorage.getItem('username');
+    
+    if (!isLoggedIn || isLoggedIn !== 'true') {
+        // 未登录，跳转到登录页
+        window.location.href = 'lawfirm.html';
+        return false;
+    }
+    
+    // 存储用户名供页面使用
+    window.currentUser = username;
+    return true;
+})();
+
+// 根据登录用户更新头像和用户名
+(function initUserView() {
+    const username = window.currentUser || sessionStorage.getItem('username');
+    const userAvatar = document.getElementById('userAvatar');
+    const userDisplay = document.getElementById('userDisplayName');
+    
+    if (username === 'admin') {
+        // 沈律师
+        if (userAvatar) userAvatar.textContent = '律';
+        if (userDisplay) userDisplay.textContent = '沈致远 律师';
+    } else {
+        // 助手（春梅）
+        if (userAvatar) userAvatar.textContent = '助';
+        if (userDisplay) userDisplay.textContent = '春梅 (你)';
+    }
+})();
+
+</script>
+<title>日程安排 - 明诚律师事务所 OA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
+<style>
+body { font-family: 'Noto Sans SC', sans-serif; }
+.sidebar { background: linear-gradient(180deg, #1e1b4b 0%, #0f172a 100%); }
+.menu-item { transition: all 0.3s ease; position: relative; overflow: hidden; }
+.menu-item::before { content: ''; position: absolute; left: 0; top: 0; height: 100%; width: 0; background: linear-gradient(90deg, rgba(167, 139, 250, 0.3), transparent); transition: width 0.3s ease; }
+.menu-item:hover::before { width: 100%; }
+.menu-item.active { background: linear-gradient(90deg, rgba(124, 58, 237, 0.4), transparent); border-right: 3px solid #a78bfa; }
+@keyframes pulse-dot { 0%, 100% { transform: scale(1); opacity: 1; } 50% { transform: scale(1.3); opacity: 0.8; } }
+.pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.fade-in-up { animation: fadeInUp 0.5s ease forwards; }
+.schedule-item { transition: all 0.3s ease; border-left: 4px solid transparent; }
+.schedule-item:hover { transform: translateX(4px); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+.schedule-item.overdue { border-left-color: #ef4444; }
+.schedule-item.today { border-left-color: #f59e0b; background: #fffbeb; }
+.schedule-item.upcoming { border-left-color: #10b981; }
+</style>
+</head>
+<body class="bg-gray-100">
+
+<script>
+// 检查登录状态
+(function checkAuth() {
+    const isLoggedIn = sessionStorage.getItem('isLoggedIn');
+    const username = sessionStorage.getItem('username');
+    
+    if (!isLoggedIn || isLoggedIn !== 'true') {
+        window.location.href = 'lawfirm.html';
+        return false;
+    }
+    window.currentUser = username;
+    return true;
+})();
+</script>
+
+<header class="bg-white shadow-sm border-b border-gray-200 h-16 flex items-center px-6 justify-between sticky top-0 z-40">
+    <div class="flex items-center space-x-3">
+        <div class="w-10 h-10 bg-gradient-to-br from-purple-600 to-indigo-700 rounded-lg flex items-center justify-center text-white font-bold shadow-lg">MC</div>
+        <div><h1 class="text-lg font-bold text-gray-900">明诚律师事务所</h1><p class="text-xs text-gray-500">内部案件管理系统 (OA) v4.2</p></div>
+    </div>
+    <div class="flex items-center space-x-6 text-sm">
+        <span class="text-gray-500" id="currentTime"></span>
+        <div class="flex items-center space-x-2 border-l pl-4">
+         <div id="userAvatar" class="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">助</div>
+<span id="userDisplayName" class="font-semibold text-gray-700">加载中...</span>
+            <button onclick="logout()" class="ml-2 text-gray-400 hover:text-red-500 transition">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+            </button>
+        </div>
+    </div>
+</header>
+
+<div class="flex h-[calc(100vh-4rem)]">
+    <aside class="sidebar w-64 text-gray-300 flex-shrink-0 hidden md:block">
+        <nav class="mt-6 space-y-1">
+            <a href="dashboard.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">📊</span> 工作台</a>
+            <a href="cases.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">📁</span> 案件管理<span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full pulse-dot">4</span></a>
+            <a href="schedule.html" class="menu-item active flex items-center px-6 py-3 text-white"><span class="mr-3 text-lg">📅</span> 日程安排<span class="ml-auto bg-yellow-500 text-white text-xs px-2 py-0.5 rounded-full">2</span></a>
+            <a href="external.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">🔗</span> 外部协查通道</a>
+            <a href="settings.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">⚙️</span> 系统设置</a>
+        </nav>
+    </aside>
+
+    <main class="flex-1 overflow-y-auto p-6">
+        <div class="flex items-center justify-between mb-6 fade-in-up">
+            <div>
+                <h2 class="text-2xl font-bold text-gray-800">日程安排</h2>
+                <p class="text-sm text-gray-500 mt-1">2026年2月 · 共 5 项日程</p>
+            </div>
+            <button class="bg-purple-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-purple-700 transition flex items-center space-x-2">
+                <span>+</span><span>新建日程</span>
+            </button>
+        </div>
+
+        <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6 fade-in-up">
+            <div class="space-y-4">
+                <!-- 已逾期 -->
+                <div class="schedule-item overdue bg-red-50 rounded-lg p-4 cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="bg-red-500 text-white text-xs px-2 py-0.5 rounded font-semibold">已逾期</span>
+                                <span class="text-sm font-semibold text-gray-800">周素兰遗嘱最终核对</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1">📍 律所会议室 A · 承办：沈致远律师</p>
+                            <p class="text-xs text-gray-500 mt-1">原定与当事人周素兰进行遗嘱最终核对，因当事人于2月18日离世，日程取消。</p>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-sm font-semibold text-red-700">2月19日</p>
+                            <p class="text-xs text-gray-500">14:00-15:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 今日 -->
+                <div class="schedule-item today rounded-lg p-4 cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="bg-yellow-500 text-white text-xs px-2 py-0.5 rounded font-semibold">今日</span>
+                                <span class="text-sm font-semibold text-gray-800">所内例会</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1">📍 大会议室 · 全体律师及助理参加</p>
+                            <p class="text-xs text-gray-500 mt-1">讨论近期案件进展，重点跟进沈致远律师失联事宜。</p>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-sm font-semibold text-yellow-700">2月20日</p>
+                            <p class="text-xs text-gray-500">09:00-10:30</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 即将到来 -->
+                <div class="schedule-item upcoming rounded-lg p-4 cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="bg-green-500 text-white text-xs px-2 py-0.5 rounded font-semibold">即将到来</span>
+                                <span class="text-sm font-semibold text-gray-800">张德明案卷宗归档</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1">📍 档案室 · 承办：沈致远律师（待助理代办）</p>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-sm font-semibold text-green-700">2月21日</p>
+                            <p class="text-xs text-gray-500">10:00-11:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-item upcoming rounded-lg p-4 cursor-pointer">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="bg-blue-500 text-white text-xs px-2 py-0.5 rounded font-semibold">待确认</span>
+                                <span class="text-sm font-semibold text-gray-800">周素兰追思会（沈律师备注：需到场）</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1">📍 临江市殡仪馆 2号厅 · 沈律师私人备注</p>
+                            <p class="text-xs text-yellow-700 mt-1">⚠️ 沈律师失联，是否代为出席待确认</p>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-sm font-semibold text-blue-700">2月22日</p>
+                            <p class="text-xs text-gray-500">09:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="schedule-item upcoming rounded-lg p-4 cursor-pointer opacity-60">
+                    <div class="flex items-start justify-between">
+                        <div class="flex-1">
+                            <div class="flex items-center space-x-2 mb-1">
+                                <span class="bg-gray-400 text-white text-xs px-2 py-0.5 rounded font-semibold">已取消</span>
+                                <span class="text-sm font-semibold text-gray-800">王德福案法院排期</span>
+                            </div>
+                            <p class="text-xs text-gray-600 mt-1"> 临江市人民法院 · 因故延期</p>
+                        </div>
+                        <div class="text-right ml-4">
+                            <p class="text-sm font-semibold text-gray-500">2月25日</p>
+                            <p class="text-xs text-gray-500">14:00</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</div>
+
+<script>
+function updateTime() {
+    const now = new Date();
+    document.getElementById('currentTime').textContent = '当前时间：' + now.toLocaleString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
+updateTime(); setInterval(updateTime, 1000);
+function logout() { if (confirm('确定要退出登录吗？')) window.location.href = 'lawfirm.html'; }
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>明诚律师事务所｜内部案件管理系统</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body{font-family:"Microsoft YaHei",Arial,sans-serif;background:#e8eaed;color:#1f2937}
+    .login-shell{box-shadow:0 12px 35px rgba(15,23,42,.16)}
+    .system-bar{background:#253047}.seal{letter-spacing:.12em}.notice{display:none}
+    input:focus{outline:2px solid #486f9d;outline-offset:-1px}
+  </style>
+</head>
+<body class="min-h-screen flex items-center justify-center p-5">
+  <main class="w-full max-w-4xl bg-white border border-slate-300 login-shell">
+    <header class="system-bar text-white px-6 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 border-2 border-slate-200 rounded-full flex items-center justify-center font-bold seal">MC</div>
+        <div><h1 class="font-semibold">明诚律师事务所</h1><p class="text-xs text-slate-300">内部案件管理系统 · OA 4.2.1</p></div>
+      </div>
+      <span class="text-xs text-slate-300">受控访问 · 仅限授权人员</span>
+    </header>
+    <div class="grid md:grid-cols-[1.2fr_.8fr]">
+      <section class="p-7 md:p-9 border-b md:border-b-0 md:border-r border-slate-200">
+        <p class="text-xs tracking-widest text-slate-500 mb-4">WORKSPACE ACCESS</p>
+        <h2 class="text-xl font-semibold text-slate-800">助理工作台登录</h2>
+        <p class="mt-2 text-sm leading-6 text-slate-600">请使用分配的协作账号进入系统。未完成交接的案件不会出现在公共检索中。</p>
+        <form id="loginForm" class="mt-7 space-y-5">
+          <label class="block text-sm text-slate-700">账号 / 工号
+            <input id="username" autocomplete="username" class="mt-2 block w-full border border-slate-300 px-3 py-2.5" placeholder="例如：chunmei">
+          </label>
+          <label class="block text-sm text-slate-700">口令
+            <input id="password" type="password" autocomplete="current-password" class="mt-2 block w-full border border-slate-300 px-3 py-2.5" placeholder="请输入口令">
+          </label>
+          <p id="errorMsg" class="hidden text-sm text-red-700 bg-red-50 border border-red-200 px-3 py-2"></p>
+          <button class="bg-[#344d6d] hover:bg-[#263d59] text-white px-6 py-2.5 text-sm" type="submit">进入工作台</button>
+          <button id="recoveryButton" class="ml-3 text-sm text-[#365f8c] hover:underline" type="button">账号恢复说明</button>
+        </form>
+        <div id="recovery" class="notice mt-6 border-l-4 border-amber-500 bg-amber-50 p-4 text-sm leading-6 text-slate-700">
+          <p class="font-semibold text-slate-800">临时协作账号恢复说明</p>
+          <p class="mt-1">账号为 <code class="bg-white px-1">chunmei</code>。沈律师最后一次交接使用的临时口令格式为：<strong>案件编号末四位 + 立遗嘱人离世日期（月日）</strong>。</p>
+          <p class="mt-1 text-xs text-slate-500">提示：交接邮件提及“2·18 周姓老人遗产案”。请勿尝试主管账号。</p>
+        </div>
+      </section>
+      <aside class="bg-slate-50 p-7 md:p-9 text-sm">
+        <h2 class="font-semibold text-slate-800">系统公告</h2>
+        <div class="mt-4 border-t border-slate-200 pt-4">
+          <p class="font-medium">[2026-02-20] 案件交接提醒</p>
+          <p class="mt-1 leading-6 text-slate-600">沈致远律师负责的部分案件尚未完成交接，请助理优先核对逾期任务。</p>
+        </div>
+        <div class="mt-5 border-t border-slate-200 pt-4">
+          <p class="font-medium">[2026-02-19] 外部协查接口维护</p>
+          <p class="mt-1 leading-6 text-slate-600">外部机构资料仅在案件附有有效协查理由后开放浏览。</p>
+        </div>
+        <p class="mt-12 text-xs leading-5 text-slate-500">本系统记录登录、附件访问及协查申请操作。技术支持：律所行政与信息组。</p>
+      </aside>
+    </div>
+    <footer class="border-t border-slate-200 px-6 py-3 text-xs text-slate-500 flex justify-between"><span>© 2026 明诚律师事务所</span><span>Build 20260220.1842</span></footer>
+  </main>
+  <script>
+    document.getElementById('recoveryButton').addEventListener('click',()=>document.getElementById('recovery').style.display='block');
+    document.getElementById('loginForm').addEventListener('submit',(event)=>{
+      event.preventDefault();
+      const user=document.getElementById('username').value.trim().toLowerCase();
+      const password=document.getElementById('password').value.trim();
+      const error=document.getElementById('errorMsg');
+      if(user==='chunmei' && password==='00420218'){
+        ['hospitalReviewed','diaryDecoded','communityReviewed','funeralReviewed','openCaseId'].forEach((key)=>sessionStorage.removeItem(key));
+        sessionStorage.setItem('isLoggedIn','true');sessionStorage.setItem('username','chunmei');sessionStorage.setItem('caseStage','intake');
+        window.location.href='dashboard.html';return;
+      }
+      error.textContent='账号或口令不正确。若你正在协助春梅，请查看“账号恢复说明”。';error.classList.remove('hidden');
+    });
+  </script>
+</body>
+</html>
