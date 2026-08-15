@@ -236,7 +236,9 @@
                 document.getElementById('modalNote').textContent = details.note;
 
                 const next = document.getElementById('modalNext');
-                next.innerHTML = name === '周素兰' ? '<a href="records.html" class="inline-block mt-4 bg-green-700 text-white text-sm px-4 py-2 rounded">调取周启明当日协查记录 →</a>' : '';
+                next.innerHTML = name === '周素兰' ? '<button id="saveDeathRecord" class="mt-4 bg-green-700 text-white text-sm px-4 py-2 rounded">将死亡登记摘要归入案件卷宗</button>' : '';
+                const saveDeathRecord = document.getElementById('saveDeathRecord');
+                if (saveDeathRecord) saveDeathRecord.addEventListener('click', () => { sessionStorage.setItem('deathSaved','true'); window.location.href='../law/external.html'; });
 
                 document.getElementById('patientModal').style.display = 'block';
             });

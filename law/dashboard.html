@@ -107,12 +107,11 @@ body { font-family: 'Noto Sans SC', sans-serif; }
             <span class="text-yellow-600 text-2xl mr-3">⚠️</span>
             <div class="flex-1">
                 <h3 class="font-bold text-yellow-900 mb-1">主管律师状态异常</h3>
-                <p class="text-sm text-yellow-800">沈致远律师自 2 月 18 日 17:42 离开律所后未再打卡或登录系统。他负责的案件仍未完成交接。</p>
+                <p class="text-sm text-yellow-800">沈致远律师自 2 月 18 日后未再打卡或登录系统。其名下部分案件尚未完成交接，请按常规工作顺序处理。</p>
             </div>
-            <a href="cases.html" onclick="sessionStorage.setItem('openCaseId','MC-2026-0042')" class="text-yellow-700 hover:text-yellow-900 text-sm font-semibold whitespace-nowrap">接管案件 →</a>
         </div>
 
-        <section class="bg-white border border-slate-200 rounded-lg shadow-sm mb-6 fade-in-up">
+        <section class="hidden bg-white border border-slate-200 rounded-lg shadow-sm mb-6 fade-in-up">
             <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
                 <div><p class="text-xs font-semibold tracking-wider text-slate-500">优先处理</p><h2 class="mt-1 font-bold text-slate-800">MC-2026-0042 · 周素兰遗产继承案</h2></div>
                 <span class="bg-red-100 text-red-700 px-2 py-1 rounded text-xs font-semibold">逾期交接</span>
@@ -121,6 +120,14 @@ body { font-family: 'Noto Sans SC', sans-serif; }
                 <div class="text-sm text-slate-600 leading-6"><p>立遗嘱人于 2 月 18 日离世；原定最终核对未完成。案件附件中留有一份加密的私人交接笔记。</p><p class="mt-1 text-xs text-slate-500">最后操作人：沈致远 · 2026-02-18 17:42</p></div>
                 <a href="cases.html" onclick="sessionStorage.setItem('openCaseId','MC-2026-0042')" class="bg-slate-700 hover:bg-slate-800 text-white text-sm px-4 py-2 rounded text-center">打开案件卷宗</a>
             </div>
+        </section>
+
+        <section id="reinvestigationDraft" class="hidden bg-white border-l-4 border-green-600 rounded-lg shadow-sm mb-6 fade-in-up">
+            <div class="px-5 py-4 border-b border-slate-200 flex items-center justify-between">
+                <div><p class="text-xs font-semibold tracking-wider text-green-700">新建草案 · 待主管审核</p><h2 class="mt-1 font-bold text-slate-800">《关于 MC-2026-0042 建议重新侦办的复核意见》</h2></div>
+                <span class="bg-green-100 text-green-700 px-2 py-1 rounded text-xs font-semibold">已生成</span>
+            </div>
+            <div class="px-5 py-4 text-sm leading-6 text-slate-600"><p>提交人：春梅（助理）　生成时间：2026-02-20 10:26</p><p class="mt-2">草案已归入周素兰案件：周启明存在可疑离岗窗口；周素兰遗留日记指向 Q.M. 与药盒；礼盒路径及骨灰盒接触记录需要由公安机关进一步核验。</p><div class="mt-3 flex gap-3"><a href="evidence.html" class="text-green-700 font-semibold hover:underline">查看复核意见 →</a><a href="cases.html" onclick="sessionStorage.setItem('openCaseId','MC-2026-0042')" class="text-slate-700 font-semibold hover:underline">打开案件卷宗 →</a></div></div>
         </section>
 
         <!-- 统计卡片 -->
@@ -269,7 +276,7 @@ body { font-family: 'Noto Sans SC', sans-serif; }
 </div>
 
 <!-- 全局悬浮系统提示 -->
-<div id="systemAlert" class="fixed bottom-8 left-8 z-[9999] max-w-sm bg-red-950/90 backdrop-blur-md border border-red-700/60 rounded-xl p-4 text-sm text-red-200 shadow-2xl transition-all duration-500">
+<div id="systemAlert" class="hidden fixed bottom-8 left-8 z-[9999] max-w-sm bg-red-950/90 backdrop-blur-md border border-red-700/60 rounded-xl p-4 text-sm text-red-200 shadow-2xl transition-all duration-500">
     <div class="flex items-start space-x-3">
         <span class="text-red-500 text-2xl flex-shrink-0 mt-0.5">⚠️</span>
         <div class="flex-1">
@@ -331,10 +338,15 @@ function showNotifications() {
 // 6. 核心：根据登录用户动态显示不同的便签区域和用户名
 (function initUserView() {
     const username = window.currentUser || sessionStorage.getItem('username');
+    const reinvestigationDraft = document.getElementById('reinvestigationDraft');
     const shenNoteSection = document.getElementById('shenNoteSection');
     const assistantNoteSection = document.getElementById('assistantNoteSection');
     const userAvatar = document.getElementById('userAvatar');
     const userDisplay = document.getElementById('userDisplayName');
+
+    if (reinvestigationDraft && sessionStorage.getItem('reinvestigationDraft') === 'true') {
+        reinvestigationDraft.classList.remove('hidden');
+    }
     
     if (username === 'admin') {
         // 沈律师视角
