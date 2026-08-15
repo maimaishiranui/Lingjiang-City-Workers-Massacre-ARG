@@ -112,7 +112,7 @@ body { font-family: 'Noto Sans SC', sans-serif; }
     </div>
     
     <!-- 临江市第二医院 - 保留可访问 -->
-    <a href="../hospital/hospital.html" data-required="noteUnlocked" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay: 0.2s">
+    <a href="../hospital/hospital.html#case-review" data-required="caseOpened" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay: 0.2s">
         <div class="flex items-center mb-3">
             <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-700 font-bold mr-3 text-xl">🏥</div>
             <div>
@@ -127,7 +127,7 @@ body { font-family: 'Noto Sans SC', sans-serif; }
         </div>
     </a>
     
-    <a href="../factory/factory.html" data-required="noteUnlocked" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay:0.3s">
+    <a href="../factory/factory.html" data-required="deathSaved" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay:0.3s">
         <div class="flex items-center mb-3">
             <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-700 font-bold mr-3 text-xl">🏭</div>
             <div>
@@ -143,7 +143,7 @@ body { font-family: 'Noto Sans SC', sans-serif; }
     </a>
     
     <!-- 工人新村社区 - 保留可访问 -->
-    <a href="../community/community.html" data-required="caseChain" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay: 0.4s">
+    <a href="../community/community.html" data-required="diaryDecoded" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay: 0.4s">
         <div class="flex items-center mb-3">
             <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center text-teal-700 font-bold mr-3 text-xl">🏘️</div>
             <div>
@@ -210,11 +210,9 @@ function logout() { if (confirm('确定要退出登录吗？')) window.location.
 document.querySelectorAll('[data-required]').forEach((card) => {
     const required = card.dataset.required;
     const stage = sessionStorage.getItem('caseStage');
-    const unlocked = required === 'noteUnlocked'
-        ? ['noteUnlocked','timelineUnlocked','diaryUnlocked','communityUnlocked','funeralUnlocked'].includes(stage)
-        : required === 'caseChain'
-            ? sessionStorage.getItem('hospitalReviewed') === 'true' && sessionStorage.getItem('diaryDecoded') === 'true'
-            : sessionStorage.getItem(required) === 'true';
+    const unlocked = required === 'caseOpened'
+        ? sessionStorage.getItem('caseOpened') === 'true'
+        : sessionStorage.getItem(required) === 'true';
     const status = card.querySelector('.gate-status');
     const action = card.querySelector('.gate-action');
     if (unlocked) {
@@ -224,7 +222,8 @@ document.querySelectorAll('[data-required]').forEach((card) => {
         card.classList.add('opacity-60');
         card.addEventListener('click', (event) => {
             event.preventDefault();
-            const message = required === 'noteUnlocked' ? '请先返回 MC-2026-0042，解密沈律师的私人笔记。' : required === 'caseChain' ? '社区资料需要两条独立依据：医院时间线与工厂日记。' : '请先完成社区的礼盒代收记录复核。';
+            const messages = { caseOpened:'请先在 MC-2026-0042 中阅读沈律师留下的协查草稿。', deathSaved:'请先归档周素兰的死亡登记摘要。', diaryDecoded:'请先在工厂档案中完成周素兰旧笔记的复原。', communityReviewed:'请先在社区资料中完成礼盒路径的核对。' };
+            const message = messages[required] || '请先完成上一份协查资料的归档。';
             alert(message);
         });
     }

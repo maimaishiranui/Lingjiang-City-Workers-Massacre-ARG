@@ -66,7 +66,7 @@
       const password=document.getElementById('password').value.trim();
       const error=document.getElementById('errorMsg');
       if(user==='chunmei' && password==='00420218'){
-        ['hospitalReviewed','diaryDecoded','communityReviewed','funeralReviewed','openCaseId'].forEach((key)=>sessionStorage.removeItem(key));
+        ['caseOpened','deathSaved','diarySaved','communitySaved','funeralSaved','reinvestigationDraft','hospitalReviewed','diaryDecoded','communityReviewed','funeralReviewed','openCaseId'].forEach((key)=>sessionStorage.removeItem(key));
         sessionStorage.setItem('isLoggedIn','true');sessionStorage.setItem('username','chunmei');sessionStorage.setItem('caseStage','intake');
         window.location.href='dashboard.html';return;
       }
