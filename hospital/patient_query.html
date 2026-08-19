@@ -1,261 +1,135 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>患者信息查询 - 临江市第二医院</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
-    <style>
-        :root { --hospital-green: #0d7a5f; --hospital-green-light: #0f9b7a; }
-        body { font-family: 'Noto Sans SC', sans-serif; background: #f5f6f8; }
-        .top-toolbar { background: #f0f2f5; border-bottom: 1px solid #e0e3e8; font-size: 0.8rem; }
-        .main-header { background: #fff; box-shadow: 0 1px 4px rgba(0,0,0,0.06); position: sticky; top:0; z-index:100; }
-        .header-logo-icon { width: 56px; height: 56px; background: linear-gradient(135deg, var(--hospital-green), var(--hospital-green-light)); border-radius: 14px; display: flex; align-items: center; justify-content: center; }
-        .header-logo-icon svg { width: 32px; height: 32px; fill: #fff; }
-        .nav-bar { background: var(--hospital-green); }
-        .nav-link { color: rgba(255,255,255,0.9); padding: 14px 18px; display: inline-block; font-size: 0.9rem; text-decoration: none; }
-        .nav-link:hover { background: rgba(255,255,255,0.15); }
-        .section-card { background: #fff; border-radius: 12px; box-shadow: 0 2px 12px rgba(0,0,0,0.05); border: 1px solid #eef0f3; }
-        .data-table { width: 100%; border-collapse: collapse; font-size: 0.85rem; }
-        .data-table thead th { background: #f7f8fa; padding: 12px 14px; text-align: left; font-weight: 600; color: #555; border-bottom: 2px solid #e0e3e8; }
-        .data-table tbody td { padding: 12px 14px; border-bottom: 1px solid #eef0f3; }
-        .data-table tbody tr { cursor: pointer; transition: background 0.2s; }
-        .data-table tbody tr:hover { background: #f0fdf6; }
-        .status-badge { display: inline-block; padding: 4px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 500; }
-        .status-badge.active { background: #e3f2fd; color: #1565c0; }
-        .status-badge.discharged { background: #e8f5e9; color: #2e7d32; }
-        .status-badge.observation { background: #fff8e1; color: #f57f17; }
-        .search-box { border: 2px solid #0d7a5f; border-radius: 8px; padding: 8px 16px; width: 100%; max-width: 400px; }
-        .search-box:focus { outline: none; border-color: #0f9b7a; box-shadow: 0 0 0 3px rgba(13,122,95,0.2); }
-        .site-footer { background: #1a1f2b; color: #b0b8c1; padding: 30px 0 20px; margin-top: 40px; }
-        /* 模态框 */
-        .modal { display: none; position: fixed; z-index: 1000; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); }
-        .modal-content { background: #fff; margin: 10% auto; padding: 24px; border-radius: 12px; width: 90%; max-width: 520px; position: relative; box-shadow: 0 8px 30px rgba(0,0,0,0.15); }
-        .close-btn { position: absolute; right: 16px; top: 12px; font-size: 1.5rem; font-weight: bold; color: #888; cursor: pointer; background: none; border: none; }
-        .close-btn:hover { color: #333; }
-        .modal h3 { font-size: 1.3rem; font-weight: 700; color: #1a1a1a; margin-bottom: 12px; }
-        .modal .detail-row { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid #f0f2f5; font-size: 0.9rem; }
-        .modal .detail-label { color: #888; font-weight: 500; }
-        .modal .detail-value { color: #333; font-weight: 600; }
-        .highlight-row { background: #fffbf0; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>患者信息查询 - 临江市第二医院</title>
+<script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="top-toolbar">
-        <div class="max-w-7xl mx-auto px-4 py-1.5"><span>📍 临江市健康路128号 | 🔒 内部查询系统</span></div>
+<body class="bg-slate-100 text-slate-800 text-sm">
+
+<div class="bg-sky-900 text-white">
+  <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-9 h-9 rounded-full bg-white text-sky-900 font-bold flex items-center justify-center">✚</div>
+      <div>
+        <div class="font-semibold">临江市第二医院</div>
+        <div class="text-xs text-sky-200">患者信息查询系统 · 权限级别：内部授权</div>
+      </div>
     </div>
-    <header class="main-header">
-        <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="header-logo-icon">
-                    <svg viewBox="0 0 24 24"><rect x="9" y="2" width="6" height="20" rx="1.5" fill="white"/><rect x="2" y="9" width="20" height="6" rx="1.5" fill="white"/></svg>
-                </div>
-                <div>
-                    <h1 class="text-xl font-bold">临江市第二医院</h1>
-                    <p class="text-xs text-gray-500">患者信息查询系统</p>
-                </div>
-            </div>
-            <a href="hospital.html" class="text-sm text-gray-500 hover:text-green-700">← 返回医院主页</a>
-        </div>
-    </header>
-    <nav class="nav-bar">
-        <div class="max-w-7xl mx-auto px-4 flex">
-            <a href="hospital.html" class="nav-link">首页</a>
-            <a href="about.html" class="nav-link">医院概况</a>
-            <a href="departments.html" class="nav-link">科室导航</a>
-            <a href="experts.html" class="nav-link">专家团队</a>
-        </div>
-    </nav>
+    <a href="hospital.html" class="text-xs text-sky-200 hover:text-white">← 返回医院主页</a>
+  </div>
+  <nav class="max-w-5xl mx-auto px-4 flex gap-1 text-sm pb-2">
+    <a href="hospital.html" class="px-3 py-1.5 rounded hover:bg-sky-800">首页</a>
+    <a href="about.html" class="px-3 py-1.5 rounded hover:bg-sky-800">医院概况</a>
+    <a href="departments.html" class="px-3 py-1.5 rounded hover:bg-sky-800">科室导航</a>
+    <a href="experts.html" class="px-3 py-1.5 rounded hover:bg-sky-800">专家团队</a>
+  </nav>
+</div>
 
-    <div class="max-w-7xl mx-auto px-4 py-8">
-        <div class="section-card p-6">
-            <div class="flex items-center justify-between mb-6">
-                <h2 class="text-xl font-bold text-gray-800">🔍 住院患者信息查询</h2>
-                <span class="text-xs text-gray-400 bg-gray-100 px-3 py-1 rounded">权限级别：内部授权</span>
-            </div>
-
-            <!-- 搜索框（真实可用） -->
-            <div class="mb-6">
-                <input type="text" id="searchInput" class="search-box" placeholder="输入患者姓名或住院号过滤...">
-                <span class="text-xs text-gray-400 ml-3" id="resultCount"></span>
-            </div>
-
-            <p class="text-xs text-gray-500 mb-4">⚠️ 本系统显示近期住院及留观患者记录，点击行查看详情。信息仅供内部医疗参考。</p>
-
-            <div class="overflow-x-auto">
-                <table class="data-table" id="patientTable">
-                    <thead>
-                        <tr>
-                            <th>姓名</th>
-                            <th>年龄</th>
-                            <th>科室</th>
-                            <th>入院日期</th>
-                            <th>状态</th>
-                            <th>住院号</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-name="周素兰" data-id="LJ2025-1102-042" >
-                            <td>周素兰</td>
-                            <td>78</td>
-                            <td>老年病科</td>
-                            <td>2025-11-02</td>
-                            <td><span class="status-badge discharged">死亡登记</span></td>
-                            <td class="text-xs text-gray-500">LJ2025-1102-042</td>
-                        </tr>
-                        <tr data-name="许晴" data-id="LJ2026-0125-017">
-                            <td>许晴</td>
-                            <td>25</td>
-                            <td>骨科</td>
-                            <td>2026-01-25</td>
-                            <td><span class="status-badge active">治疗中</span></td>
-                            <td class="text-xs text-gray-500">LJ2026-0125-017</td>
-                        </tr>
-                        <tr data-name="张桂芳" data-id="LJ2026-0612-089">
-                            <td>张桂芳</td>
-                            <td>68</td>
-                            <td>内科</td>
-                            <td>2026-06-12</td>
-                            <td><span class="status-badge active">治疗中</span></td>
-                            <td class="text-xs text-gray-500">LJ2026-0612-089</td>
-                        </tr>
-                        <tr data-name="刘文斌" data-id="LJ2026-0508-031">
-                            <td>刘文斌</td>
-                            <td>42</td>
-                            <td>心血管内科</td>
-                            <td>2026-05-08</td>
-                            <td><span class="status-badge discharged">已出院</span></td>
-                            <td class="text-xs text-gray-500">LJ2026-0508-031</td>
-                        </tr>
-                        <tr data-name="赵德生" data-id="LJ2026-0701-105">
-                            <td>赵德生</td>
-                            <td>71</td>
-                            <td>老年病科</td>
-                            <td>2026-07-01</td>
-                            <td><span class="status-badge active">治疗中</span></td>
-                            <td class="text-xs text-gray-500">LJ2026-0701-105</td>
-                        </tr>
-                        <tr data-name="吴敏" data-id="LJ2026-0628-094">
-                            <td>吴敏</td>
-                            <td>34</td>
-                            <td>妇产科</td>
-                            <td>2026-06-28</td>
-                            <td><span class="status-badge discharged">已出院</span></td>
-                            <td class="text-xs text-gray-500">LJ2026-0628-094</td>
-                        </tr>
-                        <tr data-name="陈国栋" data-id="LJ2026-0710-112">
-                            <td>陈国栋</td>
-                            <td>60</td>
-                            <td>神经内科</td>
-                            <td>2026-07-10</td>
-                            <td><span class="status-badge observation">留观中</span></td>
-                            <td class="text-xs text-gray-500">LJ2026-0710-112</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="text-xs text-gray-400 mt-4">记录更新时间：2026-07-24 09:15:32</p>
-        </div>
+<main class="max-w-5xl mx-auto px-4 py-6 space-y-4">
+  <div class="bg-white rounded border border-slate-200 p-4">
+    <div class="flex gap-2 mb-4">
+      <button id="tabCur" class="px-3 py-1.5 rounded bg-sky-800 text-white">在院及留观患者</button>
+      <button id="tabArc" class="px-3 py-1.5 rounded bg-slate-100 text-slate-600 hover:bg-slate-200">出院及死亡登记档案</button>
     </div>
-
-    <!-- 患者详情模态框 -->
-    <div id="patientModal" class="modal">
-        <div class="modal-content">
-            <button class="close-btn" onclick="closeModal()">&times;</button>
-            <h3 id="modalName"></h3>
-            <div class="detail-row"><span class="detail-label">住院号</span><span class="detail-value" id="modalId"></span></div>
-            <div class="detail-row"><span class="detail-label">年龄</span><span class="detail-value" id="modalAge"></span></div>
-            <div class="detail-row"><span class="detail-label">科室</span><span class="detail-value" id="modalDept"></span></div>
-            <div class="detail-row"><span class="detail-label">入院日期</span><span class="detail-value" id="modalDate"></span></div>
-            <div class="detail-row"><span class="detail-label">状态</span><span class="detail-value" id="modalStatus"></span></div>
-            <div class="detail-row"><span class="detail-label">主治医师</span><span class="detail-value" id="modalDoctor"></span></div>
-            <div class="detail-row"><span class="detail-label">备注</span><span class="detail-value" id="modalNote"></span></div>
-            <div class="mt-4 pt-3 border-t text-xs text-gray-500">📋 此信息仅供内部医疗参考，请勿外泄。</div>
-            <div id="modalNext"></div>
-        </div>
+    <div class="flex flex-wrap gap-3 items-center">
+      <input id="qName" placeholder="姓名" class="border border-slate-300 rounded px-2 py-1.5 w-32">
+      <input id="qId" placeholder="住院号" class="border border-slate-300 rounded px-2 py-1.5 w-44">
+      <select id="qDept" class="border border-slate-300 rounded px-2 py-1.5">
+        <option value="">按科室浏览（全部）</option>
+        <option>骨科</option><option>内科</option><option>老年病科</option>
+        <option>心血管内科</option><option>神经内科</option><option>妇产科</option>
+      </select>
+      <button id="search" class="bg-sky-800 text-white rounded px-4 py-1.5 hover:bg-sky-700">查询</button>
+      <button id="reset" class="border border-slate-300 rounded px-3 py-1.5 hover:bg-slate-50">重置</button>
     </div>
+    <p class="text-xs text-slate-400 mt-2">⚠️ 查询需输入姓名或住院号，或选择科室浏览。信息仅供内部医疗参考，查询行为将留痕。</p>
+  </div>
 
-    <footer class="site-footer">
-        <div class="max-w-7xl mx-auto px-4 text-center">
-            <p class="text-sm">临江市第二医院 | 内部信息系统</p>
-            <p class="text-xs text-gray-500 mt-1">© 2026 版权所有 · 未经授权禁止外传</p>
-        </div>
-    </footer>
+  <div class="bg-white rounded border border-slate-200 overflow-x-auto">
+    <table class="w-full text-sm">
+      <thead class="bg-slate-50 text-slate-500 text-xs">
+        <tr><th class="text-left px-3 py-2">姓名</th><th class="text-left px-3 py-2">年龄</th><th class="text-left px-3 py-2">科室</th><th class="text-left px-3 py-2">入院日期</th><th class="text-left px-3 py-2">状态</th><th class="text-left px-3 py-2">住院号</th><th class="px-3 py-2">操作</th></tr>
+      </thead>
+      <tbody id="tbody" class="divide-y divide-slate-100"></tbody>
+    </table>
+    <div id="empty" class="hidden p-6 text-center text-xs text-slate-400"></div>
+  </div>
+  <div class="text-xs text-slate-400">记录更新时间：2026-07-24 09:15:32</div>
+</main>
 
-    <script>
-        // 患者详情数据
-        const patientDetails = {
-            '周素兰': { age: '78', dept: '老年病科', date: '2025-11-02', status: '死亡登记（2026-02-18）', doctor: '吴嘉和', note: '协查摘要：既往有明确的严重食物过敏史；家属曾被告知需避免相关食物。2月18日为院外死亡登记，初步记录为严重过敏反应，法医结论及责任认定不在本系统展示。患者曾反复提及“药盒”“灰”，家属探视需登记。' },
-            '许晴': { age: '25', dept: '骨科', date: '2026-01-25', status: '治疗中', doctor: '赵峰', note: '车祸致股骨骨折，术后恢复良好，预计2026年2月底可出院。患者为护工，住院期间多次询问周素兰情况。' },
-            '张桂芳': { age: '68', dept: '内科', date: '2026-06-12', status: '治疗中', doctor: '周启明', note: '高血压、糖尿病，慢性病常规住院调理，无特殊情况。' },
-            '刘文斌': { age: '42', dept: '心血管内科', date: '2026-05-08', status: '已出院', doctor: '周明远', note: '冠状动脉支架术后康复顺利，于2026-06-20出院，出院后定期门诊随访。' },
-            '赵德生': { age: '71', dept: '老年病科', date: '2026-07-01', status: '治疗中', doctor: '周启明', note: '老年性肺炎，合并轻度认知障碍，家属陪护中。' },
-            '吴敏': { age: '34', dept: '妇产科', date: '2026-06-28', status: '已出院', doctor: '林晓雯', note: '剖宫产术后，恢复良好，已出院。' },
-            '陈国栋': { age: '60', dept: '神经内科', date: '2026-07-10', status: '留观中', doctor: '陈景生', note: '眩晕待查，需进一步MRI检查，暂留观。' },
-        };
+<div id="mask" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
+  <div class="bg-white rounded-lg max-w-xl w-full p-6 relative">
+    <button id="close" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 text-xl">✕</button>
+    <div id="detail"></div>
+  </div>
+</div>
 
-        // 表格过滤
-        const searchInput = document.getElementById('searchInput');
-        const table = document.getElementById('patientTable');
-        const rows = table.querySelectorAll('tbody tr');
-        const resultCount = document.getElementById('resultCount');
+<footer class="max-w-5xl mx-auto px-4 py-6 text-xs text-slate-400 border-t border-slate-200 mt-6">
+  临江市第二医院 | 内部信息系统<br>© 2026 版权所有 · 未经授权禁止外传
+</footer>
 
-        function filterTable() {
-            const filter = searchInput.value.trim().toLowerCase();
-            let visibleCount = 0;
-            rows.forEach(row => {
-                const name = row.getAttribute('data-name')?.toLowerCase() || '';
-                const id = row.getAttribute('data-id')?.toLowerCase() || '';
-                if (name.includes(filter) || id.includes(filter)) {
-                    row.style.display = '';
-                    visibleCount++;
-                } else {
-                    row.style.display = 'none';
-                }
-            });
-            resultCount.textContent = filter ? `(${visibleCount} 条结果)` : '';
-        }
-
-        searchInput.addEventListener('input', filterTable);
-
-        // 点击行打开详情模态框
-        rows.forEach(row => {
-            row.addEventListener('click', function() {
-                const name = this.getAttribute('data-name');
-                const details = patientDetails[name];
-                if (!details) return;
-
-                document.getElementById('modalName').textContent = name;
-                document.getElementById('modalId').textContent = this.getAttribute('data-id');
-                document.getElementById('modalAge').textContent = details.age;
-                document.getElementById('modalDept').textContent = details.dept;
-                document.getElementById('modalDate').textContent = details.date;
-                document.getElementById('modalStatus').textContent = details.status;
-                document.getElementById('modalDoctor').textContent = details.doctor;
-                document.getElementById('modalNote').textContent = details.note;
-
-                const next = document.getElementById('modalNext');
-                next.innerHTML = name === '周素兰' ? '<button id="saveDeathRecord" class="mt-4 bg-green-700 text-white text-sm px-4 py-2 rounded">将死亡登记摘要归入案件卷宗</button>' : '';
-                const saveDeathRecord = document.getElementById('saveDeathRecord');
-                if (saveDeathRecord) saveDeathRecord.addEventListener('click', () => { sessionStorage.setItem('deathSaved','true'); window.location.href='../law/external.html'; });
-
-                document.getElementById('patientModal').style.display = 'block';
-            });
-        });
-
-        // 关闭模态框
-        function closeModal() {
-            document.getElementById('patientModal').style.display = 'none';
-        }
-
-        // 点击模态框外部关闭
-        window.onclick = function(event) {
-            const modal = document.getElementById('patientModal');
-            if (event.target === modal) {
-                modal.style.display = 'none';
-            }
-        }
-    </script>
+<script>
+var CUR=[
+{name:'许晴',age:25,dept:'骨科',admit:'2026-01-25',status:'治疗中',id:'LJ2026-0125-017',doc:'王建军',note:'因交通事故于 2026-01-25 22:40 急诊入院，多处骨折，拟手术。2 月 16 日至 2 月 18 日在院治疗，无请假或离院记录。交通事故责任调解中，对方当事人姓张（见法务函件）。'},
+{name:'张桂芳',age:68,dept:'内科',admit:'2026-06-12',status:'治疗中',id:'LJ2026-0612-089',doc:'李慧敏',note:'慢性病常规住院，病情平稳。'},
+{name:'赵德生',age:71,dept:'老年病科',admit:'2026-07-01',status:'留观中',id:'LJ2026-0701-105',doc:'周启明',note:'居家跌倒后留观，家属探视频繁。'},
+{name:'陈国栋',age:60,dept:'神经内科',admit:'2026-07-10',status:'留观中',id:'LJ2026-0710-112',doc:'宋雅琴',note:'头晕待查，颅脑 CT 未见异常。'},
+{name:'孙秀英',age:29,dept:'妇产科',admit:'2026-06-30',status:'治疗中',id:'LJ2026-0630-076',doc:'何丽娟',note:'产后观察，预计 7 月上旬出院。'}
+];
+var ARC=[
+{name:'周素兰',age:78,dept:'老年病科',admit:'2025-11-02',status:'死亡登记',id:'LJ2025-1102-042',doc:'周启明',discharge:'2025-11-20',note:'出院诊断：阿尔兹海默症早期。住院期间记录严重食物过敏史（过敏原：花生及大豆蛋白类，详见过敏史摘要）。2026-02-18 外因死亡登记（公安通报附卷）。'},
+{name:'刘文斌',age:42,dept:'心血管内科',admit:'2026-05-08',status:'已出院',id:'LJ2026-0508-031',doc:'郑国强',discharge:'2026-05-15',note:'冠脉造影后出院，定期复查。'},
+{name:'吴敏',age:34,dept:'妇产科',admit:'2026-06-28',status:'已出院',id:'LJ2026-0628-094',doc:'何丽娟',discharge:'2026-07-02',note:'常规检查后出院。'}
+];
+var mode='cur';
+function setTab(m){
+  mode=m;
+  document.getElementById('tabCur').className=m==='cur'?'px-3 py-1.5 rounded bg-sky-800 text-white':'px-3 py-1.5 rounded bg-slate-100 text-slate-600 hover:bg-slate-200';
+  document.getElementById('tabArc').className=m==='arc'?'px-3 py-1.5 rounded bg-sky-800 text-white':'px-3 py-1.5 rounded bg-slate-100 text-slate-600 hover:bg-slate-200';
+  render();
+}
+function render(){
+  var data=mode==='cur'?CUR:ARC;
+  var n=document.getElementById('qName').value.trim(),
+      id=document.getElementById('qId').value.trim(),
+      dept=document.getElementById('qDept').value;
+  var rows=data.filter(function(r){
+    return (!n||r.name.indexOf(n)>-1)&&(!id||r.id.toLowerCase().indexOf(id.toLowerCase())>-1)&&(!dept||r.dept===dept);
+  });
+  var tbody=document.getElementById('tbody'),empty=document.getElementById('empty');
+  if(rows.length===0){
+    tbody.innerHTML='';
+    empty.classList.remove('hidden');
+    empty.innerHTML='未找到匹配记录。'+(mode==='cur'&&n?'当前在院患者中无此人，请尝试「出院及死亡登记档案」。':'请调整查询条件。');
+    return;
+  }
+  empty.classList.add('hidden');
+  tbody.innerHTML=rows.map(function(r){
+    return '<tr class="hover:bg-slate-50"><td class="px-3 py-2">'+r.name+'</td><td class="px-3 py-2">'+r.age+'</td><td class="px-3 py-2">'+r.dept+'</td><td class="px-3 py-2">'+r.admit+'</td><td class="px-3 py-2">'+r.status+'</td><td class="px-3 py-2 text-slate-500">'+r.id+'</td><td class="px-3 py-2 text-center"><button data-id="'+r.id+'" class="view text-sky-700 hover:underline">详情</button></td></tr>';
+  }).join('');
+  Array.prototype.forEach.call(document.querySelectorAll('.view'),function(b){
+    b.onclick=function(){
+      var id=b.getAttribute('data-id'),all=CUR.concat(ARC);
+      var r=all.filter(function(x){return x.id===id;})[0];
+      document.getElementById('detail').innerHTML=
+        '<h2 class="text-base font-semibold mb-1">'+r.name+' · '+r.age+'岁</h2>'
+        +'<div class="text-xs text-slate-500 mb-3">住院号 '+r.id+'　科室 '+r.dept+'　入院 '+r.admit+(r.discharge?'　出院 '+r.discharge:'')+'　状态 '+r.status+'　主治医师 '+r.doc+'</div>'
+        +'<p class="text-sm leading-6 text-slate-700 mb-4">'+r.note+'</p>'
+        +'<div class="text-xs text-slate-400">📋 此信息仅供内部医疗参考，请勿外泄。</div>';
+      var m=document.getElementById('mask');m.classList.remove('hidden');m.classList.add('flex');
+    };
+  });
+}
+document.getElementById('tabCur').onclick=function(){setTab('cur');};
+document.getElementById('tabArc').onclick=function(){setTab('arc');};
+document.getElementById('search').onclick=render;
+document.getElementById('reset').onclick=function(){
+  document.getElementById('qName').value='';document.getElementById('qId').value='';document.getElementById('qDept').value='';render();
+};
+document.getElementById('close').onclick=function(){var m=document.getElementById('mask');m.classList.add('hidden');m.classList.remove('flex');};
+setTab('cur');
+</script>
 </body>
 </html>

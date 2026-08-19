@@ -3,24 +3,18 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>外部协查通道 - 明诚律师事务所 OA</title>
-<script src="https://cdn.tailwindcss.com"></script>
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
-
-<!-- 1. 登录校验 (放在 head 中，尽早拦截未登录访问) -->
 <script>
 (function checkAuth() {
     const isLoggedIn = sessionStorage.getItem('isLoggedIn');
     const username = sessionStorage.getItem('username');
-    if (!isLoggedIn || isLoggedIn !== 'true') {
-        window.location.href = 'lawfirm.html';
-        return false;
-    }
+    if (!isLoggedIn || isLoggedIn !== 'true') { window.location.href = 'lawfirm.html'; return false; }
     window.currentUser = username;
     return true;
 })();
 </script>
-
+<title>外部协查通道 - 明诚律师事务所 OA</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
 <style>
 body { font-family: 'Noto Sans SC', sans-serif; }
 .sidebar { background: linear-gradient(180deg, #1e1b4b 0%, #0f172a 100%); }
@@ -32,10 +26,6 @@ body { font-family: 'Noto Sans SC', sans-serif; }
 .pulse-dot { animation: pulse-dot 2s ease-in-out infinite; }
 @keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 .fade-in-up { animation: fadeInUp 0.5s ease forwards; }
-.channel-card { transition: all 0.3s ease; }
-.channel-card:hover { transform: translateY(-4px); box-shadow: 0 15px 30px -5px rgba(0,0,0,0.15); }
-@keyframes slideIn { from { opacity: 0; transform: translateX(-20px); } to { opacity: 1; transform: translateX(0); } }
-.slide-in { animation: slideIn 0.5s ease forwards; }
 </style>
 </head>
 <body class="bg-gray-100">
@@ -48,7 +38,6 @@ body { font-family: 'Noto Sans SC', sans-serif; }
     <div class="flex items-center space-x-6 text-sm">
         <span class="text-gray-500" id="currentTime"></span>
         <div class="flex items-center space-x-2 border-l pl-4">
-            <!-- 动态头像和用户名 -->
             <div id="userAvatar" class="w-8 h-8 bg-gradient-to-br from-purple-400 to-purple-600 rounded-full flex items-center justify-center text-white text-xs font-bold">助</div>
             <span id="userDisplayName" class="font-semibold text-gray-700">加载中...</span>
             <button onclick="logout()" class="ml-2 text-gray-400 hover:text-red-500 transition">
@@ -62,7 +51,7 @@ body { font-family: 'Noto Sans SC', sans-serif; }
     <aside class="sidebar w-64 text-gray-300 flex-shrink-0 hidden md:block">
         <nav class="mt-6 space-y-1">
             <a href="dashboard.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">📊</span> 工作台</a>
-            <a href="cases.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">📁</span> 案件管理<span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full pulse-dot">12</span></a>
+            <a href="cases.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">📁</span> 案件管理<span class="ml-auto bg-red-500 text-white text-xs px-2 py-0.5 rounded-full pulse-dot">4</span></a>
             <a href="schedule.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">📅</span> 日程安排<span class="ml-auto bg-yellow-500 text-white text-xs px-2 py-0.5 rounded-full">2</span></a>
             <a href="external.html" class="menu-item active flex items-center px-6 py-3 text-white"><span class="mr-3 text-lg">🔗</span> 外部协查通道</a>
             <a href="settings.html" class="menu-item flex items-center px-6 py-3 hover:text-white"><span class="mr-3 text-lg">⚙️</span> 系统设置</a>
@@ -72,169 +61,78 @@ body { font-family: 'Noto Sans SC', sans-serif; }
     <main class="flex-1 overflow-y-auto p-6">
         <div class="mb-6 fade-in-up">
             <h2 class="text-2xl font-bold text-gray-800">外部协查通道</h2>
-            <p class="text-sm text-gray-500 mt-1">MC-2026-0042 专用协查。每次访问均会记录在案件卷宗中。</p>
-        </div>
-        <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 mb-6 rounded-lg fade-in-up">
-            <div class="flex items-start">
-                <span class="text-yellow-600 text-xl mr-3">⚠️</span>
-                <div>
-                    <h3 class="font-bold text-yellow-900 mb-1">权限提示</h3>
-                    <p class="text-sm text-yellow-800">请先在案件卷宗中解密沈律师的私人笔记。未形成协查理由的机构资料不会开放。</p>
-                </div>
-            </div>
+            <p class="text-sm text-gray-500 mt-1">协查备案：临公协备〔2026〕07 号（长期有效）。以下为单位公开站点及已授权查询入口，用于核对案件相关背景信息。所有访问将留痕。</p>
         </div>
 
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-    <!-- 临江市公安局 - 已禁用 -->
-    <div class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm cursor-not-allowed opacity-70">
-        <div class="flex items-center mb-3">
-            <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-700 font-bold mr-3 text-xl">🛡️</div>
-            <div>
-                <h3 class="font-bold text-gray-800">临江市公安局</h3>
-                <p class="text-xs text-gray-500">案件资料查询系统</p>
-            </div>
-        </div>
-        <p class="text-xs text-blue-600 mb-3">目标：获取死因通报及录音附件</p>
-        <div class="flex items-center justify-between text-xs">
-            <span class="text-gray-500">状态：系统维护中</span>
-            <span class="text-blue-600 font-semibold">无法访问</span>
-        </div>
-        <div class="mt-4 p-4 bg-blue-50 rounded-lg border border-blue-100">
-            <div class="flex items-start">
-                <span class="text-blue-600 text-xl mr-3">⚠️</span>
-                <div>
-                    <h4 class="font-bold text-blue-900 mb-1">页面架构正在调整</h4>
-                    <p class="text-sm text-blue-800 mb-2">该系统入口暂时不可用，正在与公安系统进行接口整合。</p>
-                    <button onclick="window.location.href='dashboard.html'" class="bg-blue-600 text-white px-3 py-1 rounded text-xs hover:bg-blue-700 transition">返回OA系统</button>
+        <div class="grid md:grid-cols-2 gap-6 fade-in-up">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-bold text-gray-800 flex items-center"><span class="mr-2">🏥</span> 临江市第二医院</h3>
+                    <span class="text-xs bg-green-100 text-green-700 px-2 py-1 rounded-full">已授权</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-4 leading-5">公开站点：医院概况、科室与专家信息。授权入口：患者信息查询（限在办案件相关核对）。</p>
+                <div class="flex gap-4">
+                    <a href="../hospital/hospital.html" target="_blank" class="text-sm text-purple-600 hover:underline font-medium">公开主页 →</a>
+                    <a href="../hospital/patient_query.html" target="_blank" class="text-sm text-purple-600 hover:underline font-medium">患者信息查询 →</a>
                 </div>
             </div>
-        </div>
-    </div>
-    
-    <!-- 临江市第二医院 - 保留可访问 -->
-    <a href="../hospital/hospital.html#case-review" data-required="caseOpened" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay: 0.2s">
-        <div class="flex items-center mb-3">
-            <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-700 font-bold mr-3 text-xl">🏥</div>
-            <div>
-                <h3 class="font-bold text-gray-800">临江市第二医院</h3>
-                <p class="text-xs text-gray-500">患者服务平台</p>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-bold text-gray-800 flex items-center"><span class="mr-2">🏭</span> 临江第二机械制造厂</h3>
+                    <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">公开</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-4 leading-5">厂史大事记、荣誉墙、退休员工名录与零件编号目录。</p>
+                <a href="../factory/factory.html" target="_blank" class="text-sm text-purple-600 hover:underline font-medium">访问站点 →</a>
             </div>
-        </div>
-        <p class="text-xs text-green-600 mb-3">目标：先查周素兰的死亡登记与过敏史，再调取周启明的离岗记录</p>
-        <div class="flex items-center justify-between text-xs">
-            <span class="text-gray-500 gate-status">状态：等待协查理由</span>
-            <span class="text-green-600 font-semibold gate-action">待授权</span>
-        </div>
-    </a>
-    
-    <a href="../factory/factory.html" data-required="deathSaved" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay:0.3s">
-        <div class="flex items-center mb-3">
-            <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-700 font-bold mr-3 text-xl">🏭</div>
-            <div>
-                <h3 class="font-bold text-gray-800">临江第二机械制造厂</h3>
-                <p class="text-xs text-gray-500">数字档案馆</p>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-bold text-gray-800 flex items-center"><span class="mr-2">🕯️</span> 殡仪馆追思厅</h3>
+                    <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">公开</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-4 leading-5">追思安排与交接登记信息。</p>
+                <a href="../funeral/funeral.html" target="_blank" class="text-sm text-purple-600 hover:underline font-medium">访问站点 →</a>
             </div>
-        </div>
-        <p class="text-xs text-orange-600 mb-3">目标：破解死者日记中的"零件编号"密码</p>
-        <div class="flex items-center justify-between text-xs">
-            <span class="text-gray-500 gate-status">状态：等待协查理由</span>
-            <span class="text-orange-600 font-semibold gate-action">待授权</span>
-        </div>
-    </a>
-    
-    <!-- 工人新村社区 - 保留可访问 -->
-    <a href="../community/community.html" data-required="diaryDecoded" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay: 0.4s">
-        <div class="flex items-center mb-3">
-            <div class="w-12 h-12 bg-teal-100 rounded-lg flex items-center justify-center text-teal-700 font-bold mr-3 text-xl">🏘️</div>
-            <div>
-                <h3 class="font-bold text-gray-800">工人新村社区</h3>
-                <p class="text-xs text-gray-500">居民服务平台</p>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-bold text-gray-800 flex items-center"><span class="mr-2">🏘️</span> 工人新村社区档案站</h3>
+                    <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">公开</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-4 leading-5">社区旧闻与住户公开档案。</p>
+                <a href="../community/community.html" target="_blank" class="text-sm text-purple-600 hover:underline font-medium">访问站点 →</a>
             </div>
-        </div>
-        <p class="text-xs text-teal-600 mb-3">目标：了解死者生前人际关系及邻居证词</p>
-        <div class="flex items-center justify-between text-xs">
-            <span class="text-gray-500 gate-status">状态：等待医院与日记复核</span>
-            <span class="text-teal-600 font-semibold gate-action">待授权</span>
-        </div>
-    </a>
-    
-    <!-- 临江市殡仪馆 - 保留可访问 -->
-    <a href="../funeral/funeral.html" data-required="communityReviewed" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay: 0.5s">
-        <div class="flex items-center mb-3">
-            <div class="w-12 h-12 bg-gray-200 rounded-lg flex items-center justify-center text-gray-700 font-bold mr-3 text-xl">🕯️</div>
-            <div>
-                <h3 class="font-bold text-gray-800">临江市殡仪馆</h3>
-                <p class="text-xs text-gray-500">治丧服务平台</p>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                <div class="flex justify-between items-start mb-3">
+                    <h3 class="font-bold text-gray-800 flex items-center"><span class="mr-2">📰</span> 临江新闻网</h3>
+                    <span class="text-xs bg-gray-100 text-gray-500 px-2 py-1 rounded-full">公开</span>
+                </div>
+                <p class="text-xs text-gray-500 mb-4 leading-5">本地报道与旧闻检索。</p>
+                <a href="../news/news.html" target="_blank" class="text-sm text-purple-600 hover:underline font-medium">访问站点 →</a>
             </div>
-        </div>
-        <p class="text-xs text-gray-600 mb-3">目标：核查骨灰盒交接人及"白灰"线索</p>
-        <div class="flex items-center justify-between text-xs">
-            <span class="text-gray-500 gate-status">状态：等待礼盒路径复核</span>
-            <span class="text-gray-700 font-semibold gate-action">待授权</span>
-        </div>
-    </a>
-    
-    <!-- 临江新闻门户 - 保留可访问 -->
-    <a href="../news/news.html" data-required="noteUnlocked" class="channel-card bg-white rounded-xl p-5 border border-gray-100 shadow-sm slide-in" style="animation-delay: 0.6s">
-        <div class="flex items-center mb-3">
-            <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-red-700 font-bold mr-3 text-xl">📰</div>
-            <div>
-                <h3 class="font-bold text-gray-800">临江新闻门户</h3>
-                <p class="text-xs text-gray-500">临江日报 / 市政府 / 电视台</p>
-            </div>
-        </div>
-        <p class="text-xs text-red-600 mb-3">目标：查阅2008年周小梅车祸旧闻及工厂改制史</p>
-        <div class="flex items-center justify-between text-xs">
-            <span class="text-gray-500 gate-status">状态：等待协查理由</span>
-            <span class="text-red-600 font-semibold gate-action">待授权</span>
-        </div>
-    </a>
-</div>
-        <div class="mt-8 bg-white rounded-xl shadow-sm border border-gray-100 p-6 fade-in-up">
-            <h3 class="font-bold text-gray-800 mb-4">协查记录</h3>
-            <div class="space-y-2 text-sm">
-                <div class="flex items-center justify-between py-2 border-b border-gray-100"><span class="text-gray-700">2026-02-20 09:15 · 助理 访问了 <span class="font-semibold">外部协查通道</span></span><span class="text-xs text-gray-500">刚刚</span></div>
-                <div class="flex items-center justify-between py-2 border-b border-gray-100"><span class="text-gray-700">2026-02-18 17:42 · 沈致远 访问了 <span class="font-semibold">临江市第二医院</span></span><span class="text-xs text-gray-500">2天前</span></div>
-                <div class="flex items-center justify-between py-2 border-b border-gray-100"><span class="text-gray-700">2026-02-18 16:20 · 沈致远 访问了 <span class="font-semibold">临江市公安局</span></span><span class="text-xs text-gray-500">2天前</span></div>
-                <div class="flex items-center justify-between py-2"><span class="text-gray-700">2026-02-15 14:30 · 沈致远 访问了 <span class="font-semibold">明诚律师事务所-遗嘱公证</span></span><span class="text-xs text-gray-500">5天前</span></div>
+
+            <div class="bg-purple-50 rounded-xl border border-purple-100 p-6 text-xs text-purple-800 leading-5 flex items-start">
+                <span class="mr-2 text-lg">💡</span> 
+                <span>办案提示：外部站点均为公开页面，信息可能与案卷记录不一致；发现矛盾处，请在案件卷宗中交叉标注。</span>
             </div>
         </div>
     </main>
 </div>
 
 <script>
-function updateTime() { const now = new Date(); document.getElementById('currentTime').textContent = '当前时间：' + now.toLocaleString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'}); }
+function updateTime() {
+    const now = new Date();
+    document.getElementById('currentTime').textContent = '当前时间：' + now.toLocaleString('zh-CN', {year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit',second:'2-digit'});
+}
 updateTime(); setInterval(updateTime, 1000);
 function logout() { if (confirm('确定要退出登录吗？')) window.location.href = 'lawfirm.html'; }
 
-document.querySelectorAll('[data-required]').forEach((card) => {
-    const required = card.dataset.required;
-    const stage = sessionStorage.getItem('caseStage');
-    const unlocked = required === 'caseOpened'
-        ? sessionStorage.getItem('caseOpened') === 'true'
-        : sessionStorage.getItem(required) === 'true';
-    const status = card.querySelector('.gate-status');
-    const action = card.querySelector('.gate-action');
-    if (unlocked) {
-        if (status) status.textContent = '状态：协查已获准';
-        if (action) action.textContent = '进入 →';
-    } else {
-        card.classList.add('opacity-60');
-        card.addEventListener('click', (event) => {
-            event.preventDefault();
-            const messages = { caseOpened:'请先在 MC-2026-0042 中阅读沈律师留下的协查草稿。', deathSaved:'请先归档周素兰的死亡登记摘要。', diaryDecoded:'请先在工厂档案中完成周素兰旧笔记的复原。', communityReviewed:'请先在社区资料中完成礼盒路径的核对。' };
-            const message = messages[required] || '请先完成上一份协查资料的归档。';
-            alert(message);
-        });
-    }
-});
-
-// === 核心修复：放在这里确保 DOM 已加载完毕 ===
 (function initUserView() {
     const username = window.currentUser || sessionStorage.getItem('username');
     const userAvatar = document.getElementById('userAvatar');
     const userDisplay = document.getElementById('userDisplayName');
-    
     if (username === 'admin') {
         if (userAvatar) userAvatar.textContent = '律';
         if (userDisplay) userDisplay.textContent = '沈致远 律师';
