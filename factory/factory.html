@@ -19,14 +19,20 @@
   <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
     <div>
       <div class="text-lg font-bold tracking-wide">临江第二机械制造厂</div>
-      <div class="text-xs text-slate-400">数字厂史馆 | 成立于 1958 年</div>
+      <div class="text-xs text-slate-400">数字厂史馆 | 建厂批复 1962 年 · 正式投产 1963 年</div>
     </div>
-    <div class="w-10 h-10 rounded bg-red-700 font-bold flex items-center justify-center">临机</div>
+    <div class="flex items-center gap-3">
+      <button id="navLogin" class="text-xs border border-slate-600 rounded px-2 py-1 hover:bg-slate-800">数字档案室</button>
+      <div class="w-10 h-10 rounded bg-red-700 font-bold flex items-center justify-center">临机</div>
+    </div>
   </div>
-  <nav class="max-w-5xl mx-auto px-4 flex gap-1 text-sm pb-2">
+  <nav class="max-w-5xl mx-auto px-4 flex flex-wrap gap-1 text-sm pb-2">
     <a href="#intro" class="px-3 py-1.5 rounded hover:bg-slate-800">企业简介</a>
+    <a href="#org" class="px-3 py-1.5 rounded hover:bg-slate-800">组织机构</a>
     <a href="#history" class="px-3 py-1.5 rounded hover:bg-slate-800">厂史馆</a>
+    <a href="#accident" class="px-3 py-1.5 rounded hover:bg-slate-800">事故档案</a>
     <a href="#staff" class="px-3 py-1.5 rounded hover:bg-slate-800">退休员工</a>
+    <a href="#oral" class="px-3 py-1.5 rounded hover:bg-slate-800">口述档案</a>
     <a href="#parts" class="px-3 py-1.5 rounded hover:bg-slate-800">零件编号目录</a>
   </nav>
 </header>
@@ -35,92 +41,270 @@
 
   <section id="intro" class="bg-white rounded border border-stone-200 p-5">
     <h2 class="font-semibold mb-3">企业简介</h2>
-    <p class="leading-6 text-slate-600">临江第二机械制造厂成立于 1958 年，是临江市重要的国营机械制造企业。1990 年代进行改制，现为临江机械制造有限公司。本馆收录厂史资料、荣誉档案与退休职工名录，供职工及家属查阅。</p>
-    <div class="grid grid-cols-3 gap-4 mt-4 text-center">
-      <div class="bg-stone-50 rounded p-3"><div class="text-xl font-bold text-red-700">1958</div><div class="text-xs text-slate-500">成立年份</div></div>
-      <div class="bg-stone-50 rounded p-3"><div class="text-xl font-bold text-red-700">2000+</div><div class="text-xs text-slate-500">鼎盛时期职工</div></div>
-      <div class="bg-stone-50 rounded p-3"><div class="text-xl font-bold text-red-700">1998</div><div class="text-xs text-slate-500">改制年份</div></div>
+    <div class="text-xs text-slate-500 mb-3 leading-5">
+      全称：临江第二机械制造厂（临江二机厂）｜企业性质：市属国营重工业｜建厂批复：1962-07｜正式投产：1963-04｜全面停产：1998-10｜改制收尾：2001<br>
+      厂区地址：临江市城北工业带，东围墙直接毗邻工人新村｜占地 11.7 万平方米｜鼎盛在册职工 2247 人<br>
+      主导产品：农用机械配件、工程机械精密传动部件、矿山设备配套零部件
+    </div>
+    <p class="leading-6 text-slate-600 mb-3">临江第二机械制造厂是临江市建国后重点地方国营工业项目。厂区是一套完整的"小社会"体系：除生产车间外，配套建设职工家属楼（工人新村）、职工食堂、职工医院、子弟中小学、澡堂、托儿所、大礼堂、供销合作社、篮球场。绝大多数职工家庭居住在隔壁工人新村，厂区与生活区仅一墙之隔，邻里基本都是同事，形成浓厚的熟人社会氛围。</p>
+    <p class="leading-6 text-slate-600 mb-4">质检科是全厂质量把关核心。<strong>1975 年起正式启用统一零件物料编号体系</strong>，每一件出厂零部件分配唯一编号，检验员手写登记编号、尺寸、检测日期并签字，建立纸质台账存档。该制度沿用至停产，很多老质检职工退休后仍保留抄写编号记笔记的习惯，<strong>周素兰即为典型代表</strong>。</p>
+
+    <!-- 📷 图片入口：企业简介插图位 -->
+    <div class="grid md:grid-cols-2 gap-4 mb-4">
+      <figure class="border border-stone-300 bg-stone-50 p-2">
+         <img src="image/damen.jpg" alt="1980年代厂区大门" class="w-full h-40 object-cover sepia">
+        <figcaption class="text-xs text-slate-500 mt-1">图：1980 年代厂区大门（东围墙外即工人新村）</figcaption>
+      </figure>
+      <figure class="border border-stone-300 bg-stone-50 p-2">
+      <img src="image/jianyan.jpg" alt="质检科工作台" class="w-full h-40 object-cover sepia">
+        
+        <figcaption class="text-xs text-slate-500 mt-1">图：质检科工作台（卡尺、台账与编号钢印）</figcaption>
+      </figure>
+    </div>
+
+    <p class="leading-6 text-slate-600 mb-4">八十年代中后期工厂效益达到顶峰；九十年代市场转型、设备老化、回款困难，效益逐年滑坡。1996 年开始拖欠工资，1998 年 10 月全厂停工，大批职工退休、买断工龄。原行政办公楼改建为「临江二机厂厂史馆」，2018 年启动档案数字化扫描项目，即本站点。工人新村 7 栋等家属楼完整保留至今。</p>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 text-center">
+      <div class="bg-stone-50 rounded p-3"><div class="text-xl font-bold text-red-700">1962</div><div class="text-xs text-slate-500">建厂批复</div></div>
+      <div class="bg-stone-50 rounded p-3"><div class="text-xl font-bold text-red-700">2247</div><div class="text-xs text-slate-500">鼎盛职工</div></div>
+      <div class="bg-stone-50 rounded p-3"><div class="text-xl font-bold text-red-700">11.7万㎡</div><div class="text-xs text-slate-500">厂区占地</div></div>
+      <div class="bg-stone-50 rounded p-3"><div class="text-xl font-bold text-red-700">1998</div><div class="text-xs text-slate-500">全面停产</div></div>
+    </div>
+    <p class="text-xs text-slate-400 mt-3 italic">手写批注（扫描件边缘）：不少老质检退休之后，习惯拿零件编号代指人、家事，不用真名，算是老工人之间心照不宣的小习惯。周素兰的私人笔记本中大量出现本厂物料编号。</p>
+  </section>
+
+  <section id="org" class="bg-white rounded border border-stone-200 p-5">
+    <h2 class="font-semibold mb-3">组织机构沿革</h2>
+    <div class="grid md:grid-cols-2 gap-4 text-slate-600">
+      <div>
+        <h3 class="text-xs font-semibold text-slate-500 mb-2">生产车间</h3>
+        <ul class="space-y-1 text-sm">
+          <li>铸造车间 · 毛坯浇铸、金属粗加工</li>
+          <li>机加工一车间 · 大型工程机械部件加工</li>
+          <li>机加工二车间 · 精密小件加工（质检科主要对接）</li>
+          <li>热处理车间 · 金属淬火、回火处理</li>
+          <li>装配车间 · 零部件总装出厂</li>
+          <li>维修工段 · 厂区设备维护抢修</li>
+        </ul>
+      </div>
+      <div>
+        <h3 class="text-xs font-semibold text-slate-500 mb-2">职能科室</h3>
+        <ul class="space-y-1 text-sm">
+          <li>质检科 · 质量检验、物料编号台账管理（周素兰所属）</li>
+          <li>技术科 · 图纸绘制、工艺改进</li>
+          <li>供应仓储科 · 保管全套零件编号原始台账</li>
+          <li>劳资人事科 · 职工入职、退休、工资档案</li>
+          <li>安全技安科 · 车间安全管理、工伤事故登记</li>
+          <li>工会 · 职工福利、困难补助</li>
+          <li>行政后勤科 · 食堂、澡堂、子弟学校、托儿所</li>
+        </ul>
+      </div>
     </div>
   </section>
 
   <section id="history" class="bg-white rounded border border-stone-200 p-5">
-    <h2 class="font-semibold mb-3">厂史大事记</h2>
+    <h2 class="font-semibold mb-1">厂史大事记（1962–2026）</h2>
+    <p class="text-xs text-slate-400 mb-3">档案来源：厂史馆馆藏文书、工会会议记录、劳资科档案。部分 1996–1998 档案纸张老化，字迹缺损。</p>
     <ul class="space-y-2 text-slate-600">
-      <li><span class="text-red-700 font-mono mr-2">1958</span>建厂，首批职工 214 人。</li>
-      <li><span class="text-red-700 font-mono mr-2">1986</span>质检科扩编，实行零件编号终身追溯制度。</li>
-      <li><span class="text-red-700 font-mono mr-2">1996</span>全市"质量信得过"评比，质检科获集体表彰。</li>
-      <li><span class="text-red-700 font-mono mr-2">1998</span>工厂改制，部分车间停产。</li>
-      <li><span class="text-red-700 font-mono mr-2">2003</span>更名为临江机械制造有限公司。</li>
-      <li><span class="text-red-700 font-mono mr-2">2024</span>数字厂史馆上线，退休职工可登录个人数字档案室。</li>
+      <li><span class="text-red-700 font-mono mr-2">1962-07</span>建厂批复，选址城北，工人新村 1–3 栋同步动工。</li>
+      <li><span class="text-red-700 font-mono mr-2">1963-04</span>正式投产，第一批农机配件下线。</li>
+      <li><span class="text-red-700 font-mono mr-2">1972-09</span>子弟学校、托儿所、职工医院建成；工人新村 4–6 栋完工；大礼堂落成。</li>
+      <li><span class="text-red-700 font-mono mr-2">1975-03</span>物料编号制度建立，格式：两位拼音大类码–三位流水序号。工人新村 7 栋竣工。</li>
+      <li><span class="text-red-700 font-mono mr-2">1978-11</span>机加工一车间操作事故，一名工人手指伤残，记入安全技安科档案。</li>
+      <li><span class="text-red-700 font-mono mr-2">1986-03-11</span>周素兰调入质检科，从事精密零件质检。全厂人数达峰值 2247 人。</li>
+      <li><span class="text-red-700 font-mono mr-2">1988-06</span>厂庆 25 周年，发放纪念搪瓷杯；工人新村举办家属联欢。</li>
+      <li><span class="text-red-700 font-mono mr-2">1991-08</span>热处理车间金属烫伤事故，一名年轻操作工重伤，即周小梅（周素兰小女儿）。工伤后离厂打零工。</li>
+      <li><span class="text-red-700 font-mono mr-2">1993-12</span>全年产值创历史新高；分批翻新新村住宅楼楼道、供水管道。</li>
+      <li><span class="text-red-700 font-mono mr-2">1996-02</span>订单缩减，部分车间减产；工资延期发放，部分职工待岗。</li>
+      <li><span class="text-red-700 font-mono mr-2">1997-05</span>推行自愿买断工龄，大批中年职工离厂；部分设备封存。</li>
+      <li><span class="text-red-700 font-mono mr-2">1998-07-02</span>周素兰正式退休。档案备注：退休时申请带走一套旧版《精密零部件编号简表》副本。同年其丈夫病逝。</li>
+      <li><span class="text-red-700 font-mono mr-2">1998-10-12</span>全厂正式停工，启动改制；退休金延迟发放，新村内矛盾增多。</li>
+      <li><span class="text-red-700 font-mono mr-2">2001-04</span>改制收尾，大部分厂房拆除，保留一栋办公楼改建厂史馆。</li>
+      <li><span class="text-red-700 font-mono mr-2">2005-09</span>实体厂史馆对老职工开放，收集老物件、口述、老照片。</li>
+      <li><span class="text-red-700 font-mono mr-2">2018-11</span>档案数字化工程启动，搭建本数字厂史馆。</li>
+      <li><span class="text-red-700 font-mono mr-2">2021–26</span>厂史馆工作日有限开放；部分原始纸质台账存于厂史馆库房，另一部分曾在工人新村 7 栋 402（周素兰旧居）被发现。</li>
     </ul>
-    <h3 class="text-xs font-semibold text-slate-500 mt-4 mb-2">荣誉墙（节选）</h3>
-    <ul class="text-xs text-slate-500 space-y-1">
-      <li>1995 年度 质量标兵个人：陈国安（装配车间）</li>
-      <li>1996 年度 质量标兵个人：周素兰（质检科）</li>
-      <li>1996 年度 质量标兵个人：吴桂芳（质检科）</li>
-      <li>1997 年度 安全生产先进个人：李国清（动力车间）</li>
-    </ul>
+
+    <!-- 📷 图片入口：厂史影像位 -->
+    <h3 class="text-xs font-semibold text-slate-500 mt-4 mb-2">历史影像（数字化扫描中）</h3>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <figure class="border border-stone-300 bg-stone-50 p-2">
+        <img src="image/xiaxian.jpg" alt="1963年第一批农机配件下线" class="w-full h-28 object-cover sepia"> 
+       
+        <figcaption class="text-xs text-slate-500 mt-1">1963 年 · 第一批农机配件下线</figcaption>
+      </figure>
+      <figure class="border border-stone-300 bg-stone-50 p-2">
+      <img src="image/qingdian.jpg" alt="1988年厂庆25周年大礼堂联欢" class="w-full h-28 object-cover sepia">
+        <figcaption class="text-xs text-slate-500 mt-1">1988 年 · 厂庆 25 周年大礼堂联欢</figcaption>
+      </figure>
+      <figure class="border border-stone-300 bg-stone-50 p-2">
+         <img src="image/moban.jpg" alt="1998年停产前最后一班岗" class="w-full h-28 object-cover sepia">
+        <figcaption class="text-xs text-slate-500 mt-1">1998 年 · 停产前最后一班岗（机加工二车间）</figcaption>
+      </figure>
+    </div>
+    <p class="text-xs text-slate-400 mt-3">档案破损标记：1997–1998 年部分仓储科物料台账原始纸质件存在页面缺失。</p>
+  </section>
+
+  <section id="accident" class="bg-white rounded border border-stone-200 p-5">
+    <h2 class="font-semibold mb-3">厂内重大事故档案（安全技安科扫描件 · 公开）</h2>
+    <div class="space-y-2">
+      <details class="bg-stone-50 rounded p-3">
+        <summary class="cursor-pointer text-sm">1978-09-12 · 机加工一车间 · 机械挤压工伤</summary>
+        <p class="text-xs text-slate-500 mt-2">一名工人操作失误致手指伤残，已按工伤办理。</p>
+      </details>
+      <details class="bg-red-50 border border-red-100 rounded p-3">
+        <summary class="cursor-pointer text-sm font-medium">1991-08-03 · 热处理车间 · 烫伤事故 · 职工周小梅</summary>
+        <p class="text-xs text-slate-600 mt-2">职工周小梅（临时工，1970-08-03 生），面部及四肢烫伤，1991-08-10 办理离岗——<strong>事故当日恰逢其 21 岁生日</strong>。备注：系质检科周素兰之女。事故后不再在本厂就职。</p>
+      </details>
+    </div>
   </section>
 
   <section id="staff" class="bg-white rounded border border-stone-200 p-5">
-    <h2 class="font-semibold mb-1">退休员工名录</h2>
-    <p class="text-xs text-slate-400 mb-3">以下为部分退休职工档案，点击姓名查看工作评价。</p>
+    <h2 class="font-semibold mb-1">退休员工名录（节选）</h2>
+    <p class="text-xs text-slate-400 mb-3">账号编制规则：部门拼音首字母两位 + 出生月日四位（例：质检科、4 月 17 日生 → ZJ-0417）。完整人事档案需凭档案编号调取。</p>
+    <!-- 周素兰在岗期间，会自行抄写一份零件编号笔记本带回家，属于质检科老职工私人习惯，不属于官方归档文件。 -->
     <div class="overflow-x-auto">
-      <table class="w-full text-sm">
-        <thead class="bg-stone-50 text-slate-500 text-xs">
-          <tr><th class="text-left px-3 py-2">工号</th><th class="text-left px-3 py-2">姓名</th><th class="text-left px-3 py-2">部门</th><th class="text-left px-3 py-2">岗位</th><th class="text-left px-3 py-2">入职</th><th class="text-left px-3 py-2">退休</th><th class="px-3 py-2">操作</th></tr>
-        </thead>
-        <tbody id="staffBody" class="divide-y divide-stone-100"></tbody>
-      </table>
+<table class="w-full text-xs">
+  <thead class="bg-stone-50 text-slate-500">
+    <tr>
+      <th class="text-left px-2 py-2">档案编号</th>
+      <th class="text-left px-2 py-2">姓名</th>
+      <th class="text-left px-2 py-2">岗位</th>
+      <th class="text-left px-2 py-2">入厂</th>
+      <th class="text-left px-2 py-2">退休/离岗</th>
+      <th class="text-left px-2 py-2">居住地址｜档案备注</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-stone-100">
+    <tr class="hover:bg-stone-50"><td class="px-2 py-2 font-mono">JY-0417</td><td class="px-2 py-2">周素兰</td><td class="px-2 py-2">质检科·精密零件质检员</td><td class="px-2 py-2">1986-03-11</td><td class="px-2 py-2">1998-07-02</td><td class="px-2 py-2">工人新村7栋402；厂级先进职工；习惯手抄编号台账，退休带走一份零件目录副本。</td></tr>
+    <tr class="hover:bg-stone-50"><td class="px-2 py-2 font-mono">JY-0309</td><td class="px-2 py-2">李建国</td><td class="px-2 py-2">机加工一车间车工</td><td class="px-2 py-2">1982-05-06</td><td class="px-2 py-2">1998-06-10</td><td class="px-2 py-2">工人新村5栋201；厂史馆志愿讲解员。</td></tr>
+    <tr class="hover:bg-stone-50"><td class="px-2 py-2 font-mono">JY-0522</td><td class="px-2 py-2">王桂英</td><td class="px-2 py-2">质检科辅料登记员</td><td class="px-2 py-2">1984-11-02</td><td class="px-2 py-2">1998-08-15</td><td class="px-2 py-2">工人新村3栋104；负责厂史馆口述档案整理，周素兰昔日同事。</td></tr>
+    <tr class="hover:bg-stone-50"><td class="px-2 py-2 font-mono">JY-0281</td><td class="px-2 py-2">张卫国</td><td class="px-2 py-2">铸造车间操作工</td><td class="px-2 py-2">1980-01-15</td><td class="px-2 py-2">1997-12-30</td><td class="px-2 py-2">已搬离临江市；买断工龄离职。</td></tr>
+    <tr class="hover:bg-stone-50"><td class="px-2 py-2 font-mono">LG-1143</td><td class="px-2 py-2">周小梅</td><td class="px-2 py-2">热处理车间临时工</td><td class="px-2 py-2">1989-04-02</td><td class="px-2 py-2">1991-08-10</td><td class="px-2 py-2">工伤离岗；备注：系质检科周素兰之女。</td></tr>
+    <tr class="hover:bg-stone-50"><td class="px-2 py-2 font-mono">JY-0614</td><td class="px-2 py-2">赵德山</td><td class="px-2 py-2">机加工二车间钳工</td><td class="px-2 py-2">1981-02-20</td><td class="px-2 py-2">1998-09-01</td><td class="px-2 py-2">工人新村6栋303；退休职工。</td></tr>
+    <tr class="hover:bg-stone-50"><td class="px-2 py-2 font-mono">JY-0156</td><td class="px-2 py-2">刘桂芝</td><td class="px-2 py-2">工会办事员</td><td class="px-2 py-2">1979-06-14</td><td class="px-2 py-2">1998-04-22</td><td class="px-2 py-2">工人新村2栋501；负责老职工慰问登记。</td></tr>
+    <tr class="hover:bg-stone-50"><td class="px-2 py-2 font-mono">JY-0733</td><td class="px-2 py-2">孙长海</td><td class="px-2 py-2">仓储科物料管理员</td><td class="px-2 py-2">1983-07-05</td><td class="px-2 py-2">1998-06-27</td><td class="px-2 py-2">工人新村4栋202；保管原版零件编号台账。</td></tr>
+  </tbody>
+</table>
     </div>
   </section>
+
+<section id="oral" class="bg-white rounded border border-stone-200 p-5">
+  <h2 class="font-semibold mb-3">老职工口述档案</h2>
+  <div class="space-y-2">
+    <details class="bg-stone-50 rounded p-3">
+      <summary class="cursor-pointer text-sm font-medium">口述｜王桂英（JY-0522，质检科老同事，1998 退休）</summary>
+      <p class="text-xs text-slate-600 mt-2 leading-5">"老周做质检那真是一丝不苟，卡尺、台账，一点错都不能有。厂里每一个零件编号她几乎都背得出来。退休之后还总回厂史馆翻旧台账本子。我们那时候开玩笑，说她拿厂里编号记家里的私事，本子上写一堆编号，我们都看不懂写的啥。<strong>她家的事，外人也不好多问，只知道小女儿早年出过事，她难过很久。</strong>"</p>
+    </details>
+    <details class="bg-stone-50 rounded p-3">
+      <summary class="cursor-pointer text-sm font-medium">口述｜李建国（机加工车间老工人）</summary>
+      <p class="text-xs text-slate-600 mt-2 leading-5">"二机厂那时候，厂子就是半个家。工人新村楼上楼下全是同事，谁家出事整个小区都知道。但是很多家务事，大家嘴上不说，心里都清楚。<strong>老周家小梅当年在车间出了事，那天还是她生日，老周在车间门口哭得站不住。</strong>后来小梅就离厂了，再也没回来。"</p>
+    </details>
+    <details class="bg-stone-50 rounded p-3">
+      <summary class="cursor-pointer text-sm font-medium">口述｜孙长海（原仓储科管理员）</summary>
+      <p class="text-xs text-slate-600 mt-2 leading-5">"那套零件编号规则 1975 年启用，<strong>大类是零件拼音首字母，后面三位流水号</strong>。很多老质检拿这个记东西，图个保密，家里人看不懂本子写什么。<strong>周素兰那本子，我见过，上面圈了好几个号，问她她也不说。</strong>"</p>
+    </details>
+  </div>
+</section>
 
   <section id="parts" class="bg-white rounded border border-stone-200 p-5">
-    <h2 class="font-semibold mb-1">零件编号目录（1980–1995）</h2>
-    <p class="text-xs text-slate-400 mb-3">以下为部分零件编号对照表，完整目录请到厂史馆现场查阅。</p>
-    <table class="w-full text-sm">
-      <thead class="bg-stone-50 text-slate-500 text-xs">
-        <tr><th class="text-left px-3 py-2">编号</th><th class="text-left px-3 py-2">零件名称</th><th class="text-left px-3 py-2">规格</th></tr>
-      </thead>
-      <tbody class="divide-y divide-stone-100">
-        <tr><td class="px-3 py-2 font-mono">Q-001</td><td class="px-3 py-2">齿轮组件</td><td class="px-3 py-2">Φ50mm</td></tr>
-        <tr><td class="px-3 py-2 font-mono">M-042</td><td class="px-3 py-2">轴承座</td><td class="px-3 py-2">120×80mm</td></tr>
-        <tr><td class="px-3 py-2 font-mono">L-108</td><td class="px-3 py-2">连接杆</td><td class="px-3 py-2">250mm</td></tr>
-        <tr><td class="px-3 py-2 font-mono">T-217</td><td class="px-3 py-2">定位销</td><td class="px-3 py-2">Φ12mm</td></tr>
-        <tr><td class="px-3 py-2 font-mono">K-310</td><td class="px-3 py-2">密封圈</td><td class="px-3 py-2">Φ60mm</td></tr>
-      </tbody>
-    </table>
+    <h2 class="font-semibold mb-1">零件编号目录</h2>
+    <p class="text-xs text-slate-400 mb-3">《临江二机厂 精密零部件编号简表（质检科 1995 副本）》。本扫描件为周素兰退休带走副本的数字化件；原件纸质本发现于工人新村 7 栋 402 旧居，页面可见铅笔手写批注。</p>
+    <div class="bg-stone-50 rounded p-3 text-xs text-slate-600 mb-4 leading-5">
+      编号格式：<span class="font-mono">XX-XXX</span>。前两位为零件大类拼音首字母，后三位为该大类内部流水序号（001–999）。官方目录只记录零件；个别老质检私下挪用编号代指人物、事件，属个人习惯。
+    </div>
+    <div class="overflow-x-auto">
+      <table class="w-full text-xs">
+        <thead class="bg-stone-50 text-slate-500">
+          <tr><th class="text-left px-2 py-2">零件编号</th><th class="text-left px-2 py-2">零件名称</th><th class="text-left px-2 py-2">大类</th><th class="text-left px-2 py-2">零件用途</th></tr>
+        </thead>
+        <tbody class="divide-y divide-stone-100">
+          <tr><td class="px-2 py-1.5 font-mono">JG-001</td><td class="px-2 py-1.5">机钩连接件</td><td class="px-2 py-1.5">JG</td><td class="px-2 py-1.5">工程机械挂钩配件</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">JG-012</td><td class="px-2 py-1.5">紧固卡扣</td><td class="px-2 py-1.5">JG</td><td class="px-2 py-1.5">设备装配卡扣</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">JG-027</td><td class="px-2 py-1.5">机座固定垫圈</td><td class="px-2 py-1.5">JG</td><td class="px-2 py-1.5">机加工底座垫片</td></tr>
+          <tr class="bg-amber-50/50"><td class="px-2 py-1.5 font-mono">QM-008</td><td class="px-2 py-1.5">曲面密封膜片</td><td class="px-2 py-1.5">QM</td><td class="px-2 py-1.5">精密设备密封件</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">QM-014</td><td class="px-2 py-1.5">曲面耐磨垫片</td><td class="px-2 py-1.5">QM</td><td class="px-2 py-1.5">耐磨缓冲垫片</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">QM-022</td><td class="px-2 py-1.5">曲面压环</td><td class="px-2 py-1.5">QM</td><td class="px-2 py-1.5">密封组件压件</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">YL-003</td><td class="px-2 py-1.5">压力连杆</td><td class="px-2 py-1.5">YL</td><td class="px-2 py-1.5">传动压力部件</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">YL-021</td><td class="px-2 py-1.5">压力弹簧座</td><td class="px-2 py-1.5">YL</td><td class="px-2 py-1.5">弹簧固定基座</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">YL-036</td><td class="px-2 py-1.5">压力调节销</td><td class="px-2 py-1.5">YL</td><td class="px-2 py-1.5">压力组件调节零件</td></tr>
+          <tr class="bg-amber-50/50"><td class="px-2 py-1.5 font-mono">H-007</td><td class="px-2 py-1.5">合金衬套</td><td class="px-2 py-1.5">H</td><td class="px-2 py-1.5">设备转轴衬套</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">H-011</td><td class="px-2 py-1.5">合金密封环</td><td class="px-2 py-1.5">H</td><td class="px-2 py-1.5">高温密封环</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">H-019</td><td class="px-2 py-1.5">合金垫圈</td><td class="px-2 py-1.5">H</td><td class="px-2 py-1.5">耐高温垫片</td></tr>
+          <tr class="bg-amber-50/50"><td class="px-2 py-1.5 font-mono">ZM-005</td><td class="px-2 py-1.5">轴面磨片</td><td class="px-2 py-1.5">ZM</td><td class="px-2 py-1.5">轴体耐磨耗材</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">ZM-017</td><td class="px-2 py-1.5">轴套垫圈</td><td class="px-2 py-1.5">ZM</td><td class="px-2 py-1.5">传动轴垫圈</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">ZM-024</td><td class="px-2 py-1.5">轴端锁紧片</td><td class="px-2 py-1.5">ZM</td><td class="px-2 py-1.5">传动轴锁紧配件</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">CL-004</td><td class="px-2 py-1.5">传动连杆</td><td class="px-2 py-1.5">CL</td><td class="px-2 py-1.5">传动机构零件</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">CL-016</td><td class="px-2 py-1.5">传动卡簧</td><td class="px-2 py-1.5">CL</td><td class="px-2 py-1.5">传动组件限位件</td></tr>
+          <tr><td class="px-2 py-1.5 font-mono">FS-002</td><td class="px-2 py-1.5">防尘密封片</td><td class="px-2 py-1.5">FS</td><td class="px-2 py-1.5">设备防尘组件</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="text-xs text-slate-500 mt-4 leading-5 bg-stone-50 rounded p-3">
+      摘抄自 1992《质检科岗位管理条例》："检验员需要对每一批零件登记编号，手写台账，留存副本。允许检验人员手抄编号用于个人工作备忘，但不得挪用官方台账做私人记录。"
+    </div>
+    <p class="text-xs text-slate-400 mt-2">档案缺失提示：1995–1998 完整物料流水纸质台账原件，一部分存厂史馆库房，另一部分在工人新村 7 栋 402 周素兰家中被发现。</p>
   </section>
 
-  <section id="personal" class="hidden bg-amber-50 rounded border border-amber-300 p-5">
-    <div class="flex items-center justify-between mb-3">
-      <h2 class="font-semibold">🔓 个人数字档案室 · 周素兰（LJ2-1986-0342）</h2>
+  <section class="bg-white rounded border border-stone-200 p-5">
+    <h2 class="font-semibold mb-2">系统公告</h2>
+    <p class="text-xs text-slate-500 leading-5">【公告】数字档案室管理后台试运行中，如有问题请联系信息科（分机 803）。<s class="text-slate-400">测试账号 test，初始密码 lj2j2026，正式上线前请删除本行。</s></p>
+  </section>
+
+  <section id="personal" class="hidden bg-amber-50 rounded border border-amber-300 p-5 space-y-4">
+    <div class="flex items-center justify-between">
+      <h2 class="font-semibold">🔓 个人数字档案室 · 周素兰（ZJ-0417）</h2>
       <button id="archLogout" class="text-xs text-slate-500 underline">退出档案室</button>
     </div>
-    <p class="text-xs text-slate-500 mb-4">以下为该职工自行归档的私人便笺扫描件，仅本人登录后可见。</p>
-    <div class="space-y-3 text-sm leading-6 text-slate-700">
+    <div class="bg-red-50 border border-red-200 rounded p-3 text-xs text-red-700 leading-5">
+      ⚠️ 系统安全提示：本账户曾于 <strong>2026-02-17 02:33</strong> 发生异常登录（非常用设备），该次登录删除了 1 篇便笺，内容恢复失败。
+    </div>
+    <div class="grid md:grid-cols-2 gap-4">
       <div class="bg-white rounded border border-stone-200 p-4">
-        <div class="text-xs text-slate-400 mb-1">便笺 · 2025-08-03</div>
-        又在目录上圈了两个号：Q-001、M-042。别人当我查零件，只有我自己知道写的是谁。不能写名字，名字会进汤里。
+        <h3 class="text-xs font-semibold text-slate-500 mb-2">👤 个人档案</h3>
+        <ul class="text-sm space-y-1.5 text-slate-700">
+          <li>姓名：周素兰　账号：ZJ-0417</li>
+          <li>出生日期：1948-04-17</li>
+          <li>部门 / 岗位：质检科 · 精密零件质检员</li>
+          <li>在职时间：1986-03-11 至 1998-07-02</li>
+          <li>居住地址：工人新村 7 栋 402</li>
+          <li>紧急联系人：周卫国（长子）</li>
+          <li>本人最后登录：2026-02-16 08:12</li>
+        </ul>
       </div>
       <div class="bg-white rounded border border-stone-200 p-4">
-        <div class="text-xs text-slate-400 mb-1">便笺 · 2025-10-19</div>
-        Q-001、M-042 不要靠近药盒。我把药盒搬到衣柜最下层，钥匙给了律师。
+        <h3 class="text-xs font-semibold text-slate-500 mb-2">🏭 工作记录</h3>
+        <ul class="text-sm space-y-1.5 text-slate-700">
+          <li><span class="font-mono text-red-700">1986</span> 调入质检科，负责零件核验、编号台账登记。</li>
+          <li><span class="font-mono text-red-700">1996</span> 获市级"质量标兵"个人。</li>
+          <li><span class="font-mono text-red-700">1998</span> 退休，带走《编号简表》副本；同年丈夫病逝。</li>
+          <li><span class="font-mono text-red-700">2005</span> 厂史馆志愿整理员。</li>
+          <li><span class="font-mono text-red-700">2018</span> 受聘档案数字化志愿者，开通本档案室。</li>
+        </ul>
       </div>
-      <div class="bg-white rounded border border-stone-200 p-4">
-        <div class="text-xs text-slate-400 mb-1">便笺 · 2026-02-15</div>
-        律师来了。还有一件事，不能写进遗嘱。要是我哪天忘了，或者没了，去看我圈过的编号，去看录音笔。
+    </div>
+    <div>
+      <h3 class="text-xs font-semibold text-slate-500 mb-2">📓 私人工作便笺（按时间倒序）</h3>
+      <div class="space-y-3 text-sm leading-6 text-slate-700">
+        <div class="bg-white rounded border border-stone-200 p-4"><div class="text-xs text-slate-400 mb-1">便笺 · 2026-02-17</div>要是我哪天忘了，或者没了：去看我圈过的编号，去看录音笔。H-007 不能进汤。</div>
+        <div class="bg-white rounded border border-stone-200 p-4"><div class="text-xs text-slate-400 mb-1">便笺 · 2026-02-15</div>律师来了。还有一件事，不能写进遗嘱。启明进来的时候，我说不出话。他的眼神，像当年厂里发现报废件被瞒报时，那些怕被送进熔炉的人。</div>
+        <div class="bg-white rounded border border-stone-200 p-4"><div class="text-xs text-slate-400 mb-1">便笺 · 2026-01-26</div>听说许晴出了车祸，手术要好多钱。QM-008，我的好孩子，这次妈不会再错过你的电话。遗嘱里得给这孩子留一份。</div>
+        <div class="bg-white rounded border border-stone-200 p-4"><div class="text-xs text-slate-400 mb-1">便笺 · 2025-11-02</div>二院让我住院观察。主治是启明。他很孝顺，可我不想让他碰我的药。我把这话跟许晴说了，她只当我又犯糊涂。</div>
+        <div class="bg-white rounded border border-stone-200 p-4"><div class="text-xs text-slate-400 mb-1">便笺 · 2025-10-19</div>许晴来了。她像小梅，说话也像小梅。我糊涂的时候喊她小梅，她不纠正，还给我剥橘子。ZM-005 不要靠近药盒。我把药盒搬到衣柜最下层，钥匙给了律师。</div>
+        <div class="bg-white rounded border border-stone-200 p-4"><div class="text-xs text-slate-400 mb-1">便笺 · 2025-09-30</div>医院说我这是阿尔兹海默症早期。医生的名字我记不住，可有些事，我记得清清楚楚。奇怪。</div>
+        <div class="bg-white rounded border border-stone-200 p-4"><div class="text-xs text-slate-400 mb-1">便笺 · 2025-05-12</div>劝了 ZM-005 收手。他跪着哭，说是一时糊涂。我信他一次。又在目录上圈了号。不能写名字，名字会进汤里。</div>
+        <div class="bg-white rounded border border-stone-200 p-4"><div class="text-xs text-slate-400 mb-1">便笺 · 2025-01-28（除夕）</div>回老大那边拿药。看见不该看的。我什么都没看见。我什么都没看见。我什么都没看见。</div>
+        <div class="bg-white rounded border border-stone-200 p-4 text-slate-400"><div class="text-xs mb-1">便笺 · 已删除</div>该便笺于 2026-02-17 02:33 的异常登录中被删除，内容恢复失败。</div>
       </div>
-      <div class="bg-white rounded border border-stone-200 p-4 text-slate-400">
-        <div class="text-xs mb-1">附件 · 写给小梅的信（一页）</div>
-        扫描件受损，修复中……
-      </div>
+    </div>
+    <div class="bg-white rounded border border-stone-200 p-4 text-slate-400 text-sm">
+      <div class="text-xs mb-1">📎 附件 · 写给小梅的信（一页）</div>
+      扫描件受损，修复中…… 隐约可辨最后一行："人会忘记很多事，但做错的事，不该被忘掉。"
     </div>
   </section>
 </main>
 
 <footer class="max-w-5xl mx-auto px-4 py-6 text-xs text-slate-400 border-t border-stone-200 mt-6 flex justify-between">
-  <span>临江第二机械制造厂 | 数字厂史馆</span>
+  <span>临江第二机械制造厂 | 数字厂史馆 · 档案数字化工程（2018） ｜ <a href="admin.html" class="underline hover:text-slate-600">管理后台</a></span>
   <button id="openLogin" class="underline hover:text-slate-600">职工数字档案室登录</button>
 </footer>
 
@@ -128,66 +312,142 @@
   <div class="bg-white rounded-lg max-w-sm w-full p-6 relative">
     <button id="close" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 text-xl">✕</button>
     <h2 class="font-semibold mb-1">职工数字档案室</h2>
-    <p class="text-xs text-slate-400 mb-4">档案室仅对本人开放。请输入工号与自设密码。</p>
-    <label class="block text-xs text-slate-500 mb-1">工号</label>
-    <input id="empId" class="w-full border border-slate-300 rounded px-2 py-1.5 mb-3" placeholder="如 LJ2-1986-0342">
+    <p class="text-xs text-slate-400 mb-4">后台仅对职工本人开放。请输入职工账号与自设密码。</p>
+    <label class="block text-xs text-slate-500 mb-1">职工账号</label>
+    <input id="empId" class="w-full border border-slate-300 rounded px-2 py-1.5 mb-3" placeholder="如 ZJ-0417">
     <label class="block text-xs text-slate-500 mb-1">密码</label>
     <input id="empPwd" type="password" class="w-full border border-slate-300 rounded px-2 py-1.5 mb-3">
-    <div id="err" class="hidden text-xs text-red-600 mb-2">工号或密码不正确。档案室仅对本人开放。</div>
+    <div id="err" class="hidden text-xs text-red-600 mb-2">职工账号或密码不正确。档案室仅对本人开放。</div>
     <button id="login" class="w-full bg-slate-900 text-white rounded px-4 py-2 hover:bg-slate-700">登录</button>
   </div>
 </div>
 
-<div id="staffMask" class="fixed inset-0 bg-black/50 hidden items-center justify-center p-4 z-50">
-  <div class="bg-white rounded-lg max-w-md w-full p-6 relative">
-    <button id="staffClose" class="absolute top-3 right-3 text-slate-400 hover:text-slate-700 text-xl">✕</button>
-    <div id="staffDetail"></div>
-  </div>
-</div>
-
 <script>
-var STAFF=[
-{id:'LJ2-1975-0021',name:'李国清',dept:'动力车间',job:'电工',in:1975,out:1996,eval:'技术过硬，带徒众多。'},
-{id:'LJ2-1978-0107',name:'王建国',dept:'装配车间',job:'钳工',in:1978,out:1999,eval:'出勤率全厂前列。'},
-{id:'LJ2-1979-0133',name:'陈志刚',dept:'技术科',job:'图纸员',in:1979,out:2002,eval:'档案整理一丝不苟。'},
-{id:'LJ2-1980-0156',name:'刘淑兰',dept:'财务科',job:'会计',in:1980,out:2005,eval:'账目清晰，从未出错。'},
-{id:'LJ2-1982-0287',name:'孙丽华',dept:'新村管理处',job:'文员',in:1982,out:2007,eval:'熟悉新村各家情况。'},
-{id:'LJ2-1986-0342',name:'周素兰',dept:'质检科',job:'精密零件质检员',in:1986,out:2003,eval:'工作细致认真，习惯给物品编号并记录日期。多次获得“质量标兵”称号。'},
-{id:'LJ2-1988-0411',name:'赵雅梅',dept:'质检科',job:'质检员',in:1988,out:2008,eval:'与周素兰同组，配合默契。'},
-{id:'LJ2-1990-0512',name:'周卫国',dept:'运输队',job:'司机',in:1990,out:2001,eval:'长途运输任务完成良好。'}
-];
-document.getElementById('staffBody').innerHTML=STAFF.map(function(s){
-  return '<tr class="hover:bg-stone-50"><td class="px-3 py-2 font-mono text-slate-500">'+s.id+'</td><td class="px-3 py-2">'+s.name+'</td><td class="px-3 py-2">'+s.dept+'</td><td class="px-3 py-2">'+s.job+'</td><td class="px-3 py-2">'+s.in+'</td><td class="px-3 py-2">'+s.out+'</td><td class="px-3 py-2 text-center"><button data-id="'+s.id+'" class="sv text-sky-700 hover:underline">查看</button></td></tr>';
-}).join('');
-Array.prototype.forEach.call(document.querySelectorAll('.sv'),function(b){
-  b.onclick=function(){
-    var s=STAFF.filter(function(x){return x.id===b.getAttribute('data-id');})[0];
-    document.getElementById('staffDetail').innerHTML='<h2 class="font-semibold mb-1">'+s.name+'</h2><div class="text-xs text-slate-500 mb-3">工号 '+s.id+'　'+s.dept+' · '+s.job+'　'+s.in+'–'+s.out+'</div><p class="text-sm text-slate-700">工作评价：'+s.eval+'</p>';
-    var m=document.getElementById('staffMask');m.classList.remove('hidden');m.classList.add('flex');
-  };
-});
-document.getElementById('staffClose').onclick=function(){var m=document.getElementById('staffMask');m.classList.add('hidden');m.classList.remove('flex');};
-
 var mask=document.getElementById('mask');
-document.getElementById('openLogin').onclick=function(){mask.classList.remove('hidden');mask.classList.add('flex');};
-document.getElementById('close').onclick=function(){mask.classList.add('hidden');mask.classList.remove('flex');};
-document.getElementById('login').onclick=function(){
-  var id=document.getElementById('empId').value.trim().toUpperCase(),
-      pwd=document.getElementById('empPwd').value.trim().toLowerCase().replace(/\./g,'');
-  if(id==='LJ2-1986-0342'&&pwd==='qm'){
-    mask.classList.add('hidden');mask.classList.remove('flex');
-    document.getElementById('err').classList.add('hidden');
-    document.getElementById('personal').classList.remove('hidden');
-    sessionStorage.setItem('diarySaved','true');
-    document.getElementById('personal').scrollIntoView({behavior:'smooth'});
+function openMask(){mask.classList.remove('hidden');mask.classList.add('flex');}
+function hideMask(){mask.classList.add('hidden');mask.classList.remove('flex');}
+document.getElementById('openLogin').onclick=openMask;
+document.getElementById('close').onclick=hideMask;
+document.getElementById('navLogin').onclick=function(){
+  var exist=document.getElementById('arch-ZJ0417');
+  if(exist){exist.scrollIntoView({behavior:'smooth'});}else{openMask();}
+};
+
+var USERS={'ZJ0417':'cW0=','JJ1001':'MTIzNDU2','ZJ0308':'YWJjMTIz','ZZ0715':'MTExMTEx','RL0803':'cXdlcnR5','JJ1226':'MTIzNDU2Nzg5','GH0520':'dGVzdA==','CC0909':'YWRtaW4xMjM='};
+
+var ARCHIVES={
+'ZJ0417':{name:'周素兰',
+ profile:['姓名：周素兰　账号：ZJ-0417','出生日期：1948-04-17','部门 / 岗位：质检科 · 精密零件质检员','在职时间：1986-03-11 至 1998-07-02','居住地址：工人新村 7 栋 402','紧急联系人：周卫国（长子）','本人最后登录：2026-02-16 08:12'],
+ warn:'系统安全提示：本账户曾于 2026-02-17 02:33 发生异常登录（非常用设备），该次登录删除了 1 篇便笺，内容恢复失败。',
+ work:['1986 调入质检科，负责零件核验、编号台账登记。','1996 获市级"质量标兵"个人。','1998 退休，带走《编号简表》副本；同年丈夫病逝。','2005 厂史馆志愿整理员。','2018 受聘档案数字化志愿者，开通本档案室。'],
+ notes:[
+  {d:'2026-02-17',t:'要是我哪天忘了，或者没了：去看我圈过的编号，去看录音笔。H-007 不能进汤。'},
+  {d:'2026-02-15',t:'律师来了。还有一件事，不能写进遗嘱。启明进来的时候，我说不出话。他的眼神，像当年厂里发现报废件被瞒报时，那些怕被送进熔炉的人。'},
+  {d:'2026-01-26',t:'听说许晴出了车祸，手术要好多钱。QM-008，我的好孩子，这次妈不会再错过你的电话。遗嘱里得给这孩子留一份。'},
+  {d:'2025-11-02',t:'二院让我住院观察。主治是启明。他很孝顺，可我不想让他碰我的药。我把这话跟许晴说了，她只当我又犯糊涂。'},
+  {d:'2025-10-19',t:'许晴来了。她像小梅，说话也像小梅。我糊涂的时候喊她小梅，她不纠正，还给我剥橘子。ZM-005 不要靠近药盒。我把药盒搬到衣柜最下层，钥匙给了律师。'},
+  {d:'2025-09-30',t:'医院说我这是阿尔兹海默症早期。医生的名字我记不住，可有些事，我记得清清楚楚。奇怪。'},
+  {d:'2025-05-12',t:'劝了 ZM-005 收手。他跪着哭，说是一时糊涂。我信他一次。又在目录上圈了号。不能写名字，名字会进汤里。'},
+  {d:'2025-01-28（除夕）',t:'回老大那边拿药。看见不该看的。我什么都没看见。我什么都没看见。我什么都没看见。'},
+  {d:'已删除',t:'该便笺于 2026-02-17 02:33 的异常登录中被删除，内容恢复失败。'}],
+ attach:{t:'附件 · 写给小梅的信（一页）',d:'扫描件受损，修复中…… 隐约可辨最后一行："人会忘记很多事，但做错的事，不该被忘掉。"'}},
+'ZJ0308':{name:'王桂英',
+ profile:['姓名：王桂英　账号：ZJ-0308','出生日期：1962-03-08','部门 / 岗位：质检科 · 辅料登记员','在职时间：1984-11-02 至 1998-08-15','居住地址：工人新村 3 栋 104','备注：负责厂史馆口述档案整理，周素兰昔日同事。'],
+ work:['1984 入厂，分配至质检科。','1998 退休。','2005 起负责厂史馆口述档案整理。'],
+ notes:[
+  {d:'2025-06-18',t:'老周来帮忙整理台账，聊了会儿。她说启明这孩子最贴心，可最近眼神躲着她，进她屋都不让。她叹着气说，家丑不可外扬，让我别跟别人讲。'},
+  {d:'2025-09-12',t:'老周说林娟太能干了，能干得让人怕。老太太的退休金存折都在她手里攥着，卫国反而做不了主。"这种人，心里装的事，嘴上一句都不说。"她原话。'},
+  {d:'2025-12-03',t:'老周给我一袋花生，说她自己吃不得，让我吃。她盯着那袋子看了好久，手抖，没拆。我后来才知道她过敏得厉害，这袋子她是从哪儿拿回来的，她没说。'}]},
+'JJ1001':{name:'李建国',
+ profile:['姓名：李建国　账号：JJ-1001','出生日期：1960-10-01','部门 / 岗位：机加工一车间 · 车工','在职时间：1982-05-06 至 1998-06-10','居住地址：工人新村 5 栋 201','备注：厂史馆志愿讲解员。'],
+ work:['1982 入厂，分配至机加工一车间。','1998 退休。','2005 受聘厂史馆志愿讲解员。'],
+ notes:[
+  {d:'2025-03-22',t:'老周来厂史馆翻旧台账，说是要找几个零件号，找了两天。我问她找啥，她说编号被人动过，本子上写的和台账对不上了。'},
+  {d:'2025-11-08',t:'周卫国来找老周，娘俩在院子里吵了半钟头，好像是借钱的事。老周难受，说卫国自从娶了媳妇，钱都归林娟管，他手里紧，就急。'},
+  {d:'2026-01-15',t:'老周说住院观察那几天，主治是启明。她说启明孝顺，可她就是不想让他碰她的药。我没敢多问。'}]},
+'CC0909':{name:'孙长海',
+ profile:['姓名：孙长海　账号：CC-0909','出生日期：1961-09-09','部门 / 岗位：仓储科 · 物料管理员','在职时间：1983-07-05 至 1998-06-27','居住地址：工人新村 4 栋 202','备注：保管原版零件编号台账。'],
+ work:['1983 入厂，分配至仓储科。','1998 退休，留任库房看管。','2018 档案数字化工程协办。'],
+ notes:[
+  {d:'2025-08-30',t:'老周来对 1995 年编号简表副本，说她退休带走的那份有几页粘了，编号对不上。我给她泡了茶，她边看边圈了好几个号。'},
+  {d:'2026-02-20',t:'来了个人，说是老周的孙子，要借 1995 到 1998 的台账原件。我说原件封存不外借，他脸色当场就变了，茶没喝完就走了。'},
+  {d:'2026-02-23',t:'给老周家里打电话，没人接。台账的事，我跟沈律师说了。'}]},
+'GH0520':{name:'刘桂芝',
+ profile:['姓名：刘桂芝　账号：GH-0520','出生日期：1961-05-20','部门 / 岗位：工会 · 办事员','在职时间：1979-06-14 至 1998-04-22','居住地址：工人新村 2 栋 501','备注：负责老职工慰问登记。'],
+ work:['1979 入厂，分配至工会。','1998 退休。'],
+ notes:[
+  {d:'2025-10-25',t:'老周来翻小梅当年的工伤补助档案，说想再看看。她翻着翻着就哭了，说当年是她不对，是该接那个电话的。我劝她不是她的错，她摇头，不说话。'},
+  {d:'2026-01-28',t:'老周来问非亲属的医疗补助怎么办。说家里有个孩子出了车祸，手术要好多钱。我以为是亲戚，她说不是亲戚，是比亲戚还亲的孩子。'}]},
+'ZZ0715':{name:'张卫国',
+ profile:['姓名：张卫国　账号：ZZ-0715','出生日期：1958-07-15','部门 / 岗位：铸造车间 · 操作工','在职时间：1980-01-15 至 1997-12-30','备注：买断工龄后已搬离临江市，档案自 1998 年起未更新。'],
+ work:['1980 入厂，分配至铸造车间。','1997 买断工龄离厂。'],
+ notes:[
+  {d:'1997-12-30',t:'买断走了。老周帮我收拾的东西，她说厂子不欠谁的，是人欠厂子的。我那会儿不懂，现在懂了。'}]},
+'JJ1226':{name:'赵德山',
+ profile:['姓名：赵德山　账号：JJ-1226','出生日期：1959-12-26','部门 / 岗位：机加工二车间 · 钳工','在职时间：1981-02-20 至 1998-09-01','居住地址：工人新村 6 栋 303。'],
+ work:['1981 入厂，分配至机加工二车间。','1998 退休。'],
+ notes:[
+  {d:'1998-09-01',t:'最后一天上班。老周送我一页质检台账，说留个念想。还在我老屋里放着，没动过。'}]},
+'RL0803':{name:'周小梅',
+ profile:['姓名：周小梅　账号：RL-0803','出生日期：1970-08-03','部门 / 岗位：热处理车间 · 临时工','在职时间：1989-04-02 至 1991-08-10','备注：系质检科周素兰之女。'],
+ frozen:'账户冻结：1991-08-10 因工伤离岗。依《档案管理规定》，冻结账户档案仅供只读查阅。',
+ work:['1989 入厂为临时工，分配至热处理车间。','1991-08-03 烫伤事故；1991-08-10 办理离岗。'],
+ notes:[
+  {d:'1991-07-20',t:'厂庆歌咏比赛我拿了三等奖。妈比我还高兴，说搪瓷杯给她留着，她帮我收着。'},
+  {d:'1991-08-02',t:'明天我生日。妈说下了班给我做长寿面，车间还说要发我一副新手套当生日礼物。'}]}
+};
+
+function fmtId(id){return id.replace(/^(..)(....)$/,'$1-$2');}
+function showArchive(id){
+  var a=ARCHIVES[id];if(!a)return;
+  var old=document.getElementById('arch-'+id);if(old){old.parentNode.removeChild(old);}
+  var h='<div class="bg-amber-50 rounded border border-amber-300 p-5 space-y-4">';
+  h+='<div class="flex items-center justify-between"><h2 class="font-semibold">🔓 个人数字档案室 · '+a.name+'（'+fmtId(id)+'）</h2><button class="genLogout text-xs text-slate-500 underline">退出档案室</button></div>';
+  if(a.warn){h+='<div class="bg-red-50 border border-red-200 rounded p-3 text-xs text-red-700 leading-5">⚠️ '+a.warn+'</div>';}
+  if(a.frozen){h+='<div class="bg-stone-100 border border-stone-300 rounded p-3 text-xs text-slate-500 leading-5">🧊 '+a.frozen+'</div>';}
+  h+='<div class="grid md:grid-cols-2 gap-4">';
+  h+='<div class="bg-white rounded border border-stone-200 p-4"><h3 class="text-xs font-semibold text-slate-500 mb-2">👤 个人档案</h3><ul class="text-sm space-y-1.5 text-slate-700">'+a.profile.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div>';
+  h+='<div class="bg-white rounded border border-stone-200 p-4"><h3 class="text-xs font-semibold text-slate-500 mb-2">🏭 工作经历</h3><ul class="text-sm space-y-1.5 text-slate-700">'+a.work.map(function(x){return '<li>'+x+'</li>';}).join('')+'</ul></div>';
+  h+='</div>';
+  h+='<div><h3 class="text-xs font-semibold text-slate-500 mb-2">📓 个人工作便笺</h3>';
+  if(a.notes&&a.notes.length){
+    h+='<div class="space-y-3 text-sm leading-6 text-slate-700">';
+    a.notes.forEach(function(n){h+='<div class="bg-white rounded border border-stone-200 p-4"><div class="text-xs text-slate-400 mb-1">便笺 · '+n.d+'</div>'+n.t+'</div>';});
+    h+='</div></div>';
   }else{
-    document.getElementById('err').classList.remove('hidden');
+    h+='<p class="text-sm text-slate-400">该职工未留存私人工作便笺。</p></div>';
+  }
+  if(a.attach){h+='<div class="bg-white rounded border border-stone-200 p-4 text-slate-400 text-sm"><div class="text-xs mb-1">📎 '+a.attach.t+'</div>'+a.attach.d+'</div>';}
+  h+='</div>';
+  var div=document.createElement('div');
+  div.id='arch-'+id;div.className='mb-8';div.innerHTML=h;
+  document.querySelector('main').appendChild(div);
+  div.querySelector('.genLogout').onclick=function(){
+    div.parentNode.removeChild(div);
+    if(id==='ZJ0417'){sessionStorage.removeItem('diarySaved');}
+    window.scrollTo({top:0,behavior:'smooth'});
+  };
+  div.scrollIntoView({behavior:'smooth'});
+}
+
+document.getElementById('login').onclick=function(){
+  var id=document.getElementById('empId').value.trim().toUpperCase().replace(/-/g,'');
+  var pwd=document.getElementById('empPwd').value.trim();
+  var errEl=document.getElementById('err');
+  if(id==='TEST'){
+    errEl.textContent='⚠ 该账号为后台测试账号，无个人档案室。请从页面底部「管理后台」入口登录。';
+    errEl.className='text-xs text-amber-600 mb-2';errEl.classList.remove('hidden');return;
+  }
+  if(USERS[id]&&pwd===atob(USERS[id])){
+    hideMask();errEl.classList.add('hidden');
+    if(id==='ZJ0417'){sessionStorage.setItem('diarySaved','true');}
+    showArchive(id);
+  }else{
+    errEl.textContent='职工账号或密码不正确。档案室仅对本人开放。';
+    errEl.className='text-xs text-red-600 mb-2';errEl.classList.remove('hidden');
   }
 };
-document.getElementById('archLogout').onclick=function(){
-  document.getElementById('personal').classList.add('hidden');
-  window.scrollTo({top:0,behavior:'smooth'});
-};
+if(sessionStorage.getItem('diarySaved')==='true'){showArchive('ZJ0417');}
 </script>
 </body>
 </html>

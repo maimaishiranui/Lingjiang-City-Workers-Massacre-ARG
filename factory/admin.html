@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>人事档案管理系统（试运行） - 临江第二机械制造厂</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-200 text-slate-800 text-sm">
+
+<div class="bg-slate-800 text-slate-300 text-xs">
+  <div class="max-w-5xl mx-auto px-4 py-1.5 flex justify-between">
+    <span>⚙ 临江第二机械制造厂 · 人事档案管理系统（试运行 v0.9）｜内部后台 · 访问将留痕</span>
+    <a href="factory.html" class="underline hover:text-white">← 返回数字厂史馆前台</a>
+  </div>
+</div>
+
+<div id="loginBox" class="max-w-sm mx-auto mt-16 bg-white rounded border border-gray-300 p-6">
+  <h1 class="font-semibold mb-1">后台登录</h1>
+  <p class="text-xs text-gray-500 mb-4">本系统试运行中，仅限信息科管理员登录。</p>
+  <label class="block text-xs text-gray-500 mb-1">账号</label>
+  <input id="aUser" class="w-full border border-gray-300 rounded px-2 py-1.5 mb-3">
+  <label class="block text-xs text-gray-500 mb-1">密码</label>
+  <input id="aPwd" type="password" class="w-full border border-gray-300 rounded px-2 py-1.5 mb-3">
+  <div id="aErr" class="hidden text-xs text-red-600 mb-2">账号或密码不正确。</div>
+  <button id="aLogin" class="w-full bg-slate-800 text-white rounded px-4 py-2 hover:bg-slate-700">登录</button>
+</div>
+
+<div id="adminBox" class="hidden max-w-5xl mx-auto px-4 py-6 space-y-4">
+  <div class="flex justify-between items-center">
+    <h1 class="text-lg font-semibold">职工账户管理</h1>
+    <button id="aLogout" class="text-xs text-gray-500 underline">退出后台</button>
+  </div>
+  <div class="bg-yellow-50 border border-yellow-300 rounded p-3 text-xs text-yellow-800 leading-5">
+    ⚠ 试运行提示：测试账户尚未停用，正式上线前须迁移至统一认证平台。职工密码当前以 <strong>MD5 单向加密</strong> 存储；弱密码可被外部解码网站反查，请督促职工修改强密码。<br>
+    📐 账号编制规则：部门拼音首字母两位 + 出生月日四位（例：质检科、4 月 17 日生 → ZJ-0417）。
+  </div>
+  <div class="bg-white rounded border border-gray-300 overflow-x-auto">
+    <table class="w-full text-xs">
+      <thead class="bg-gray-100 text-gray-500">
+        <tr><th class="text-left px-3 py-2">账号</th><th class="text-left px-3 py-2">姓名</th><th class="text-left px-3 py-2">部门</th><th class="text-left px-3 py-2">档案室状态</th><th class="text-left px-3 py-2">最近登录</th><th class="text-left px-3 py-2">密码（MD5）</th></tr>
+      </thead>
+      <tbody id="uBody" class="divide-y divide-gray-100 font-mono"></tbody>
+    </table>
+  </div>
+  <p class="text-xs text-gray-500">注：依《个人资料保护规程》，后台不展示明文密码。职工遗忘密码可到信息科重置，或自行尝试外部 MD5 解码（仅限弱密码）。</p>
+</div>
+
+<script>
+function md5(str){
+  function toBytes(s){var b=[],i,c;for(i=0;i<s.length;i++){c=s.charCodeAt(i);if(c<128){b.push(c);}else if(c<2048){b.push(192|(c>>6),128|(c&63));}else{b.push(224|(c>>12),128|((c>>6)&63),128|(c&63));}}return b;}
+  var bytes=toBytes(str),len=bytes.length,i;
+  bytes.push(0x80);
+  while(bytes.length%64!==56){bytes.push(0);}
+  var bitLen=len*8;
+  bytes.push(bitLen&255,(bitLen>>>8)&255,(bitLen>>>16)&255,(bitLen>>>24)&255,0,0,0,0);
+  var T=[];for(i=1;i<=64;i++){T[i-1]=Math.floor(Math.abs(Math.sin(i))*4294967296)>>>0;}
+  var S=[7,12,17,22,7,12,17,22,7,12,17,22,7,12,17,22,5,9,14,20,5,9,14,20,5,9,14,20,5,9,14,20,4,11,16,23,4,11,16,23,4,11,16,23,4,11,16,23,6,10,15,21,6,10,15,21,6,10,15,21,6,10,15,21];
+  function rot(x,c){return (x<<c)|(x>>>(32-c));}
+  var h0=0x67452301,h1=0xEFCDAB89,h2=0x98BADCFE,h3=0x10325476;
+  for(var off=0;off<bytes.length;off+=64){
+    var M=[];for(var j=0;j<16;j++){M[j]=bytes[off+j*4]|(bytes[off+j*4+1]<<8)|(bytes[off+j*4+2]<<16)|(bytes[off+j*4+3]<<24);}
+    var a=h0,b=h1,c=h2,d=h3;
+    for(i=0;i<64;i++){
+      var f,g;
+      if(i<16){f=(b&c)|((~b)&d);g=i;}
+      else if(i<32){f=(d&b)|((~d)&c);g=(5*i+1)%16;}
+      else if(i<48){f=b^c^d;g=(3*i+5)%16;}
+      else{f=c^(b|(~d));g=(7*i)%16;}
+      var tmp=d;d=c;c=b;
+      b=(b+rot((a+f+T[i]+M[g])>>>0,S[i]))>>>0;
+      a=tmp;
+    }
+    h0=(h0+a)>>>0;h1=(h1+b)>>>0;h2=(h2+c)>>>0;h3=(h3+d)>>>0;
+  }
+  function hex(x){var s='';for(var k=0;k<4;k++){s+=('0'+((x>>>(k*8))&255).toString(16)).slice(-2);}return s;}
+  return hex(h0)+hex(h1)+hex(h2)+hex(h3);
+}
+
+var USERS=[
+ {id:'ZJ-0417',name:'周素兰',dept:'质检科（退休）',st:'已开通',last:'2026-02-17 02:33（异常）',pw:'cW0='},
+ {id:'JJ-1001',name:'李建国',dept:'机加工一车间（退休）',st:'未开通',last:'—',pw:'MTIzNDU2'},
+ {id:'ZJ-0308',name:'王桂英',dept:'质检科（退休）',st:'已开通',last:'2026-01-12 15:20',pw:'YWJjMTIz'},
+ {id:'ZZ-0715',name:'张卫国',dept:'铸造车间（买断）',st:'已冻结',last:'—',pw:'MTExMTEx'},
+ {id:'RL-0803',name:'周小梅',dept:'热处理车间（离岗）',st:'已冻结',last:'1991-08-10',pw:'cXdlcnR5'},
+ {id:'JJ-1226',name:'赵德山',dept:'机加工二车间（退休）',st:'未开通',last:'—',pw:'MTIzNDU2Nzg5'},
+ {id:'GH-0520',name:'刘桂芝',dept:'工会（退休）',st:'未开通',last:'—',pw:'dGVzdA=='},
+ {id:'CC-0909',name:'孙长海',dept:'仓储科（退休）',st:'已开通',last:'2025-11-03 09:41',pw:'YWRtaW4xMjM='}
+];
+
+document.getElementById('aLogin').onclick=function(){
+  var u=document.getElementById('aUser').value.trim();
+  var p=document.getElementById('aPwd').value.trim();
+  if(u==='test'&&p==='lj2j2026'){
+    document.getElementById('loginBox').classList.add('hidden');
+    document.getElementById('adminBox').classList.remove('hidden');
+    document.getElementById('uBody').innerHTML=USERS.map(function(x){
+      return '<tr><td class="px-3 py-2">'+x.id+'</td><td class="px-3 py-2">'+x.name+'</td><td class="px-3 py-2">'+x.dept+'</td><td class="px-3 py-2">'+x.st+'</td><td class="px-3 py-2">'+x.last+'</td><td class="px-3 py-2 text-gray-500">'+md5(atob(x.pw))+'</td></tr>';
+    }).join('');
+  }else{
+    document.getElementById('aErr').classList.remove('hidden');
+  }
+};
+document.getElementById('aLogout').onclick=function(){location.reload();};
+</script>
+</body>
+</html>
