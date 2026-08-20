@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>警情通报 - 临江市公安局</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 text-slate-800 text-sm">
+<div class="bg-amber-500/90 text-slate-900 text-xs">
+  <div class="max-w-4xl mx-auto px-4 py-1.5 flex justify-between">
+    <span>🔗 外部协查通道 · 正在查看：临江市公安局 网上通报平台（公开站点）</span>
+    <a href="../law/external.html" class="underline hover:no-underline">返回协查通道</a>
+  </div>
+</div>
+<header class="bg-blue-900 text-white">
+  <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-red-600 font-bold flex items-center justify-center">警</div>
+      <div><div class="text-lg font-bold">临江市公安局</div><div class="text-xs text-blue-200">网上通报平台 | 公开信息 · 无需登录</div></div>
+    </div>
+    <div class="text-xs text-blue-200">报警电话：110</div>
+  </div>
+  <nav class="max-w-4xl mx-auto px-4 flex gap-1 text-sm pb-2">
+    <a href="index.html" class="px-3 py-1.5 rounded hover:bg-blue-800">首页</a>
+    <a href="tongbao.html" class="px-3 py-1.5 rounded bg-blue-800 text-white">警情通报</a>
+    <a href="xunren.html" class="px-3 py-1.5 rounded hover:bg-blue-800">协查通告</a>
+    <a href="gonggao.html" class="px-3 py-1.5 rounded hover:bg-blue-800">工作公告</a>
+  </nav>
+</header>
+<main class="max-w-4xl mx-auto px-4 py-6 space-y-4">
+  <input id="q" placeholder="🔍 输入关键字检索，如：工人新村 / 死亡 / 醉驾" class="w-full border border-slate-300 rounded px-3 py-2 bg-white">
+  <div id="empty" class="hidden bg-white rounded border border-slate-200 p-6 text-center text-xs text-slate-400">未检索到相关通报。</div>
+
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于"2·23 建设路商铺纠纷事件"的警情通报<span class="text-xs text-slate-400">2026-02-24</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">2 月 23 日，我市建设路某商铺因退换货纠纷引发肢体冲突。警方到场处置，涉事双方已被依法行政拘留。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于"2·20 工人新村入室盗窃案"的警情通报<span class="text-xs text-slate-400">2026-02-22</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">2 月 20 日，城北工人新村发生一起入室盗窃案，被盗金饰若干，案件正在侦办中。请居民外出时检查门窗。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于"2·18 工人新村死亡事件"的警情通报<span class="text-xs text-slate-400">2026-02-19</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">2026 年 2 月 18 日上午，我市城北工人新村 7 栋 402 室发生一起死亡事件。死者周素兰，女，78 岁，原临江第二机械制造厂退休工人。经法医检验，死因为严重过敏反应，过敏源来自食物；现场无破坏痕迹，周边监控未见外人进入。综合调查情况，初步认定为意外死亡。<span class="font-mono text-xs text-slate-400">编号：LJGA-2026-0218-001</span></p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于打击冒充"公检法"电信网络诈骗的通报<span class="text-xs text-slate-400">2026-02-17</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">近期我市发生数起冒充"公检法"人员实施诈骗的案件。公安机关不会通过电话办案，请市民切勿转账。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于城北北门路口交通事故的警情通报<span class="text-xs text-slate-400">2026-02-15</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">2 月 15 日，城北北门路口两车刮擦，无人员伤亡，事故已按简易程序处理。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于兰江畔广场舞噪音扰民警情的通报<span class="text-xs text-slate-400">2026-02-12</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">经警方调解，活动双方已就时段与音量达成一致。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于"2·9 江河路醉驾事件"的警情通报<span class="text-xs text-slate-400">2026-02-10</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">嫌疑人醉酒驾驶机动车被当场查获，已依法立案调查。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于农机站门市债务纠纷警情的通报<span class="text-xs text-slate-400">2026-02-06</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">系经济纠纷引发警情，警方已告知当事人通过司法途径解决。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于春节前菜市场火警的警情通报<span class="text-xs text-slate-400">2026-01-29</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">火情系灶台用火不慎引起，无人员伤亡。</p>
+  </details>
+</main>
+<footer class="max-w-4xl mx-auto px-4 py-6 text-xs text-slate-400 border-t border-slate-200 mt-6">临江市公安局 | 网上通报平台 © 2026</footer>
+<script>
+document.getElementById('q').oninput=function(){
+  var k=this.value.trim(),n=0;
+  document.querySelectorAll('.item').forEach(function(el){
+    var hit=!k||el.textContent.indexOf(k)>-1;
+    el.style.display=hit?'':'none';if(hit)n++;
+  });
+  document.getElementById('empty').classList.toggle('hidden',n>0);
+};
+</script>
+</body>
+</html>

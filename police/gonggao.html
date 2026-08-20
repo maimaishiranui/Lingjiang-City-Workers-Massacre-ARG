@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>工作公告 - 临江市公安局</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 text-slate-800 text-sm">
+<div class="bg-amber-500/90 text-slate-900 text-xs">
+  <div class="max-w-4xl mx-auto px-4 py-1.5 flex justify-between">
+    <span>🔗 外部协查通道 · 正在查看：临江市公安局 网上通报平台（公开站点）</span>
+    <a href="../law/external.html" class="underline hover:no-underline">返回协查通道</a>
+  </div>
+</div>
+<header class="bg-blue-900 text-white">
+  <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-red-600 font-bold flex items-center justify-center">警</div>
+      <div><div class="text-lg font-bold">临江市公安局</div><div class="text-xs text-blue-200">网上通报平台 | 公开信息 · 无需登录</div></div>
+    </div>
+    <div class="text-xs text-blue-200">报警电话：110</div>
+  </div>
+  <nav class="max-w-4xl mx-auto px-4 flex gap-1 text-sm pb-2">
+    <a href="index.html" class="px-3 py-1.5 rounded hover:bg-blue-800">首页</a>
+    <a href="tongbao.html" class="px-3 py-1.5 rounded hover:bg-blue-800">警情通报</a>
+    <a href="xunren.html" class="px-3 py-1.5 rounded hover:bg-blue-800">协查通告</a>
+    <a href="gonggao.html" class="px-3 py-1.5 rounded bg-blue-800 text-white">工作公告</a>
+  </nav>
+</header>
+<main class="max-w-4xl mx-auto px-4 py-6 space-y-4">
+  <input id="q" placeholder="🔍 输入关键字检索，如：谣言 / 管制 / 户籍" class="w-full border border-slate-300 rounded px-3 py-2 bg-white">
+  <div id="empty" class="hidden bg-white rounded border border-slate-200 p-6 text-center text-xs text-slate-400">未检索到相关公告。</div>
+
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">工作公告（关于涉"2·18 事件"网络谣言）<span class="text-xs text-slate-400">2026-02-23</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">近期个别网民编造、传播涉"2·18 事件"不实信息。公安机关提醒：案件调查进展以官方通报为准；对恶意造谣传谣的，将依法追究法律责任。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">元宵节灯会活动期间交通管制通告<span class="text-xs text-slate-400">2026-02-20</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">3 月 3 日 18:00–23:00，兰江畔灯会区域周边道路实施临时交通管制。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于户籍窗口春节后办公时间的公告<span class="text-xs text-slate-400">2026-02-16</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">各户籍窗口自 2 月 16 日起恢复正常办公。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于开展"反诈宣传月"活动的公告<span class="text-xs text-slate-400">2026-02-10</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">请市民下载国家反诈中心 APP，守住钱袋子。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">公安政务服务系统维护公告<span class="text-xs text-slate-400">2026-02-05</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">2 月 6 日 0:00–6:00 系统维护，期间线上业务暂停。</p>
+  </details>
+</main>
+<footer class="max-w-4xl mx-auto px-4 py-6 text-xs text-slate-400 border-t border-slate-200 mt-6">临江市公安局 | 网上通报平台 © 2026</footer>
+<script>
+document.getElementById('q').oninput=function(){
+  var k=this.value.trim(),n=0;
+  document.querySelectorAll('.item').forEach(function(el){
+    var hit=!k||el.textContent.indexOf(k)>-1;
+    el.style.display=hit?'':'none';if(hit)n++;
+  });
+  document.getElementById('empty').classList.toggle('hidden',n>0);
+};
+</script>
+</body>
+</html>

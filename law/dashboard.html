@@ -71,7 +71,7 @@ body { font-family: 'Noto Sans SC', sans-serif; }
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4"><div class="text-xs text-gray-500">处理中案件 📂</div><div class="text-2xl font-bold mt-1 text-gray-800">4</div></div>
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4"><div class="text-xs text-gray-500">本月已结案 ✅</div><div class="text-2xl font-bold mt-1 text-gray-800">9</div></div>
             <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4"><div class="text-xs text-gray-500">待办日程 📅</div><div class="text-2xl font-bold mt-1 text-gray-800">2</div><div class="text-xs text-red-500 mt-1">1 项已逾期</div></div>
-            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4"><div class="text-xs text-gray-500">未读通知 🔔</div><div class="text-2xl font-bold mt-1 text-gray-800">5</div></div>
+            <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-4"><div class="text-xs text-gray-500">未读通知 🔔</div><div class="text-2xl font-bold mt-1 text-gray-800">6</div></div>
         </div>
 
         <div class="grid md:grid-cols-3 gap-6 fade-in-up">
@@ -81,12 +81,39 @@ body { font-family: 'Noto Sans SC', sans-serif; }
                     <ul class="divide-y divide-gray-100 text-sm">
                         <li class="py-3 flex items-center justify-between">
                             <span><span class="text-red-500 mr-2">[交接]</span>整理沈致远律师名下案件（4 件，含 1 件遗嘱公证）</span>
-                            <a class="text-purple-600 hover:underline font-medium" href="cases.html?lawyer=shen">前往处理 →</a>
+                            <a class="text-purple-600 hover:underline font-medium" href="cases.html">前往处理 →</a>
                         </li>
                         <li class="py-3 flex items-center justify-between">
                             <span><span class="text-gray-400 mr-2">[日常]</span>归档本月已结案件卷宗</span>
                             <a class="text-purple-600 hover:underline font-medium" href="cases.html">前往 →</a>
                         </li>
+                        <li class="py-3 flex items-center justify-between">
+                            <span><span class="text-gray-400 mr-2">[日常]</span>核对下周开庭排期</span>
+                            <a class="text-purple-600 hover:underline font-medium" href="schedule.html">前往 →</a>
+                        </li>
+                        <li class="py-3 flex items-center justify-between">
+                            <span><span class="text-gray-400 mr-2">[工会]</span>核对二月律师生日贺卡名单（今日截止）</span>
+                            <span class="text-xs text-gray-400">纸质</span>
+                        </li>
+                        <li class="py-3 flex items-center justify-between">
+                            <span><span class="text-gray-400 mr-2">[日常]</span>协助整理所庆「律师名录」资料</span>
+                            <span class="text-xs text-gray-400">2/25 截止</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h3 class="font-bold text-gray-800">最近案件动态</h3>
+                        <a href="cases.html" class="text-xs text-purple-600 hover:underline">查看全部 →</a>
+                    </div>
+                    <ul class="divide-y divide-gray-100 text-sm">
+                        <li class="py-2 flex justify-between"><span>MC-2026-0039 · 医疗损害责任纠纷 · 赵国强</span><span class="text-gray-400">处理中 · 沈致远 · 2/14</span></li>
+                        <li class="py-2 flex justify-between"><span>MC-2026-0040 · 赡养纠纷 · 李秀英</span><span class="text-gray-400">处理中 · 沈致远 · 2/12</span></li>
+                        <li class="py-2 flex justify-between"><span>MC-2026-0038 · 交通事故人身损害赔偿 · 张德明</span><span class="text-gray-400">已结案 · 沈致远 · 2/18</span></li>
+                        <li class="py-2 flex justify-between"><span>MC-2026-0042 · 遗嘱公证及遗产继承 · 周素兰（已故）</span><span class="text-gray-400">处理中 · 沈致远 · 2/18</span></li>
+                        <li class="py-2 flex justify-between"><span>MC-2026-0037 · 财产损害赔偿纠纷 · 刘梅</span><span class="text-gray-400">处理中 · 李志铭 · 2/11</span></li>
+                        <li class="py-2 flex justify-between"><span>MC-2026-0035 · 房屋买卖合同纠纷 · 王德福</span><span class="text-gray-400">已结案 · 沈茹婷 · 2/10</span></li>
                     </ul>
                 </div>
             </div>
@@ -96,11 +123,29 @@ body { font-family: 'Noto Sans SC', sans-serif; }
                     <h3 class="font-bold text-gray-800 mb-4">系统通知</h3>
                     <ul class="space-y-4 text-xs text-gray-600">
                         <li class="flex items-start space-x-2"><span class="text-red-500 font-bold">[人事]</span> <span>沈致远律师已连续 3 天未打卡。如仍无法联系，请按《案件交接规程》处理其名下案件。</span></li>
-                        <!-- 🕵️ 关键线索：泄露沈律师密码 -->
-                        <li class="flex items-start space-x-2 bg-yellow-50 p-2 rounded border border-yellow-100"><span class="text-yellow-600 font-bold">[IT]</span> <span>2月17日安全审计：沈致远律师的账户(admin)密码已重置为 <strong class="text-purple-700">SZY1985</strong>，已发送短信至其手机，请提醒其登录后修改。</span></li>
-                        <li><span class="text-gray-400">[行政]</span> 2/20 会议室预约系统升级。</li>
-                        <li><span class="text-gray-400">[IT]</span> 系统将于 2 月 22 日 00:00 例行维护。</li>
+                        <li class="flex items-start space-x-2"><span class="text-yellow-600 font-bold">[IT]</span> <span>2月17日安全审计：沈致远律师的账户(admin)密码已重置为<strong>系统初始密码</strong>，已发送短信至其手机，请提醒其登录后修改。</span></li>
+                       <li class="flex items-start space-x-2"><span class="text-gray-400">[工会]</span> <span>二月生日祝福名单：李志铭、沈茹婷。沈致远律师的贺卡暂缓，等人事科通知。</span></li>
+                        <li><span class="text-gray-400">[行政]</span> 2/20 会议室预约系统升级，本周会议请重新预约。</li>
+                        <li><span class="text-gray-400">[IT]</span> 系统将于 2 月 22 日 00:00–06:00 例行维护。</li>
+                        <li><span class="text-gray-400">[财务]</span> 一季度办案费用报销已开放，请于月底前提交。</li>
                     </ul>
+                </div>
+
+                <div class="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
+                    <h3 class="font-bold text-gray-800 mb-1">📝 春梅的工作手记</h3>
+                    <p class="text-xs text-gray-400 mb-4">仅自己可见</p>
+                    <ul class="space-y-3 text-xs text-gray-600 leading-5">
+                        <li class="bg-gray-50 rounded p-2"><span class="text-gray-400">02-20</span> 许晴的妈妈来问医疗援助金的事，眼睛红红的。我很想告诉她遗嘱里写了她那份，但沈律师说最终核对前不能透露。</li>
+                        <li class="bg-gray-50 rounded p-2"><span class="text-gray-400">02-18</span> 沈律师上午脸色很差，说厂史馆有人来借台账原件，"姓周，说是老太太的孙子"。下午他出去之后就再没回来。</li>
+                        <li class="bg-gray-50 rounded p-2"><span class="text-gray-400">02-16</span> 沈律师让我把 1995 年《零件编号简表》复印两份，说老太太本子上的编号能跟这个表对上。复印件还在我抽屉里。</li>
+                        <li class="bg-gray-50 rounded p-2"><span class="text-gray-400">02-15</span> 下午遗嘱公证，老太太（周素兰）握着我的手说我像她孙女。她的手特别凉。</li>
+                       <li class="bg-gray-50 rounded p-2"><span class="text-gray-400">02-21</span> 派出所来所里问了话，还在门口贴了沈老师的协查通告，说公安局的网上通报平台也发了。我读了三遍，手心全是汗。</li>
+                        <li class="bg-gray-50 rounded p-2"><span class="text-gray-400">02-10</span> IT 小哥来修打印机，吐槽说初始密码规则好几年没改了，"还是姓名拼音首字母加出生年份"，太不安全。我记下了。</li>
+                    </ul>
+                </div>
+
+                <div class="bg-purple-50 rounded-xl border border-purple-100 p-4 text-xs text-purple-800 leading-5">
+                    💡 助理权限说明：你可查看本所全部案件列表，但仅能编辑自己被指派的文书。主管律师名下案件的交接操作会留痕。
                 </div>
             </div>
         </div>
@@ -119,9 +164,9 @@ body { font-family: 'Noto Sans SC', sans-serif; }
             <div class="bg-gray-800 rounded-xl border border-gray-700 p-6">
                 <h3 class="font-bold text-white mb-4 flex items-center"><span class="mr-2 text-red-400">⚠️</span> 案件疑点复盘 (MC-2026-0042)</h3>
                 <div class="text-sm text-gray-300 leading-6 space-y-3">
-                    <p>警方定性为“意外过敏”，但我绝不相信。周素兰虽然患有早期阿尔兹海默症，但她对“吃”极其谨慎，尤其是花生和豆类。</p>
+                    <p>警方定性为"意外过敏"，但我绝不相信。周素兰虽然患有早期阿尔兹海默症，但她对"吃"极其谨慎，尤其是花生和豆类。</p>
                     <p><strong class="text-white">关于礼盒：</strong>周卫东确实买了礼盒，但他是个粗人，根本不知道母亲的过敏史。清单是谁定的？长子一家脱不了干系。</p>
-                    <p><strong class="text-white">关于录音：</strong>2月15日立遗嘱时，录音笔里有一段杂音。周素兰反复念叨“灰不能进汤”。这绝不是谵妄。她是在警告我。</p>
+                    <p><strong class="text-white">关于录音：</strong>2月15日立遗嘱时，录音笔里有一段杂音。周素兰反复念叨"灰不能进汤"。这绝不是谵妄。她是在警告我。</p>
                     <p><strong class="text-white">关于白灰：</strong>2月19日我去殡仪馆，发现周素兰的骨灰盒边缘有一抹不正常的白灰。交接记录上，入灵堂前只有一个人单独接触过盒子——周启明。</p>
                 </div>
             </div>
@@ -130,7 +175,7 @@ body { font-family: 'Noto Sans SC', sans-serif; }
                 <h3 class="font-bold text-white mb-4 flex items-center"><span class="mr-2">👥</span> 周家成员侧写</h3>
                 <div class="text-sm text-gray-300 leading-6 space-y-3">
                     <p><strong class="text-white">周卫国（长子）：</strong>沉默，好面子。遗嘱会上因为债务问题和母亲大吵一架。他有动机，但案发时他在外地跑长途，有GPS轨迹。</p>
-                    <p><strong class="text-white">林娟（长媳）：</strong>太镇定了。老太太刚走，她就以“入土为安”为由催促火化，试图掩盖什么。她和周启明之间的眼神交流，让我觉得恶心。</p>
+                    <p><strong class="text-white">林娟（长媳）：</strong>太镇定了。老太太刚走，她就以"入土为安"为由催促火化，试图掩盖什么。她和周启明之间的眼神交流，让我觉得恶心。</p>
                     <p><strong class="text-white">周卫东（次子）：</strong>被利用的替罪羊。他删了家庭群里的聊天记录，以为能撇清关系，其实正好落入下套者的圈套。</p>
                     <p><strong class="text-white">周启明（长孙）：</strong>市二院住院医师，老太太最疼他。但他看我的眼神充满了恐惧。他在害怕我想起来什么？</p>
                 </div>
@@ -139,11 +184,11 @@ body { font-family: 'Noto Sans SC', sans-serif; }
             <div class="md:col-span-2 bg-red-900/40 rounded-xl border border-red-800 p-6">
                 <h3 class="font-bold text-red-300 mb-3 flex items-center"><span class="mr-2">🩸</span> 留给春梅的最后留言</h3>
                 <div class="text-sm text-red-100 leading-6 bg-gray-900 p-4 rounded border border-red-800 font-mono">
-                    “春梅，如果你用IT部重置的密码登进了这个账户，说明我已经出事了，或者我被困在某个地方无法使用自己的设备。<br><br>
-                    不要相信警方的结论。周素兰的死是一场精心策划的谋杀，而凶手正试图用一场‘家宴’把所有知情人拖下水，让他们成为共犯。<br><br>
-                    我已经把外部协查通道的最高权限开放给了你的账户。去查二院案发当天的监控，去查殡仪馆的交接记录，去机械厂找找她留下的旧笔记。<br><br>
-                    记住她的那句话：<strong class="text-white">‘不是药，是灰。别让他们把灰熬进汤里。’</strong><br><br>
-                    如果我回不来，把这些资料交给那个匿名的外部志愿者。拜托了。”
+                    "春梅，如果你登进了这个账户，说明我已经出事了。<br><br>
+                    不要相信警方的结论。周素兰的死是一场精心策划的谋杀，而凶手正试图用一场'家宴'把所有知情人拖下水。<br><br>
+                    去查二院案发当天的监控，去查殡仪馆的交接记录，去机械厂找找她留下的旧笔记。<br><br>
+                    记住她的那句话：<strong class="text-white">'不是药，是灰。别让他们把灰熬进汤里。'</strong><br><br>
+                    如果我回不来，把这些资料交给那个匿名的外部志愿者。拜托了。"
                 </div>
             </div>
         </div>
@@ -162,13 +207,12 @@ function logout() { if (confirm('确定要退出登录吗？')) { sessionStorage
     const username = window.currentUser || sessionStorage.getItem('username');
     const userAvatar = document.getElementById('userAvatar');
     const userDisplay = document.getElementById('userDisplayName');
-    
     if (username === 'admin') {
         if (userAvatar) userAvatar.textContent = '律';
         if (userDisplay) userDisplay.textContent = '沈致远 律师';
         document.getElementById('main-chunmei').classList.add('hidden');
         document.getElementById('main-admin').classList.remove('hidden');
-        document.body.className = 'bg-gray-900'; // 沈律师视角整体变暗
+        document.body.className = 'bg-gray-900';
     } else {
         if (userAvatar) userAvatar.textContent = '助';
         if (userDisplay) userDisplay.textContent = '春梅 (你)';
