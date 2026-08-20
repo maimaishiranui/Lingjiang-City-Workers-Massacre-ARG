@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>协查通告 - 临江市公安局</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 text-slate-800 text-sm">
+<div class="bg-amber-500/90 text-slate-900 text-xs">
+  <div class="max-w-4xl mx-auto px-4 py-1.5 flex justify-between">
+    <span>🔗 外部协查通道 · 正在查看：临江市公安局 网上通报平台（公开站点）</span>
+    <a href="../law/external.html" class="underline hover:no-underline">返回协查通道</a>
+  </div>
+</div>
+<header class="bg-blue-900 text-white">
+  <div class="max-w-4xl mx-auto px-4 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <div class="w-10 h-10 rounded-full bg-red-600 font-bold flex items-center justify-center">警</div>
+      <div><div class="text-lg font-bold">临江市公安局</div><div class="text-xs text-blue-200">网上通报平台 | 公开信息 · 无需登录</div></div>
+    </div>
+    <div class="text-xs text-blue-200">报警电话：110</div>
+  </div>
+  <nav class="max-w-4xl mx-auto px-4 flex gap-1 text-sm pb-2">
+    <a href="index.html" class="px-3 py-1.5 rounded hover:bg-blue-800">首页</a>
+    <a href="tongbao.html" class="px-3 py-1.5 rounded hover:bg-blue-800">警情通报</a>
+    <a href="xunren.html" class="px-3 py-1.5 rounded bg-blue-800 text-white">协查通告</a>
+    <a href="gonggao.html" class="px-3 py-1.5 rounded hover:bg-blue-800">工作公告</a>
+  </nav>
+</header>
+<main class="max-w-4xl mx-auto px-4 py-6 space-y-4">
+  <input id="q" placeholder="🔍 输入关键字检索，如：失联 / 律师 / 认领" class="w-full border border-slate-300 rounded px-3 py-2 bg-white">
+  <div id="empty" class="hidden bg-white rounded border border-slate-200 p-6 text-center text-xs text-slate-400">未检索到相关通告。</div>
+
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">失踪人员协查通告（沈致远）<span class="text-xs text-slate-400">2026-02-21</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">沈致远，男，<strong>1985 年生</strong>，临江市人，明诚律师事务所律师。2026 年 2 月 18 日 14 时许离开单位后至今失联，随身携带灰色公文包一个，最后出现地点为工人新村北门附近。该人失联前正在办理一起遗嘱继承类案件，因其失联时间与"2·18 工人新村死亡事件"相近，公安机关已依法开展调查。请知情人员提供线索，联系电话：城北派出所 0578-861****。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">失物认领通告（灰色公文包）<span class="text-xs text-slate-400">2026-02-23</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">2 月 20 日，长途汽车站警务室拾获灰色公文包一个，内有若干遗嘱类法律文书。请失主携带有效证明到城北派出所认领。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">走失老人协查通告（王秀兰，已找回）<span class="text-xs text-slate-400">2026-02-18</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">王秀兰，女，82 岁，患阿尔兹海默症，2 月 17 日上午离家未归，可能误认他人为亲属。老人已于 2 月 19 日由家属接回，感谢市民提供线索。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于城北系列入室盗窃案的线索征集通告<span class="text-xs text-slate-400">2026-02-14</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">近期城北发生多起入室盗窃案，请 2 月 10 日以来在工人新村、农机站一带看到可疑人员的市民提供线索。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">走失儿童协查通告（已找回）<span class="text-xs text-slate-400">2026-02-08</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">走失儿童已于当日由民警护送回家，案件办结。</p>
+  </details>
+  <details class="item bg-white rounded border border-slate-200 p-4">
+    <summary class="cursor-pointer font-medium flex justify-between">关于城北路口肇事逃逸案的协查通告（肇事车辆）<span class="text-xs text-slate-400">2026-01-26</span></summary>
+    <p class="text-slate-600 leading-6 mt-2">寻找一辆前部受损的白色面包车，请知情者联系城北交警中队。</p>
+  </details>
+</main>
+<footer class="max-w-4xl mx-auto px-4 py-6 text-xs text-slate-400 border-t border-slate-200 mt-6">临江市公安局 | 网上通报平台 © 2026</footer>
+<script>
+document.getElementById('q').oninput=function(){
+  var k=this.value.trim(),n=0;
+  document.querySelectorAll('.item').forEach(function(el){
+    var hit=!k||el.textContent.indexOf(k)>-1;
+    el.style.display=hit?'':'none';if(hit)n++;
+  });
+  document.getElementById('empty').classList.toggle('hidden',n>0);
+};
+</script>
+</body>
+</html>
