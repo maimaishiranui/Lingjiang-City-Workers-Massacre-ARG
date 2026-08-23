@@ -3,204 +3,349 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>工人新村社区 - 居民服务平台</title>
+<title>工人新村社区 - 和谐邻里 温暖家园</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
-<style>
-body { font-family: 'Noto Sans SC', sans-serif; }
-.community-header { background: linear-gradient(135deg, #0d9488 0%, #14b8a6 100%); }
-</style>
+<style>body { font-family: 'Noto Sans SC', sans-serif; }</style>
 </head>
-<body class="bg-gray-50">
-<div class="community-header text-white">
-<div class="max-w-7xl mx-auto px-4 py-6">
-<div class="flex items-center justify-between">
-<div class="flex items-center space-x-4">
-<div class="w-20 h-20 bg-white rounded-full flex items-center justify-center">
-<svg class="w-12 h-12 text-teal-700" fill="currentColor" viewBox="0 0 24 24">
-<path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/>
-</svg>
+<body class="bg-gray-100 text-slate-800 text-sm">
+
+<div class="bg-amber-500/90 text-slate-900 text-xs">
+  <div class="max-w-7xl mx-auto px-4 py-1.5 flex justify-between">
+    <span>🔗 外部协查通道 · 正在查看：工人新村社区（公开站点）</span>
+    <a href="../law/external.html" class="underline hover:no-underline">返回协查通道</a>
+  </div>
 </div>
-<div>
-<h1 class="text-3xl font-bold">工人新村社区</h1>
-<p class="text-teal-100">和谐邻里 温暖家园</p>
+
+<header class="bg-teal-600 text-white">
+  <div class="max-w-7xl mx-auto px-4 py-6 flex items-center space-x-4">
+    <div class="w-16 h-16 bg-white rounded-full flex items-center justify-center text-3xl">🏠</div>
+    <div>
+      <h1 class="text-2xl font-bold">工人新村社区</h1>
+      <p class="text-teal-100 text-xs">和谐邻里 温暖家园</p>
+    </div>
+  </div>
+</header>
+
+<div class="bg-white shadow-sm sticky top-0 z-30">
+  <div class="max-w-7xl mx-auto px-4 flex space-x-6 py-3 text-sm overflow-x-auto">
+    <a href="#gonggao" class="text-teal-700 font-semibold border-b-2 border-teal-600 pb-1">首页</a>
+    <a href="#gonggao" class="text-gray-600 hover:text-teal-700">社区公告</a>
+    <a href="#wuye" class="text-gray-600 hover:text-teal-700">物业通知</a>
+    <a href="#laoren" class="text-gray-600 hover:text-teal-700">老人协会</a>
+    <a href="#luntan" class="text-gray-600 hover:text-teal-700">居民论坛</a>
+    <a href="#shiwu" class="text-gray-600 hover:text-teal-700">失物招领</a>
+  </div>
 </div>
+
+<div class="max-w-7xl mx-auto px-4 py-4">
+  <input id="q" placeholder="🔍 检索社区信息，如：402 / 保温杯 / 礼盒 / 骨汤" class="w-full border border-gray-300 rounded px-3 py-2 bg-white">
+  <div id="empty" class="hidden bg-white rounded p-6 text-center text-xs text-gray-400 shadow mt-3">未检索到相关内容。</div>
 </div>
-<a href="../law/dashboard.html" class="text-white hover:text-opacity-80 text-sm">← 返回律所OA系统</a>
+
+<div class="max-w-7xl mx-auto px-4 pb-8 grid grid-cols-1 lg:grid-cols-3 gap-6">
+  <div class="lg:col-span-2 space-y-6">
+
+    <section id="gonggao" class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-bold mb-4">社区公告</h2>
+
+      <div class="item bg-red-50 border-l-4 border-red-500 p-4 mb-4">
+        <h3 class="font-bold mb-1">讣告</h3>
+        <p class="text-sm text-slate-700 leading-6">我社区居民周素兰同志于2026年2月18日在家中安详离世，享年78岁。周素兰同志系临江第二机械制造厂退休职工，长期居住于7栋402室。在职期间工作细致、认真负责，多次获评"质量标兵"；退休后热心社区事务，曾任厂史馆志愿整理员。追悼会定于2月22日上午9时在殡仪馆追思厅举行。遵照家属意愿，丧事从简；邻里亲友如需吊唁，可到居委会办公室在吊唁簿上签名留念。社区老人协会太极拳队全体队员致以深切慰问。</p>
+        <p class="text-xs text-slate-500 mt-2">工人新村社区居委会 | 2026-02-19</p>
+      </div>
+
+      <details class="item bg-white border-l-4 border-teal-500 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">关于老旧小区电梯加装征询意见的通知</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">根据《临江市老旧小区改造实施方案》及市政府老旧小区改造计划，现对7栋、8栋居民楼加装电梯事宜征询意见。资金按"政府补贴40%、公积金提取20%、居民自筹40%"比例分担，居民自筹部分按楼层系数分摊，明细见附件。请相关住户于3月1日前到居委会填写意向表；行动不便的老年居民可电话预约，工作人员上门登记。加装意向需本栋三分之二以上住户同意方可立项。</p>
+        <p class="text-xs text-slate-500 mt-2">联系人：张主任 | 电话：862**** | 2026-02-15</p>
+      </details>
+      <details class="item bg-white border-l-4 border-teal-500 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">元宵节文艺汇演报名</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">社区老人协会将于2月24日下午2点在活动中心举办元宵节文艺汇演，节目单包括太极拳晨练队《太极云手》、棋牌室诗朗诵《厂颂》、广场舞队《秧歌扭起来》等，现继续开放居民报名，尤其欢迎儿童节目。23日下午2点彩排，请参演居民准时到场。特别说明：今年太极拳节目由张桂兰老师代领周素兰老师的原定位置，请全体队员提前半小时到场列队。</p>
+        <p class="text-xs text-slate-500 mt-2">联系人：张主任 | 2026-02-10</p>
+      </details>
+      <details class="item bg-white border-l-4 border-teal-500 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">计划停水通知（7–8栋）</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">为保障二次供水安全，物业定于2月26日 8:00–18:00 对7–8栋二次供水水箱进行清洗消毒，期间暂停供水。请提前储水；恢复供水后如出现短暂浑浊，放水数分钟即可。独居老人如有储水困难，可联系楼栋长或居委会，志愿者将协助送水上门。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-02-05</p>
+      </details>
+      <details class="item bg-white border-l-4 border-teal-500 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">全社区春季卫生大扫除活动通知</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">3月2日上午9点在各楼栋前集合，统一清理楼道杂物与小广告。分工：1–3栋由物业负责，4–6栋由党员志愿者负责，7–8栋由老人协会牵头。参加者可到居委会领取手套与垃圾袋，活动后在活动中心供应姜茶。请勿将杂物堆放在消防通道，违者由物业统一清运。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-02-08</p>
+      </details>
+      <details class="item bg-white border-l-4 border-teal-500 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">社区反诈骗知识讲座通知</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">城北派出所民警将于2月28日来社区活动中心讲解防诈骗知识。近期我市发生多起冒充"公检法"人员实施诈骗的案件，另有一名退休人员被"保健品返利"骗局骗取八万余元，请独居老人务必提高警惕：公安机关不会通过电话办案，更不会要求转账到"安全账户"。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-01-28</p>
+      </details>
+      <details class="item bg-white border-l-4 border-teal-500 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">关于清理公共绿地种菜现象的通知</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">个别住户在3栋前公共绿地种菜，影响整体环境，也违反《城市绿化管理条例》。请于2月10日前自行清理；逾期由物业统一处理，所种蔬菜按无主物处置。感谢配合。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-01-20</p>
+      </details>
+      <details class="item bg-white border-l-4 border-teal-500 p-4">
+        <summary class="cursor-pointer font-semibold">2026年老年居民免费体检登记</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">65岁以上居民可凭身份证到居委会登记，体检由社区卫生服务中心统一安排，项目包括血压、血糖、心电图与胸片。行动不便者可预约上门随访。体检当日请空腹。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-01-12</p>
+      </details>
+    </section>
+
+    <section id="wuye" class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-bold mb-4">物业通知</h2>
+      <details class="item bg-white border-l-4 border-gray-300 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">5–6栋供水管维修通知</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">2月22日–23日对5–6栋底层供水管进行更换，施工期间可能有短时停水与噪音，请谅解。施工产生的泥土当日清理完毕。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-02-21</p>
+      </details>
+      <details class="item bg-white border-l-4 border-gray-300 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">电梯加装征询进展公示</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">截至2月18日，7栋同意率61%，8栋同意率58%，尚未达到加装门槛。未填写意向表的住户请尽快到居委会补填。公示期至3月5日。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-02-20</p>
+      </details>
+      <details class="item bg-white border-l-4 border-gray-300 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">车辆登记通知</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">为规范停车秩序，请有车住户于2月底前到物业登记车牌，办理月租车位。外来车辆长时间占用消防通道的，物业将联系交警拖移。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-02-18</p>
+      </details>
+      <details class="item bg-white border-l-4 border-gray-300 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">消防通道杂物清理提醒</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">近期检查发现部分楼栋消防通道堆放纸箱、旧家具，存在安全隐患。请于2月20日前自行清理；逾期物业统一清运，不予保管。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-02-14</p>
+      </details>
+      <details class="item bg-white border-l-4 border-gray-300 p-4 mb-3">
+        <summary class="cursor-pointer font-semibold">垃圾分类点位调整通知</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">原6栋旁投放点移至活动中心北侧，请相互转告。厨余垃圾请破袋投放。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-02-06</p>
+      </details>
+      <details class="item bg-white border-l-4 border-gray-300 p-4">
+        <summary class="cursor-pointer font-semibold">关于流浪猫投喂与绝育的温馨提示</summary>
+        <p class="text-sm text-slate-600 mt-2 leading-6">请爱心人士定点投喂，避免在楼道内放置食物。物业已联系动物保护组织，将对小区内流浪猫分批绝育并剪耳标记，请勿惊吓。</p>
+        <p class="text-xs text-slate-500 mt-2">2026-01-30</p>
+      </details>
+    </section>
+
+    <section id="luntan" class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-bold mb-4">居民论坛</h2>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">李</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">7栋老李</span><span class="text-xs text-gray-400">2026-02-19 14:23</span></div>
+            <p class="text-sm text-gray-700 mt-1">听说402的周阿姨走了？前几天还看到她孙子来看她，多孝顺的孩子啊。周阿姨身体一直不好吗？</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">3栋王阿姨：</span>是啊，孙子是二院的医生，人长得精神也孝顺，前阵子还来看过她。那天拎着水果站在楼下聊了好一会儿，谁看了不夸一句。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">5栋老张：</span>我记得16号晚上看见个高个子年轻人从楼栋里出来，手里拎着东西，走得挺快。天那么冷，我当是周家亲戚。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">7栋王婶：</span>周阿姨是好人。我家刚搬来时她还送过一套编号印章，说搬箱子贴个号就不会丢。她做质检做了一辈子，什么都要编号。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">7栋老李：</span>唉，咱们这年纪，儿女常来看看就是福气。22号追悼会，咱们几个老邻居一起去送送她。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">卫</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">402周卫玲</span><span class="text-xs text-gray-400">2026-02-20 09:05</span></div>
+            <p class="text-sm text-gray-700 mt-1">感谢各位邻居对我母亲周素兰后事的关心。追悼会定于22日上午9时在殡仪馆追思厅举行，遵照母亲遗愿，丧事从简。居委会和各位叔叔阿姨多年来照顾我母亲，我们全家铭记在心。</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">7栋老李：</span>周阿姨一路走好。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">3栋王阿姨：</span>许晴那孩子也真可怜，还住院呢。听说老太太遗嘱里给她留了份，好人有好报。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">402周卫玲：</span>谢谢王阿姨。我妈说，许晴姐是家里人。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">王</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">7栋王婶</span><span class="text-xs text-gray-400">2026-02-17 20:45</span></div>
+            <p class="text-sm text-gray-700 mt-1">前几天夜里听见402那边有人争执，一个年轻声音一个老太太声音，说了挺久。不是电视声，是真吵。老太太跟谁吵呢？</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">5栋老张：</span>周阿姨那个病，有时候自己跟自己念叨，也说不准。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">3栋王阿姨：</span>年前我倒是听见她大儿媳声音挺大，说的啥没听清。家家有本难念的经，少打听。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">7栋王婶：</span>15号那天我还看见个年轻小伙子从402出来，脸色黑得跟要滴出水一样。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">刘</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">7栋刘嫂</span><span class="text-xs text-gray-400">2026-02-16 11:40</span></div>
+            <p class="text-sm text-gray-700 mt-1">上午看见卫东提着两个大礼盒上402，说是买了些老太太爱吃的。儿子孝顺，老太太有福。</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">2栋老陈：</span>卫东心是好的，就是嘴笨。那礼盒挺高档，城南夜市新开那家的吧？</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">3栋王阿姨：</span>老太太嘴挑，吃不了多少，别浪费喽。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">刘</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">7栋刘嫂</span><span class="text-xs text-gray-400">2026-02-23 18:20</span></div>
+            <p class="text-sm text-gray-700 mt-1">你们发现没，这两天楼道里总有一股熬骨头的汤味，像是周家在熬什么补汤。味道有点怪，说不上来。</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">5栋老张：</span>周家这几天亲戚来往挺多，听说25号要办个家宴，"散散晦气"。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">1栋吴妈：</span>散晦气？老规矩是有的。不过这味道是真重，我在家都闻见。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">3栋王阿姨：</span>行了，少议论人家家里的事。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">陈</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">2栋老陈</span><span class="text-xs text-gray-400">2026-02-18 09:12</span></div>
+            <p class="text-sm text-gray-700 mt-1">7栋楼下那个蓝色保温杯是谁的？放了两天了也没人拿。杯身上好像还印着"质量标兵"几个字。</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">居委会张主任：</span>已收至居委会失物招领处，请失主携带证明来认领。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">6栋老赵：</span>"质量标兵"？那不就是402周阿姨的杯子？她当年厂里发的。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">吴</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">1栋吴妈</span><span class="text-xs text-gray-400">2026-02-16 18:30</span></div>
+            <p class="text-sm text-gray-700 mt-1">傍晚看见402的周先生在楼下转来转去，急得不行，好像丢了什么东西。</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">居委会张主任：</span>周先生报了个黑色钱包丢失，已登记。他说等家里事忙完再来认领。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">赵</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">6栋老赵</span><span class="text-xs text-gray-400">2026-02-17 08:15</span></div>
+            <p class="text-sm text-gray-700 mt-1">谁家的白色面包车在6栋前停了三天了？挪一挪！</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">8栋小周：</span>车上写着"家电维修"吧？我见车主在新村里转过，好像是来收旧家电的。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">6栋老赵：</span>收旧家电也不能堵楼门口啊。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">猫</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">3栋猫姨</span><span class="text-xs text-gray-400">2026-02-15 10:20</span></div>
+            <p class="text-sm text-gray-700 mt-1">谁家橘猫又在我家阳台晒太阳？留下两行脚印就走了。我给它放了小鱼干，它闻闻就走了，架子真大。</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">6栋小赵：</span>那是我们楼"大黄"，它认路，不用管。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">3栋猫姨：</span>大黄下次来记得把它家地址给我，我去讨猫粮钱。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4 mb-3">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">赵</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">6栋老赵</span><span class="text-xs text-gray-400">2026-02-12 16:05</span></div>
+            <p class="text-sm text-gray-700 mt-1">求推荐一个靠谱的水管工，厨房下水又堵了。上回那个师傅收了八十块没修好。</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">8栋小周：</span>物业老刘手艺就行，电话在门卫那。</div>
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">2栋老陈：</span>402以前那位周卫东不是开家电维修店的？他修水管也行，价钱实在。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="item bg-white rounded-lg border border-gray-200 p-4">
+        <div class="flex items-start space-x-3">
+          <div class="w-9 h-9 rounded-full bg-gray-200 flex items-center justify-center text-xs text-gray-500">周</div>
+          <div class="flex-1">
+            <div class="flex justify-between"><span class="font-semibold">8栋小周</span><span class="text-xs text-gray-400">2026-02-09 19:40</span></div>
+            <p class="text-sm text-gray-700 mt-1">出一辆二手儿童自行车，16寸，九成新，有需要的邻居私信。另：广场舞队能不能换个地方？孩子写作业天天听《最炫民族风》。</p>
+            <div class="mt-2 space-y-2">
+              <div class="bg-gray-50 rounded p-2 text-xs text-gray-600"><span class="font-semibold">广场舞领队：</span>小伙子，我们七点就散了。你小时候还在我们队里跳过呢。</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <div class="space-y-6">
+    <section id="shiwu" class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-bold mb-4">失物招领</h2>
+      <div class="item space-y-4 text-sm">
+        <div class="border-b pb-3">
+          <p class="font-semibold">拾到：蓝色保温杯一个</p>
+          <p class="text-xs text-gray-500 mt-1">杯身印"质量标兵"字样。地点：7栋楼下 | 时间：2026-02-17<br>联系人：居委会张主任</p>
+        </div>
+        <div class="border-b pb-3">
+          <p class="font-semibold">寻物：黑色钱包</p>
+          <p class="text-xs text-gray-500 mt-1">失主：周先生 | 时间：2026-02-16<br>内有身份证和银行卡，必有重谢。失主称等家里事忙完再来认领。</p>
+        </div>
+        <div class="border-b pb-3">
+          <p class="font-semibold">拾到：钥匙一串（5把）</p>
+          <p class="text-xs text-gray-500 mt-1">红绳穿着，带一个小齿轮挂件。地点：社区活动中心 | 时间：2026-02-15</p>
+        </div>
+        <div class="border-b pb-3">
+          <p class="font-semibold">拾到：老花镜一副</p>
+          <p class="text-xs text-gray-500 mt-1">地点：棋牌室 | 时间：2026-02-12</p>
+        </div>
+        <div>
+          <p class="font-semibold">寻物：橘猫"大黄"</p>
+          <p class="text-xs text-gray-500 mt-1">6栋小赵 | 2026-02-05 | 见论坛</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="laoren" class="bg-white rounded-lg shadow p-6">
+      <h2 class="text-lg font-bold mb-4">老人协会活动</h2>
+      <div class="space-y-3 text-sm">
+        <div class="flex items-center justify-between"><span class="bg-teal-100 text-teal-700 text-xs px-2 py-1 rounded">每周三</span><span>太极拳晨练（6:30-7:30）</span></div>
+        <div class="flex items-center justify-between"><span class="bg-teal-100 text-teal-700 text-xs px-2 py-1 rounded">每周五</span><span>棋牌室开放（14:00-17:00）</span></div>
+        <div class="flex items-center justify-between"><span class="bg-orange-100 text-orange-700 text-xs px-2 py-1 rounded">2月24日</span><span>元宵节文艺汇演</span></div>
+        <div class="flex items-center justify-between"><span class="bg-teal-100 text-teal-700 text-xs px-2 py-1 rounded">3月05日</span><span>春季健康讲座</span></div>
+      </div>
+      <div class="mt-4 bg-gray-50 rounded p-3 text-xs text-gray-600 leading-5">
+        会员名单（部分）：<br>周素兰、李秀英、王德福、张桂兰、赵国强、孙丽华、老李、刘婶……
+      </div>
+      <p class="mt-3 text-xs text-gray-500 leading-5">※ 元宵节汇演太极拳节目，由张桂兰老师代领周素兰老师的原定位置。全体会员向周素兰老师家属致以慰问。</p>
+      <p class="mt-2 text-xs text-gray-500 leading-5">※ 棋牌室诗朗诵《厂颂》由李建国老师执笔，回顾二机厂四十年厂史，欢迎老工友到场。</p>
+    </section>
+  </div>
 </div>
+
+<div class="bg-gray-800 text-gray-400 text-center py-6">
+<p>工人新村社区居委会 | 地址：工人新村活动中心</p>
+<p class="mt-1 text-xs">办公时间：周一至周五 8:30–17:30 | 电话：0578-862****</p>
 </div>
-</div>
-<div class="bg-white shadow-sm">
-<div class="max-w-7xl mx-auto px-4">
-<div class="flex space-x-8 py-4">
-<a href="#" class="text-teal-700 font-semibold border-b-2 border-teal-700 pb-2">首页</a>
-<a href="#" class="text-gray-600 hover:text-teal-700">社区公告</a>
-<a href="#" class="text-gray-600 hover:text-teal-700">物业通知</a>
-<a href="#" class="text-gray-600 hover:text-teal-700">老人协会</a>
-<a href="#" class="text-gray-600 hover:text-teal-700">居民论坛</a>
-<a href="#" class="text-gray-600 hover:text-teal-700">失物招领</a>
-</div>
-</div>
-</div>
-<div class="max-w-7xl mx-auto px-4 py-8">
-<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
-<div class="lg:col-span-2">
-<div class="bg-white rounded-lg shadow-md p-6 mb-6">
-<h2 class="text-xl font-bold text-gray-800 mb-4">社区公告</h2>
-<div class="space-y-4">
-<div class="border-l-4 border-red-500 pl-4 py-2 bg-red-50 rounded">
-<h3 class="font-bold text-gray-800 mb-1">讣告</h3>
-<p class="text-sm text-gray-600">
-我社区居民周素兰同志于2026年2月18日在家中安详离世，享年78岁。周素兰同志系临江第二机械制造厂退休职工，长期居住于7栋402室。追悼会定于2月22日上午9时在殡仪馆追思厅举行。
-</p>
-<p class="text-xs text-gray-500 mt-2">工人新村社区居委会 | 2026-02-19</p>
-</div>
-<div class="border-l-4 border-teal-500 pl-4 py-2">
-<h3 class="font-bold text-gray-800 mb-1">关于老旧小区电梯加装征询意见的通知</h3>
-<p class="text-sm text-gray-600">
-根据市政府老旧小区改造计划，现对7栋、8栋居民楼加装电梯事宜征询意见。请相关住户于3月1日前到居委会填写意向表。
-</p>
-<p class="text-xs text-gray-500 mt-2">2026-02-15</p>
-</div>
-<div class="border-l-4 border-teal-500 pl-4 py-2">
-<h3 class="font-bold text-gray-800 mb-1">元宵节文艺汇演报名</h3>
-<p class="text-sm text-gray-600">
-社区老人协会将于2月24日下午2点在活动中心举办元宵节文艺汇演，欢迎有才艺的居民报名参加。联系人：张主任。
-</p>
-<p class="text-xs text-gray-500 mt-2">2026-02-10</p>
-</div>
-</div>
-</div>
-<div class="bg-white rounded-lg shadow-md p-6">
-<h2 class="text-xl font-bold text-gray-800 mb-4">居民论坛</h2>
-<div class="space-y-4">
-<div class="border-b pb-3">
-<div class="flex items-start space-x-3">
-<div class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"></div>
-<div class="flex-1">
-<div class="flex items-center space-x-2 mb-1">
-<span class="font-semibold text-gray-800">7栋老李</span>
-<span class="text-xs text-gray-500">2026-02-19 14:23</span>
-</div>
-<p class="text-sm text-gray-600">
-听说402的周阿姨走了？前几天还看到她孙子来看她，多孝顺的孩子啊。周阿姨身体一直不好吗？
-</p>
-<div class="mt-2 text-xs text-gray-500">
-<span class="mr-3">👍 12</span>
-<span>💬 3条回复</span>
-</div>
-</div>
-</div>
-</div>
-<div class="border-b pb-3">
-<div class="flex items-start space-x-3">
-<div class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"></div>
-<div class="flex-1">
-<div class="flex items-center space-x-2 mb-1">
-<span class="font-semibold text-gray-800">8栋王阿姨</span>
-<span class="text-xs text-gray-500">2026-02-19 15:47</span>
-</div>
-<p class="text-sm text-gray-600">
-周阿姨是个好人，就是太要强了。她小女儿走后，她一个人住了好多年。后来请了个小姑娘照顾，那姑娘挺细心的。
-</p>
-<div class="mt-2 text-xs text-gray-500">
-<span class="mr-3">👍 8</span>
-<span>💬 5条回复</span>
-</div>
-</div>
-</div>
-</div>
-<div class="border-b pb-3">
-<div class="flex items-start space-x-3">
-<div class="w-10 h-10 bg-gray-300 rounded-full flex-shrink-0"></div>
-<div class="flex-1">
-<div class="flex items-center space-x-2 mb-1">
-<span class="font-semibold text-gray-800">6栋小陈</span>
-<span class="text-xs text-gray-500">2026-02-20 09:12</span>
-</div>
-<p class="text-sm text-gray-600">
-有人知道周阿姨的追悼会什么时候吗？我想去送送她。她以前经常帮我看孩子。
-</p>
-<div class="mt-2 text-xs text-gray-500">
-<span class="mr-3">👍 5</span>
-<span>💬 2条回复</span>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="space-y-6">
-<div class="bg-white rounded-lg shadow-md p-6">
-<h2 class="text-lg font-bold text-gray-800 mb-4">失物招领</h2>
-<div class="space-y-3 text-sm">
-<div class="border-b pb-2">
-<p class="font-semibold text-gray-700">拾到：蓝色保温杯一个</p>
-<p class="text-xs text-gray-500">地点：7栋楼下 | 时间：2026-02-17</p>
-<p class="text-xs text-gray-500">联系人：居委会张主任</p>
-</div>
-<div class="border-b pb-2">
-<p class="font-semibold text-gray-700">寻物：黑色钱包</p>
-<p class="text-xs text-gray-500">失主：周先生 | 时间：2026-02-16</p>
-<p class="text-xs text-gray-500">内有身份证和银行卡，必有重谢</p>
-</div>
-<div>
-<p class="font-semibold text-gray-700">拾到：钥匙一串（5把）</p>
-<p class="text-xs text-gray-500">地点：社区活动中心 | 时间：2026-02-15</p>
-</div>
-</div>
-</div>
-<div class="bg-white rounded-lg shadow-md p-6">
-<h2 class="text-lg font-bold text-gray-800 mb-4">老人协会活动</h2>
-<div class="space-y-3 text-sm">
-<div class="flex items-center space-x-2 pb-2 border-b">
-<span class="bg-teal-100 text-teal-800 px-2 py-1 rounded text-xs">每周三</span>
-<span class="text-gray-700">太极拳晨练（6:30-7:30）</span>
-</div>
-<div class="flex items-center space-x-2 pb-2 border-b">
-<span class="bg-teal-100 text-teal-800 px-2 py-1 rounded text-xs">每周五</span>
-<span class="text-gray-700">棋牌室开放（14:00-17:00）</span>
-</div>
-<div class="flex items-center space-x-2">
-<span class="bg-orange-100 text-orange-800 px-2 py-1 rounded text-xs">2月24日</span>
-<span class="text-gray-700">元宵节文艺汇演</span>
-</div>
-</div>
-<div class="mt-4 p-3 bg-gray-50 rounded text-xs text-gray-600">
-<strong>会员名单（部分）：</strong><br>
-周素兰、李秀英、王德福、张桂兰、赵国强...
-</div>
-</div>
-<div class="bg-white rounded-lg shadow-md p-6">
-<h2 class="text-lg font-bold text-gray-800 mb-4">物业通知</h2>
-<div class="space-y-3 text-sm">
-<div class="border-b pb-2">
-<p class="font-semibold text-gray-700">2月份物业费催缴通知</p>
-<p class="text-xs text-gray-500">请尚未缴纳2月份物业费的住户尽快到物业办公室缴纳。</p>
-</div>
-<div>
-<p class="font-semibold text-gray-700">关于规范停车的通知</p>
-<p class="text-xs text-gray-500">请勿占用消防通道，违者将按相关规定处理。</p>
-</div>
-</div>
-</div>
-</div>
-</div>
-</div>
-<div class="bg-white rounded-lg shadow-md p-6 mt-6 border border-teal-100">
-<p class="text-xs tracking-wider text-teal-700">经授权调阅 · 社区便民代收登记</p>
-<h2 class="text-xl font-bold text-gray-800 mt-1 mb-2">2 月 16 日 7 栋来访与代收记录</h2>
-<div class="text-sm text-gray-600 leading-6 space-y-1"><p>10:06　周卫东签收“慰问礼盒”，送达地址：7 栋 402。</p><p>10:09　代收备注：<strong>“按家属群确认清单购买；请勿代换品类。”</strong></p><p>15:49　公共影像记录一名与周启明体貌相符者进入 7 栋。</p></div>
-<fieldset class="mt-4 text-sm"><legend class="font-semibold text-gray-700 mb-2">根据以上登记，应如何写入协查摘要？</legend><label class="block mb-2"><input type="radio" name="gift" value="a"> 周卫东独自决定礼盒内容，因此应视为唯一嫌疑人。</label><label class="block mb-2"><input type="radio" name="gift" value="b"> 周卫东负责取件，但礼盒内容来自家属群确认的清单；他是进入 402 的过敏源路径，不足以单独证明主使者。</label><label class="block"><input type="radio" name="gift" value="c"> 周启明购买并亲手将礼盒送入 402。</label></fieldset>
-<button id="submitGift" class="mt-4 bg-teal-700 text-white text-sm px-4 py-2 rounded">保存协查摘要</button><p id="giftResult" class="mt-3 text-sm leading-6"></p>
-</div>
-<div class="bg-gray-800 text-gray-400 text-center py-6 mt-12">
-<p>工人新村社区居委会</p>
-<p class="mt-1 text-xs">地址：临江市工人新村社区活动中心 | 电话：0578-66665555</p>
-</div>
+
 <script>
-document.getElementById('submitGift').addEventListener('click',()=>{const selected=document.querySelector('input[name="gift"]:checked');const result=document.getElementById('giftResult');if(selected&&selected.value==='b'){sessionStorage.setItem('communityReviewed','true');sessionStorage.setItem('caseStage','communityUnlocked');result.className='mt-3 text-sm leading-6 text-green-700';result.innerHTML='<strong>摘要已保存。</strong> 礼盒提供了过敏源进入 402 的路径，却不能单独指向周卫东。结合周启明的离岗与周素兰的日记，现在应核对他案后为何单独接触骨灰盒。<br><a href="../law/external.html" class="underline font-semibold">返回协查通道，申请殡仪馆资料 →</a>';}else{result.className='mt-3 text-sm leading-6 text-red-700';result.textContent='这份登记只能说明代收与进入路径，不能支持该结论。请再核对“家属群确认清单”的备注。';}});
+document.getElementById('q').oninput=function(){
+  var k=this.value.trim(),n=0;
+  document.querySelectorAll('.item').forEach(function(el){
+    var hit=!k||el.textContent.indexOf(k)>-1;
+    el.style.display=hit?'':'none';if(hit)n++;
+  });
+  document.getElementById('empty').classList.toggle('hidden',n>0);
+};
 </script>
 </body>
 </html>

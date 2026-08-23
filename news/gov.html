@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>市政府公告 - 临江新闻门户</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
+<style>body { font-family: 'Noto Sans SC', sans-serif; }.news-header { background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%); }</style>
+</head>
+<body class="bg-gray-50">
+<div class="bg-amber-500/90 text-slate-900 text-xs"><div class="max-w-7xl mx-auto px-4 py-1.5 flex justify-between"><span>🔗 外部协查通道 · 正在查看：临江新闻门户（公开站点）</span><a href="../law/external.html" class="underline hover:no-underline">返回协查通道</a></div></div>
+<div class="news-header text-white"><div class="max-w-7xl mx-auto px-4 py-6 flex items-center space-x-4"><div class="w-14 h-14 bg-white rounded-full flex items-center justify-center text-2xl font-bold text-red-700">临</div><div><h1 class="text-2xl font-bold">临江新闻门户</h1><p class="text-red-100 text-xs">临江日报 | 市政府发布 | 临江电视台</p></div></div></div>
+<div class="bg-white shadow-sm"><div class="max-w-7xl mx-auto px-4 flex space-x-6 py-3 text-sm overflow-x-auto">
+<a href="news.html" class="text-gray-600 hover:text-red-700">首页</a><a href="daily.html" class="text-gray-600 hover:text-red-700">临江日报</a><a href="gov.html" class="text-red-700 font-semibold border-b-2 border-red-700 pb-1">市政府公告</a><a href="local.html" class="text-gray-600 hover:text-red-700">地方新闻</a><a href="livelihood.html" class="text-gray-600 hover:text-red-700">社会民生</a><a href="archive.html" class="text-gray-600 hover:text-red-700">历史存档</a>
+</div></div>
+
+<div class="max-w-7xl mx-auto px-4 py-8 space-y-3">
+  <input id="q" placeholder="🔍 检索公告，如：改造 / 管制 / 工资" class="w-full border border-gray-300 rounded px-3 py-2 bg-white text-sm">
+  <div id="empty" class="hidden bg-white rounded p-6 text-center text-xs text-gray-400 shadow">未检索到相关公告。</div>
+  <details class="item bg-white rounded-lg shadow p-4"><summary class="cursor-pointer font-bold text-gray-800 flex justify-between">关于机械厂旧址改造项目的立项批复<span class="text-xs text-gray-500 font-normal">2026-02-19</span></summary><p class="text-sm text-gray-600 mt-2">同意原临江第二机械制造厂旧址改造为文化创意产业园，保留7栋家属楼等历史建筑。</p></details>
+  <details class="item bg-white rounded-lg shadow p-4"><summary class="cursor-pointer font-bold text-gray-800 flex justify-between">关于调整最低工资标准的通知<span class="text-xs text-gray-500 font-normal">2026-02-01</span></summary><p class="text-sm text-gray-600 mt-2">自2026年3月1日起执行新标准。</p></details>
+  <details class="item bg-white rounded-lg shadow p-4"><summary class="cursor-pointer font-bold text-gray-800 flex justify-between">元宵节灯会活动临时交通管制通告<span class="text-xs text-gray-500 font-normal">2026-01-25</span></summary><p class="text-sm text-gray-600 mt-2">灯会期间兰江畔周边道路分时段管制。</p></details>
+  <details class="item bg-white rounded-lg shadow p-4"><summary class="cursor-pointer font-bold text-gray-800 flex justify-between">2026年春节期间放假安排<span class="text-xs text-gray-500 font-normal">2026-01-20</span></summary><p class="text-sm text-gray-600 mt-2">1月28日至2月4日放假调休。</p></details>
+  <details class="item bg-white rounded-lg shadow p-4"><summary class="cursor-pointer font-bold text-gray-800 flex justify-between">关于开展老旧小区改造调研的通知<span class="text-xs text-gray-500 font-normal">2026-01-15</span></summary><p class="text-sm text-gray-600 mt-2">工人新村（1–7栋）等小区纳入摸底范围，社区档案站同步整理住户历史档案。</p></details>
+  <details class="item bg-white rounded-lg shadow p-4"><summary class="cursor-pointer font-bold text-gray-800 flex justify-between">全市第三次文物普查公告<span class="text-xs text-gray-500 font-normal">2026-01-08</span></summary><p class="text-sm text-gray-600 mt-2">欢迎市民提供老建筑、老物件线索。</p></details>
+  <details class="item bg-white rounded-lg shadow p-4"><summary class="cursor-pointer font-bold text-gray-800 flex justify-between">住房公积金年终结算公告<span class="text-xs text-gray-500 font-normal">2025-12-30</span></summary><p class="text-sm text-gray-600 mt-2">结算期间线上业务暂停。</p></details>
+</div>
+
+<div class="bg-gray-800 text-gray-400 text-center py-6 mt-12"><p>临江新闻门户 | 临江日报 | 临江电视台</p><p class="mt-1 text-xs">主办单位：临江市委宣传部 | 投稿邮箱：news@linjiang.gov.cn</p></div>
+<script>
+document.getElementById('q').oninput=function(){var k=this.value.trim(),n=0;document.querySelectorAll('.item').forEach(function(el){var hit=!k||el.textContent.indexOf(k)>-1;el.style.display=hit?'':'none';if(hit)n++;});document.getElementById('empty').classList.toggle('hidden',n>0);};
+</script>
+</body>
+</html>
