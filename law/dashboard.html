@@ -181,6 +181,29 @@ body { font-family: 'Noto Sans SC', sans-serif; }
                 </div>
             </div>
 
+<div class="md:col-span-2 bg-gray-800 rounded-xl border border-gray-700 p-6 mb-6">
+    <h3 class="font-bold text-white mb-1 flex items-center"><span class="mr-2">🧾</span> 案件复核表 · MC-2026-0042</h3>
+    <p class="text-xs text-gray-400 mb-4">本表将随数字化卷宗一并提交公安机关案卷科。请慎重填写；证据链不完整的，卷宗将被退回。</p>
+    <div class="grid md:grid-cols-3 gap-4 text-sm">
+        <div>
+            <label class="block text-xs text-gray-400 mb-1">1. 本案嫌疑人是谁？（姓名或编号）</label>
+            <input id="v1" class="w-full bg-gray-900 border border-gray-600 rounded px-2 py-2 text-gray-200" placeholder="如：X XX / XX-000">
+        </div>
+        <div>
+            <label class="block text-xs text-gray-400 mb-1">2. 录音中的"灰"指什么？</label>
+            <input id="v2" class="w-full bg-gray-900 border border-gray-600 rounded px-2 py-2 text-gray-200" placeholder="填写它指代的对象">
+        </div>
+        <div>
+            <label class="block text-xs text-gray-400 mb-1">3. 凶手利用什么伪装成意外？</label>
+            <input id="v3" class="w-full bg-gray-900 border border-gray-600 rounded px-2 py-2 text-gray-200" placeholder="如：XX 史 / 礼盒">
+        </div>
+    </div>
+    <div class="flex items-center gap-3 mt-4">
+        <button id="verify" class="bg-red-700 text-white rounded px-5 py-2 text-sm hover:bg-red-600">提交复核</button>
+        <span id="verr" class="text-xs text-red-400 hidden"></span>
+    </div>
+</div>
+
             <div class="md:col-span-2 bg-red-900/40 rounded-xl border border-red-800 p-6">
                 <h3 class="font-bold text-red-300 mb-3 flex items-center"><span class="mr-2">🩸</span> 留给春梅的最后留言</h3>
                 <div class="text-sm text-red-100 leading-6 bg-gray-900 p-4 rounded border border-red-800 font-mono">
@@ -220,6 +243,27 @@ function logout() { if (confirm('确定要退出登录吗？')) { sessionStorage
         document.getElementById('main-admin').classList.add('hidden');
     }
 })();
+
+document.getElementById('verify').onclick=function(){
+  var a=document.getElementById('v1').value.trim().toUpperCase().replace(/-/g,'');
+  var b=document.getElementById('v2').value.trim();
+  var c=document.getElementById('v3').value.trim();
+  var ok1=(a==='周启明'||a==='ZM005');
+  var ok2=(b.indexOf('灰')>-1||b.indexOf('骨灰')>-1||b.indexOf('骨粉')>-1||b.toUpperCase().indexOf('H007')>-1);
+  var ok3=(c.indexOf('过敏')>-1||c.indexOf('礼盒')>-1||c.indexOf('花生')>-1);
+  var err=document.getElementById('verr');
+  if(ok1&&ok2&&ok3){
+    err.classList.add('hidden');
+    if(confirm('证据链完整。今晚周家在「家宴」私房菜设宴。以沈致远助理身份出席？')){
+      location.href='../banquet/banquet.html';
+    }
+  }else{
+    err.textContent='卷宗退回：证据链不完整（'+(ok1?'':'嫌疑人未锁定 ')+(ok2?'':'"灰"未解读 ')+(ok3?'':'手段未核实 ')+')。请重新核对各站点卷宗。';
+    err.classList.remove('hidden');
+  }
+};
+
+
 </script>
 </body>
 </html>

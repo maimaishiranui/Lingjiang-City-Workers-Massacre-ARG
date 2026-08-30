@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>终章 · 家宴</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fontsource/noto-sans-sc@5.0.1/index.css">
+<style>
+html,body{background:#000;}
+body{color:#dc2626;font-family:'Noto Sans SC',sans-serif;min-height:100vh;}
+.scan::after{content:'';position:fixed;inset:0;pointer-events:none;z-index:40;background:repeating-linear-gradient(0deg,transparent 0 2px,rgba(0,0,0,.22) 2px 4px);}
+.vig::before{content:'';position:fixed;inset:0;pointer-events:none;z-index:30;background:radial-gradient(ellipse at center,transparent 50%,rgba(0,0,0,.92));}
+#stage{max-width:42rem;margin:0 auto;padding:5rem 1.25rem 7rem;}
+.line{opacity:0;animation:appear .8s ease forwards;margin-bottom:1.05rem;line-height:1.9;letter-spacing:.06em;}
+@keyframes appear{0%{opacity:0;transform:translateY(8px);}55%{opacity:.7;}65%{opacity:.15;}75%{opacity:.6;}100%{opacity:1;transform:none;}}
+.n{color:#b91c1c;}
+.d{color:#6b7280;font-size:.85rem;}
+.big{font-size:1.5rem;font-weight:900;color:#ef4444;letter-spacing:.15em;}
+.sub{color:#8a919c;font-size:.8rem;margin-top:-.55rem;margin-bottom:1.25rem;}
+.sp{color:#f87171;font-weight:700;margin-right:.6rem;}
+.tx.rgb{animation:rgb .16s infinite;}
+@keyframes rgb{0%,100%{text-shadow:2px 0 rgba(255,0,60,.9),-2px 0 rgba(0,255,255,.7);}50%{text-shadow:-2px 0 rgba(255,0,60,.9),2px 0 rgba(0,255,255,.7);}}
+.glitching #stage{transform:translate(2px,-2px) skewX(.5deg);filter:hue-rotate(50deg) saturate(3);}
+#hint{position:fixed;bottom:1.2rem;left:0;right:0;text-align:center;color:#7f1d1d;font-size:.8rem;letter-spacing:.3em;animation:blink 1.2s infinite;z-index:50;}
+@keyframes blink{50%{opacity:.15;}}
+.hidden{display:none;}
+#choices{max-width:42rem;margin:0 auto;padding:0 1.25rem 6rem;}
+#choices button{display:block;width:100%;text-align:left;border:1px solid #7f1d1d;color:#dc2626;padding:.9rem 1.1rem;margin-bottom:.9rem;background:transparent;font-size:.95rem;letter-spacing:.08em;cursor:pointer;}
+#choices button:hover{background:#7f1d1d;color:#000;}
+#restart{position:fixed;bottom:3rem;left:0;right:0;text-align:center;z-index:50;}
+#restart a{color:#6b7280;font-size:.8rem;text-decoration:underline;}
+</style>
+</head>
+<body class="scan vig">
+
+<div id="stage"></div>
+
+<div id="choices" class="hidden">
+  <button id="c1">🥣 端起碗，喝下这口汤</button>
+  <button id="c2">🛑 放下碗，问在座所有人</button>
+  <button id="c3">📁 笑笑，不动声色，带着证据离开</button>
+</div>
+
+<div id="hint">▼ 点击任意处 继续</div>
+<div id="restart" class="hidden"><a href="../law/lawfirm.html">重新开始调查</a></div>
+
+<script>
+/* UTF-8 字节流强制按 GBK 解码 = 真乱码 */
+function gb(s){try{return new TextDecoder('gbk').decode(new TextEncoder().encode(s));}catch(e){return s;}}
+/* 混合损坏：部分片段保持正常汉字，其余变成乱码，且保持不修复 */
+function corrupt(s,keep){
+  var out='',i=0;
+  while(i<s.length){
+    var len=1+Math.floor(Math.random()*3);
+    var seg=s.slice(i,i+len);
+    out+=(Math.random()<keep)?seg:gb(seg);
+    i+=len;
+  }
+  return out;
+}
+
+var INTRO=[
+{t:'2026-02-25 18:30 · 「家宴」私房菜馆 · 周家旧宅',c:'d'},
+{t:'黑。',c:'n'},
+{t:'只有砂锅里汤水翻滚的声音。',c:'n'},
+{t:'骨汤炖得奶白，翻着滚花。',c:'n'},
+{t:'圆桌八副碗筷。一个空位。',c:'n'},
+{t:'不是药，是灰。别让他们把灰熬进汤里。',c:'n',burst:1},
+{sp:'林娟',t:'小春是吧？沈律师来不了，你来也是一样。',c:'n'},
+{sp:'林娟',t:'自家人不说两家话。汤，趁热喝。',c:'n'},
+{sp:'周卫东',t:'我……我不喝了，店里还得……',c:'n'},
+{sp:'林娟',t:'二哥，一家人团圆，还有比这更要紧的事？',c:'n'},
+{sp:'周启明',t:'奶奶以前总说——',c:'n'},
+{t:'灰不能进汤。',c:'big',burst:1},
+{t:'（整张桌子，安静了三秒。）',c:'d'},
+{sp:'周启明',t:'口误。是"渣"不能进汤。最近夜班多，脑子糊涂。',c:'n'},
+{sp:'周卫玲',t:'这锅汤……哥，你什么时候炖的？',c:'n'},
+{sp:'周启明',t:'早上。炖了一天。',c:'n'},
+{t:'（周卫玲没有再说话。）',c:'d'},
+{sp:'林娟',t:'喝吧。老太太生前最喜欢你。这一碗，算她请你的。',c:'n'},
+{t:'你口袋里的 U 盘，烫得像一块炭。',c:'n'},
+{t:'—— 你怎么做？',c:'big'}
+];
+var E1=[
+{t:'你端起碗。',c:'n'},
+{t:'汤很烫。有一股奇怪的、微微发甜的味道。',c:'n'},
+{t:'你尝到了久违的团圆味道。',c:'n'},
+{t:'没有人再谈起周素兰。',c:'n'},
+{t:'也没有人打开那只空了的盒子。',c:'n'},
+{t:'味道鲜美。',c:'big',burst:1},
+{t:'结局一 · 家宴',c:'d'}
+];
+var E2=[
+{t:'你放下碗。',c:'n'},
+{t:'"人的骨粉，会比动物的骨头更有营养吗？"',c:'big'},
+{t:'沉默。',c:'n'},
+{t:'周启明猛地站起来，撞翻了椅子。',c:'n',burst:1},
+{t:'周卫国一把攥住他的手腕，像攥住一根烧红的钢筋。',c:'n'},
+{t:'你拿出证据袋：排班表、停车缴费单、交接登记、盒盖微距照片，和那段录音。',c:'n'},
+{t:'案件状态：重新侦办。',c:'big',burst:1},
+{t:'结局二 · 叫停',c:'d'}
+];
+var E3=[
+{t:'你笑笑，说汤很好喝，所里还要加班。',c:'n'},
+{t:'林娟笑着看你，没有再劝。',c:'n'},
+{t:'周启明替你开门，说"慢走"。他的声音很稳，稳得像另一个人。',c:'n'},
+{t:'你走出私房菜馆。U 盘贴着你的心跳。',c:'n'},
+{t:'身后周家旧宅的窗子暖黄，像什么都没发生过。',c:'n'},
+{t:'数月后。',c:'d'},
+{t:'7 栋 402 的旧屋被清空。许晴康复后，回来归还那把备用钥匙。',c:'n'},
+{t:'钥匙下面，压着一页信。',c:'n'},
+{t:'人会忘记很多事，但做错的事，不该被忘掉。',c:'big'},
+{t:'真结局 · 带走证据',c:'d'}
+];
+
+var stage=document.getElementById('stage'),hint=document.getElementById('hint');
+var BEATS=INTRO,idx=0,after=function(){document.getElementById('choices').classList.remove('hidden');};
+
+function reveal(b){
+  var el=document.createElement('div');
+  el.className='line '+(b.c||'n');
+  if(b.sp){var s=document.createElement('span');s.className='sp';s.textContent=b.sp;el.appendChild(s);}
+  var t=document.createElement('span');t.className='tx';el.appendChild(t);
+  stage.appendChild(el);
+  /* 主行：重度乱码，穿插正常汉字，且不修复 */
+  t.textContent=corrupt(b.t,(b.c==='d')?0.75:(b.c==='big')?0.5:0.35);
+  /* 第二行：信号修复版小字，大部分可读、个别字抽搐 */
+  if(b.c!=='d'&&b.t.length>8){
+    var sub=document.createElement('div');
+    sub.className='line sub';
+    sub.textContent='▸ '+corrupt(b.t,0.9);
+    stage.appendChild(sub);
+  }
+  if(b.burst){document.body.classList.add('glitching');setTimeout(function(){document.body.classList.remove('glitching');},260);}
+  window.scrollTo({top:document.body.scrollHeight,behavior:'smooth'});
+}
+function next(){
+  if(idx<BEATS.length){reveal(BEATS[idx++]);}
+  else{hint.classList.add('hidden');after();}
+}
+function locked(){
+  return !document.getElementById('choices').classList.contains('hidden')
+      || !document.getElementById('restart').classList.contains('hidden');
+}
+document.addEventListener('click',function(){if(!locked())next();});
+document.addEventListener('keydown',function(e){if((e.key===' '||e.key==='Enter')&&!locked())next();});
+
+function playEnd(arr){
+  stage.innerHTML='';BEATS=arr;idx=0;
+  document.getElementById('choices').classList.add('hidden');
+  after=function(){document.getElementById('restart').classList.remove('hidden');};
+  hint.classList.remove('hidden');
+}
+document.getElementById('c1').onclick=function(){playEnd(E1);};
+document.getElementById('c2').onclick=function(){playEnd(E2);};
+document.getElementById('c3').onclick=function(){playEnd(E3);};
+
+/* 环境故障：随机一行突然色彩抽搐 */
+setInterval(function(){
+  var txs=stage.querySelectorAll('.tx');
+  if(!txs.length)return;
+  var el=txs[Math.floor(Math.random()*txs.length)];
+  el.classList.add('rgb');setTimeout(function(){el.classList.remove('rgb');},280);
+},5000);
+</script>
+</body>
+</html>
